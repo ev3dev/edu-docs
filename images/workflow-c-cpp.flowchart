@@ -1,0 +1,32 @@
+st=>start: Choose a 
+C/C++
+Toolchain
+e=>end
+multiarch=>condition: Multiarch
+Libraries
+Available?
+ontarget=>condition: Use target 
+platform?
+customlib=>condition: Use custom
+libraries?
+st->multiarch
+multiarch(yes)->ontarget
+multiarch(no,bottom)->customlib
+usetarget=>subroutine: Target Based 
+Compilation
+(ev3dev-tools):>https://github.com/ev3dev/ev3dev-tools
+usehostemu=>subroutine: Host-based Emulated
+Cross-compilation
+(debian-<dist>-<arch>-cross):>https://github.com/ev3dev/docker-cross
+usedocker=>subroutine: Host-based Native 
+Cross-compilation
+(debian-<dist>-cross):>http://www.ev3dev.org/docs/tutorials/using-docker-to-cross-compile/
+useprebuilt=>subroutine: Vendor-supplied
+Cross Toolchain
+(NB: latest releases
+may not support
+EV3 HW):>https://github.com/ddemidov/ev3dev-lang-cpp
+ontarget(yes,right)->usetarget->e
+ontarget(no)->usehostemu->e
+customlib(yes)->usedocker->e
+customlib(no)->useprebuilt->e
