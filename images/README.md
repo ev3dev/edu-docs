@@ -1,10 +1,12 @@
-The diagrams are generated using the node.js based diagrams app
-https://www.npmjs.com/package/diagrams
+Generating SVG Diagrams
+=======================
 
-The source files (*.flowchart, *.dot) need to be compiled into svg.
+The diagrams are generated using the node.js based [diagrams](https://www.npmjs.com/package/diagrams) app.
+
+The source files (\*.flowchart, \*.dot) need to be compiled into svg.
 
 Syntax:
-diagrams.js dot <file>.dot <file>.svg
+`diagrams.js dot <file>.dot <file>.svg`
 
-diagrams.js flowchart <file>.flowchart <file>.svg
+`diagrams.js flowchart <file>.flowchart <file>.svg`
 
