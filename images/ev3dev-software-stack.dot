@@ -1,0 +1,109 @@
+graph G {
+	compound=true;
+	arrowType=none;
+	node [shape=rect];
+	edge [penwidth=0,minlen=1];
+
+	rank = same; 
+	node [shape=tripleoctagon,style="filled",color=cadetblue,width=1];
+	"NXTCamView5" "Brickman";
+
+	subgraph cluster_10 {
+		node [shape=tripleoctagon,style="filled",color=cadetblue,width=2];
+		"EV3\nBytecode\nAsembler\n(lmsasm)"; "EV3 Bytecode\nDisassembler\n(lms-hacker\n-tools)";
+
+		subgraph cluster_9 {
+			style=filled;
+			fillcolor=ghostwhite;
+			label="LEGO Mindstorms\nEV3 Virtual Machine";
+			node [shape=rect,style="filled,rounded",color=cornflowerblue,width=5];
+			"lms2012-compat";
+		};
+		{"EV3\nBytecode\nAsembler\n(lmsasm)" "EV3 Bytecode\nDisassembler\n(lms-hacker\n-tools)"}--"lms2012-compat";
+	};
+	
+	
+	subgraph cluster_8 {
+		style=filled;
+		fillcolor=ghostwhite;
+		label="Libraries";
+
+		subgraph cluster_5 {
+		    label="";
+			node [shape=rect,style="filled,rounded",color=navajowhite,width=2];
+			"GRX3 UI\nWidgets\n(grx-widgets)"--"GRX3 UI\nLibrary\n(grx)"
+			--"GLib/\nGObject Library\n(ev3devKit)";
+			edge [penwidth=1];
+		};
+		subgraph cluster_6 {
+		    label="";
+			node [shape=rect,style="filled,rounded",color=navajowhite,width=2];
+			"CMUCam5 Pixy\nVision Library\n(pixy)";
+			edge [penwidth=1];
+		};
+
+		subgraph cluster_7 {
+		    label="";
+			node [shape=rect,style="filled,rounded",color=goldenrod1,width=2];
+			"Embedded\nPython\n(micrpython)";
+			edge [penwidth=1];
+		};
+	
+	};
+
+	subgraph cluster_4 {
+		label="Language Bindings";
+
+		subgraph cluster_3 {
+		    label="";
+			node [shape=house,style=filled,color=darkseagreen1,width=3];
+			"C\n(in4lio/\nev3dev-c)"-- 
+			"Java\n[LeJos compat.]\n(ev3dev-lang-java/\nev3dev-lang-java)"--
+			"Go\n(ev3go/ev3dev)";
+			node [shape=oval,style=filled,color=darksalmon,width=3];
+			edge [penwidth=1];
+			"Perl, Ruby,\nPython Bindings\n(for ev3dev-c)"--"C\n(in4lio/\nev3dev-c)";
+		}
+		subgraph cluster_2 {
+		    label="";
+			node [shape=house,style=filled,color=thistle1,width=3];
+			"C++\n(ddemidov/\nev3dev-lang-cpp)"--"Java\n(mob41/\nev3dev-lang-java)"--
+			"Javascript\n(wasabifan/\nev3dev-lang-js)"--"Python 3\n(ev3dev-lang-python)";
+		};
+			node [shape=oval,style=filled,color=darksalmon,width=3];
+			"Binding Metadata\n(ev3dev-lang)";
+	};
+	
+	subgraph cluster_1 {
+		style=filled;
+		fillcolor=paleturquoise;
+		node [shape=rect,style=filled,color=navajowhite,width=14];
+		"lego-linux-drivers"
+		label = "Linux EV3 SysFS Drivers";
+
+	};
+	subgraph cluster_0 {
+		style=filled;
+		fillcolor=lightgrey;
+		node [style=filled,color=navajowhite, shape=invhouse,width=3.7];
+		rank = same; "etc."; "rpi-kernel"; "..."; "ev3-kernel"; "bb-kernel"; 
+		label = "Platform Specific Linux Kernel";
+	};
+
+	edge [penwidth=1];
+	"Brickman"--"GRX3 UI\nWidgets\n(grx-widgets)";
+	"NXTCamView5"--"CMUCam5 Pixy\nVision Library\n(pixy)";
+	"Python 3\n(ev3dev-lang-python)"--"Binding Metadata\n(ev3dev-lang)" [ltail=cluster_2];
+
+	edge [penwidth=0];
+	
+	"lego-linux-drivers"--"..." [ltail=cluster_1,lhead=cluster_0];
+
+	"Go\n(ev3go/ev3dev)"--"lego-linux-drivers" [ltail=cluster_3,lhead=cluster_1];
+	"Binding Metadata\n(ev3dev-lang)"--"lego-linux-drivers" [ltail=cluster_2,lhead=cluster_1];
+	"GLib/\nGObject Library\n(ev3devKit)"--"lego-linux-drivers" [ltail=cluster_5,lhead=cluster_1];
+	"CMUCam5 Pixy\nVision Library\n(pixy)"--"lego-linux-drivers" [ltail=cluster_6,lhead=cluster_1];
+	"Embedded\nPython\n(micrpython)"--"lego-linux-drivers" [ltail=cluster_7,lhead=cluster_1];
+
+	"lms2012-compat"--"..." [ltail=cluster_10,lhead=cluster_0];
+}
