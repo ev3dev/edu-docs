@@ -7,16 +7,68 @@ graph G {
 	subgraph cluster_150 {
 	
 		label = "Host Platform (PC)"
+
+		subgraph cluster_108 {
+			label = "Cross Compilation Toolchains";
+
+			subgraph cluster_107 {
+				label="Vendor\nSupplied";
+				style=filled;
+				fillcolor=white;
+				node [shape=rect,style="filled,rounded",color=cornsilk3,width=2,height=0.7];
+				"Mentor Graphics"--"Linaro"; 
+			};
+
+			subgraph cluster_106 {
+				label="Docker Images\nARM-only Arch";
+				style=filled;
+				fillcolor=paleturquoise;
+				node [shape=rect,style="filled,rounded",color=navajowhite,width=2,height=0.7];
+				"ev3dev/\ndebian-jessie-\n<arch>-cross"--"ev3dev/\ndebian-stretch-\n<arch>-cross"; 
+			};
+
+			subgraph cluster_105 {
+				label="Docker Images\nMulti-Arch";
+				style=filled;
+				fillcolor=paleturquoise;
+				node [shape=rect,style="filled,rounded",color=navajowhite,width=2,height=0.7];
+				"ev3dev/\ndebian-jessie-cross"--"ev3dev/\ndebian-stretch-cross"; 
+			};
+
+		};
+
+		subgraph cluster_104 {
+			label="ev3dev Build Tools";
+			
+			subgraph cluster_103 {
+				label="EV3 BootImage\nBuild Tool";
+				style=filled;
+				fillcolor=paleturquoise;
+				node [shape=rect,style="filled,rounded",color=goldenrod1,width=2,height=0.7];
+				"brickstrap"; 
+			};
+
+			subgraph cluster_102 {
+				label="Docker Image\nGenerator Scripts";
+				style=filled;
+				fillcolor=paleturquoise;
+				node [shape=rect,style="filled,rounded",color=goldenrod1,width=2,height=0.7];
+				"Cross-compiler\nev3dev/\ndocker-library"--"QEMU Base Image\nev3dev/\ndocker-base"; 
+			};
+	
+		};
+		"ev3dev/\ndebian-stretch-\n<arch>-cross"--"brickstrap";		// Dummy link for stacking
+		"ev3dev/\ndebian-stretch-cross"--"Cross-compiler\nev3dev/\ndocker-library"		// Dummy link for stacking
+
 		subgraph cluster_101 {
-			label = "Development Tools";
+			label = "Host Applications";
 			subgraph cluster_100 {
-				label="Open Source";
+				label="Remote Access";
 				style=filled;
 				fillcolor=plum;
-				node [shape=rect,style="filled,rounded",color=navajowhite,width=2];
-				"GDB"; "OpenSSH"; 
+				node [shape=rect,style="filled,rounded",color=navajowhite,width=2,height=0.7];
+				"OpenSSH"; 
 			};
-		
 		};
 	
 	};
@@ -25,13 +77,22 @@ graph G {
 
 		label = "Target Platform (Robot Controller)";
 	
-		subgraph cluster_13 {
-			label = "Applications";
+		subgraph cluster_14 {
+			label = "Target Applications";
+			
+			subgraph cluster_13 {
+				label="Native Compiler Tools";
+				style=filled;
+				fillcolor=plum;
+				node [shape=rect,style="filled,rounded",color=navajowhite,width=2,height=0.7];
+				"GNU Compilers";
+			};
+			
 			subgraph cluster_12 {
 				label="ev3dev specific";
 				style=filled;
 				fillcolor=paleturquoise;
-				node [shape=rect,style="filled,rounded",color=navajowhite,width=2];
+				node [shape=rect,style="filled,rounded",color=navajowhite,width=2,height=0.7];
 				"ev3dev-config\n(ev3dev-tools)"; "brickrun"; 
 				"Brickman"; "NXTCamView5";
 				"brickrun"--"Brickman";	// Dummy link for stacking
@@ -41,10 +102,10 @@ graph G {
 		};
 		
 		subgraph cluster_11 {
-			label = "Mid Level ev3dev Library Packages";
+			label = "Mid Level Library Packages";
 
 			subgraph cluster_10 {
-				label="ev3dev Ported";
+				label="ev3dev ported";
 				style=filled;
 				fillcolor=grey;
 				node [shape=rect,style="filled,rounded",color=goldenrod1,width=2];
@@ -77,7 +138,7 @@ graph G {
 			label = "Low Level Library Packages";
 
 			subgraph cluster_6 {
-				label="ev3dev Ported Packages";
+				label="ev3dev ported";
 				style=filled;
 				fillcolor=grey;
 				node [shape=rect,style="filled,rounded",color=goldenrod1,width=2,height=0.7];
@@ -89,7 +150,7 @@ graph G {
 				label = "Debian-derived Libraries";
 				style=filled;
 				fillcolor=plum;
-				node [shape=rect,style=filled,color=navajowhite,width=3,height=0.7];
+				node [shape=rect,style="filled,rounded",color=navajowhite,width=3,height=0.7];
 				"???"
 			};
 
@@ -97,7 +158,7 @@ graph G {
 			label = "ev3dev specific";
 			style=filled;
 			fillcolor=paleturquoise;
-			node [shape=rect,style=filled,color=navajowhite,width=3,height=0.7];
+			node [shape=rect,style="filled,rounded",color=navajowhite,width=3,height=0.7];
 			"SysFS Driver Library\n(lego-linux-drivers)";
 
 			};
@@ -111,7 +172,7 @@ graph G {
 				label = "Debian-derived";
 				style=filled;
 				fillcolor=plum;
-				node [shape=rect,style=filled,color=navajowhite,width=1];
+				node [shape=rect,style="filled,rounded",color=navajowhite,width=1];
 				rank = same;
 				"systemd"; "connman"; "avahi"; "bluez"; "opensshd"; 
 			};
@@ -120,7 +181,7 @@ graph G {
 				label = "ev3dev specific";
 				style=filled;
 				fillcolor=paleturquoise;
-				node [shape=rect,style=filled,color=navajowhite,width=2];
+				node [shape=rect,style="filled,rounded",color=navajowhite,width=2];
 				rank = same;
 				"brickd";
 			};
