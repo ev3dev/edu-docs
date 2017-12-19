@@ -1,0 +1,152 @@
+graph G {
+	compound=true;
+	arrowType=none;
+	node [shape=rect];
+	edge [penwidth=0,minlen=1];
+
+	subgraph cluster_150 {
+	
+		label = "Host Platform (PC)"
+		subgraph cluster_101 {
+			label = "Development Tools";
+			subgraph cluster_100 {
+				label="Open Source";
+				style=filled;
+				fillcolor=plum;
+				node [shape=rect,style="filled,rounded",color=navajowhite,width=2];
+				"GDB"; "OpenSSH"; 
+			};
+		
+		};
+	
+	};
+
+	subgraph cluster_15 {
+
+		label = "Target Platform (Robot Controller)";
+	
+		subgraph cluster_13 {
+			label = "Applications";
+			subgraph cluster_12 {
+				label="ev3dev specific";
+				style=filled;
+				fillcolor=paleturquoise;
+				node [shape=rect,style="filled,rounded",color=navajowhite,width=2];
+				"ev3dev-config\n(ev3dev-tools)"; "brickrun"; 
+				"Brickman"; "NXTCamView5";
+				"brickrun"--"Brickman";	// Dummy link for stacking
+				"ev3dev-config\n(ev3dev-tools)"--"NXTCamView5";	// Dummy link for stacking
+			};
+		
+		};
+		
+		subgraph cluster_11 {
+			label = "Mid Level ev3dev Library Packages";
+
+			subgraph cluster_10 {
+				label="ev3dev Ported";
+				style=filled;
+				fillcolor=grey;
+				node [shape=rect,style="filled,rounded",color=goldenrod1,width=2];
+				"Embedded\nPython\n(micrpython)";
+			};
+
+			subgraph cluster_9 {
+				label="Vision";
+				style=filled;
+				fillcolor=paleturquoise;
+				node [shape=rect,style="filled,rounded",color=navajowhite,width=2];
+				"CMUCam5 Pixy\nVision Library\n(pixy)";
+			};
+
+
+			subgraph cluster_8 {
+				label = "Graphics";
+				style=filled;
+				fillcolor=paleturquoise;
+				node [shape=rect,style="filled,rounded",color=navajowhite,width=2];
+				"GRX3 UI\nWidgets\n(grx-widgets)"--"GRX3 UI\nLibrary\n(grx)"
+				--"GLib/\nGObject Library\n(ev3devKit)";
+			};
+		};
+	
+		"Brickman"--"GRX3 UI\nWidgets\n(grx-widgets)" [penwidth=1];
+		"NXTCamView5"--"CMUCam5 Pixy\nVision Library\n(pixy)" [penwidth=1];
+
+		subgraph cluster_7 {
+			label = "Low Level Library Packages";
+
+			subgraph cluster_6 {
+				label="ev3dev Ported Packages";
+				style=filled;
+				fillcolor=grey;
+				node [shape=rect,style="filled,rounded",color=goldenrod1,width=2,height=0.7];
+				"Modular Micro-\nPython Library\n(micropython-lib)"; "Micro-Python\nLinux Library\n(micropython-linux)";
+			};
+
+
+			subgraph cluster_5 {
+				label = "Debian-derived Libraries";
+				style=filled;
+				fillcolor=plum;
+				node [shape=rect,style=filled,color=navajowhite,width=3,height=0.7];
+				"???"
+			};
+
+		subgraph cluster_4 {
+			label = "Linux EV3 SysFS Driver Library";
+			style=filled;
+			fillcolor=paleturquoise;
+			node [shape=rect,style=filled,color=navajowhite,width=3,height=0.7];
+			"lego-linux-drivers";
+
+			};
+		};
+
+		
+
+		subgraph cluster_3 {
+			label = "Linux Daemons"
+			subgraph cluster_1 {
+				label = "Debian-derived";
+				style=filled;
+				fillcolor=plum;
+				node [shape=rect,style=filled,color=navajowhite,width=1];
+				rank = same;
+				"systemd"; "connman"; "avahi"; "bluez"; "opensshd"; 
+			};
+
+			subgraph cluster_2 {
+				label = "ev3dev-specific";
+				style=filled;
+				fillcolor=paleturquoise;
+				node [shape=rect,style=filled,color=navajowhite,width=2];
+				rank = same;
+				"brickd";
+			};
+
+		};
+	
+		subgraph cluster_0 {
+			label = "Linux Kernel";
+			style=filled;
+			fillcolor=lightgrey;
+			node [style=filled,color=navajowhite, shape=invhouse,width=2,height=1.3];
+			rank = same; "etc."; "rpi-kernel\n(Raspbian)\n[Raspberrypi.org]"; "..."; 
+			"ev3-kernel\n(Debian mainline)\n[Debian.org]"; "bb-kernel\n(eLinux)\n[Beagleboard.org]"; 
+		};
+
+		edge [penwidth=0];
+	
+		"Embedded\nPython\n(micrpython)"--"Modular Micro-\nPython Library\n(micropython-lib)";
+
+		"Modular Micro-\nPython Library\n(micropython-lib)"--"avahi"
+		"GLib/\nGObject Library\n(ev3devKit)"--"lego-linux-drivers"
+		"???"--"avahi"
+		"lego-linux-drivers"--"brickd" [ltail=cluster_4, lhead=cluster_3];
+		"avahi"--"..." [ltail=cluster_1,lhead=cluster_0];
+		"brickd"--"..." [ltail=cluster_2,lhead=cluster_0];
+
+	};
+
+}
