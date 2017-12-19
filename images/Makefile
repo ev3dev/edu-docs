@@ -1,3 +1,6 @@
+# Uses diagrams node.js package to generate SVG files programmatically
+# https://www.npmjs.com/package/diagrams
+#
 DIAGRAMS='$(HOME)/node_modules/diagrams/bin/diagrams.js'
 
 DOT_TARGETS = 	ev3dev-related-repositories.dot.svg \
