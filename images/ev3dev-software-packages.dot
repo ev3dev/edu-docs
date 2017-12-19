@@ -94,11 +94,11 @@ graph G {
 			};
 
 		subgraph cluster_4 {
-			label = "Linux EV3 SysFS Driver Library";
+			label = "ev3dev specific";
 			style=filled;
 			fillcolor=paleturquoise;
 			node [shape=rect,style=filled,color=navajowhite,width=3,height=0.7];
-			"lego-linux-drivers";
+			"SysFS Driver Library\n(lego-linux-drivers)";
 
 			};
 		};
@@ -117,7 +117,7 @@ graph G {
 			};
 
 			subgraph cluster_2 {
-				label = "ev3dev-specific";
+				label = "ev3dev specific";
 				style=filled;
 				fillcolor=paleturquoise;
 				node [shape=rect,style=filled,color=navajowhite,width=2];
@@ -141,9 +141,9 @@ graph G {
 		"Embedded\nPython\n(micrpython)"--"Modular Micro-\nPython Library\n(micropython-lib)";
 
 		"Modular Micro-\nPython Library\n(micropython-lib)"--"avahi"
-		"GLib/\nGObject Library\n(ev3devKit)"--"lego-linux-drivers"
+		"GLib/\nGObject Library\n(ev3devKit)"--"SysFS Driver Library\n(lego-linux-drivers)"
 		"???"--"avahi"
-		"lego-linux-drivers"--"brickd" [ltail=cluster_4, lhead=cluster_3];
+		"SysFS Driver Library\n(lego-linux-drivers)"--"brickd" [ltail=cluster_4, lhead=cluster_3];
 		"avahi"--"..." [ltail=cluster_1,lhead=cluster_0];
 		"brickd"--"..." [ltail=cluster_2,lhead=cluster_0];
 
