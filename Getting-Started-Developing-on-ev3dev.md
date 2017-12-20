@@ -39,7 +39,7 @@ Bytecode based languages such as the LEGO Programmer and Java will have Compiler
 
 Consequently, when compiling C and C++ programs on the PC to run on the EV3 Controller, we need to perform [Cross Compilation](https://en.wikipedia.org/wiki/Cross_compiler). The C and C++ cross compilers used by ev3dev are based on the GNU Compiler Collection ([`GCC`](https://gcc.gnu.org/)).
 
-> It is important to select the correct Target environment for the cross compiler; otherwise the generated programs will not be able to run on the targeted EV3 controller platform. There are two [Target Architectures](https://www.debian.org/ports/arm/) for ARM-based Debian distributions used by ev3dev depending on the Controller board. The appropriate GCC Cross-Toolchain *MUST* be used to generate the binary executables to avoid unexpected problems:
+> It is important to select the correct Target environment for the cross compiler; otherwise the generated programs will not be able to run on the targeted EV3 controller platform. Generally we use a generic Cross-Compiler which can generate executables for multiple target architectures. However, if you're building on the Target platform, or else intend to run the cross-compiler for a specific architecture since certain custom libraries are only available for the given target architecture, the appropriate GCC Cross-Toolchain *MUST* be used to generate the binary executables to avoid unexpected problems. There are two [Target Architectures](https://www.debian.org/ports/arm/) for ARM-based Debian distributions used by ev3dev depending on the Controller board:
 > * armel (for XXX)
 > * armhf (for YYY)
 
