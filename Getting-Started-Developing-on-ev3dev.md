@@ -14,8 +14,8 @@ The basic process to start developing on ev3dev is as follows:
 1. [Choose a Language](@choosing-a-language)
 2. [Choose a Workflow and Toolchain](#choosing-a-workflow-and-toolchain)
 3. [Build the Libraries](#building-the-libraries)
-4. Write your programs
-5. Download program to Target and debug/run the program
+4. [Write your Programs](#writing-your-programs)
+5. [Download Program to Target and Debug/Run the Program](#downloading-and-debugging-programs)
 
 # Choosing a Language
 
@@ -60,4 +60,10 @@ Based on the chosen [Programming Language](http://www.ev3dev.org/docs/programmin
 
 ![Software Packages](https://github.com/tcwan/ev3dev/blob/ev3dev-wiki-1/images/ev3dev-software-packages.dot.svg?sanitize=true)
 
-# Building the Libraries
+# Writing Your Programs
+
+TBD
+
+# Downloading and Debugging Programs
+
+TBD
