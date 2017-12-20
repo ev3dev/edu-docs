@@ -9,6 +9,7 @@ graph G {
 	"NXTCamView5" "Brickman";
 
 	subgraph cluster_10 {
+		label = "EV3 Programmer Software Compatible\n(Cannot be used conncurrently with ev3dev)"
 		node [shape=tripleoctagon,style="filled",color=cadetblue,width=2];
 		"EV3\nBytecode\nAsembler\n(lmsasm)"; "EV3 Bytecode\nDisassembler\n(lms-hacker\n-tools)";
 
