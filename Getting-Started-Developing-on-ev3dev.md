@@ -1,7 +1,15 @@
 # Getting Started Developing on ev3dev
 
-This guide is meant for people interested in writing code directly for
-the ev3dev Linux environment.
+## Introduction
+
+The LEGO Mindstorms EV3 Controller (better known as the EV3 Brick) is a Linux-based computing platform for interfacing with the various motors and sensors for the Mindstorms environment.
+
+LEGO provides the EV3 Programmer software which uses graphical programming to develop programs to run on the EV3 Brick. However, these executables stored in `*.rxe` files are actually virtual machine bytecode files (conceptually similar to Java Bytecodes) that run on top of the LMS Virtual Machine.
+
+Alternatively, others are interested in writing programs that execute directly on the Linux Operating System. Commercial solutions include `RobotC` which supports C programming for the EV3 Brick.
+
+Nonetheless, since the EV3 Brick is based on Linux, we have various alternatives to commercially available tools.
+This guide is meant primarily for people interested in writing code directly for the ev3dev Linux environment using open source tools.
 
 # Choosing a Workflow and Toolchain
 
