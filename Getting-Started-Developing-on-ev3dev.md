@@ -75,7 +75,7 @@ The essential components for developing on the Host are:
 * Executable Program Downloader from PC to Target (e.g., OpenSSH provides `scp` (Secure Copy) for transferring files)
 * Cross-Debugger (usually comes with the Cross-compiler Toolchain, but can also be provided as part of the IDE)
 
-In addition, several build tools may be provided to build ev3dev Distribution Boot images or GCC Cross-compiler toolchains for Docker. 
+In addition, several build tools are provided for building ev3dev Distribution Boot images or GCC Cross-compiler toolchains for Docker. 
 >These build tools are not needed unless you plan to create custom toolchains or custom ev3dev Distribution images.
 
 ### Target Packages
