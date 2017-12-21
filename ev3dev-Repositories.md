@@ -11,7 +11,19 @@ The ev3dev Repositories in GitHub consists of the following major components:
 
 ## Linux-based Programming Components
 
-TBD
+## Common components
+
+The `lego-linux-drivers` repository hosts the Linux SysFS-based I/O routines for accessing the motors and sensors used by ev3dev. Most I/O will take place using the SysFS interface under the `/sys/class/` virtual filesystem. This allows for user space drivers to be written easily for reading information from the sensors, for example. 
+
+> SysFS is classified as User-space I/O where the actual data transfers with the device take place via pseudo-files found under `/sys/class` using normal file manipulation routines such as `open()`, `read()`, `write()`, and `close()`. This is different from kernel mode I/O where data transfers take place inside a interrupt handler specifically written for a kernel module running within the kernel context.
+>
+> The disadvantage of using SysFS is that I/O response time would be slower than if a dedicated kernel driver were available. The advantage of SysFS is that interrupt handling routines do not need to be written by the user.
+
+## Language-specific Components
+
+The important repositories listed here are the Language Bindings which provide the Application Programming Interface (API) to `lego-linux-drivers`. The ev3dev project maintains several standard Language bindings based on the GObject/GLib library, which can be automatically updated for all supported languages easily when new APIs are developed.
+
+Alternatively, third party Language Bindings and support libraries are available for several languages. These  do not use the ev3dev GObject/GLib libraries but provide their own API and libraries for writing programs. Nonetheless, all of them depend on `lego-linux-drivers` to actually interface with the sensors and motors.
 
 ## EV3 Programmer Components
 
