@@ -31,7 +31,7 @@ For Python and Javascript, almost everything is already built-in to the ev3dev d
 
 > The pre-built ev3dev image has everything you need, unless you're interested in installing non-standard library packages into the ev3dev image (this is an advanced topic which is not covered in this guide). 
 
-For the other languages, there is a need to compile the source files into executable files that will be run on the EV3 Controller. Technically, it is possible to write and compile programs on the EV3 Controller platform, but that would be an exercise in frustration except for compiling trivial programs such as `Hello World!`. 
+For the other languages, there is a need to compile the source files into executable files that will be run on the EV3 Controller. Technically, it is possible to write and compile programs on the EV3 Controller platform (this is also known as Native Compilation), but that would be an exercise in frustration except for compiling trivial programs such as `Hello World!`. 
 
 Typically we would want to use our Host PC to write, compile and debug the program, since it is much more powerful than the EV3 Controller platform. However, the EV3 Controller uses a different CPU or Instruction Set compared with the ones typically used on your PC. 
 
@@ -79,10 +79,28 @@ In addition, several build tools are provided for building ev3dev Distribution B
 >These build tools are not needed unless you plan to create custom toolchains or custom ev3dev Distribution images.
 
 ### Target Packages
-* Platform specific Kernel
-* 
 
->Take a look at [Organization of ev3dev Repositories](ev3dev-Repositories) for more information regarding the packages maintained by the ev3dev project.
+>This is not meant as an exhaustive list of all packages used, but to highlight those essential or relevant for the operation of the ev3dev environment.
+
+The description of the packages starts from the bottom layer, since the lower layers of the OS are common to the upper layers. The ev3dev specific packages are highlighted in turquiose to indicate that they are specifically developed for the e3vdev platform. Debian-derived packages (default packages provided by the Debian Linux Distribution) are highlighted in plum. Additionally, packages highlighted in dark gray indicate third-party packages ported for use with the e3vdev distribution.
+
+* Platform specific Kernel (part of ev3dev Boot Image (only ev3-kernel based kernel provided currently)
+* Linux Daemons (part of ev3dev Boot Image)
+* Low-level Library Packages (part of ev3dev Boot Image)
+* Mid-level Library Packages
+
+> Micropython is included as part of the ev3dev Boot Image. 
+>
+>The other ev3dev specific libraries listed here are for reference only. They are not included in the Boot Image but but will be statically linked in with the program where necessary (***FIXME: Is this correct???***)
+* Target Applications
+
+> Native Compiler Tools are not included in the ev3dev Boot Image, since users are expected to perform cross-compilation
+> Brickman is the GUI interface for ev3dev (included as part of the ev3dev Boot Image)
+> Others (***FIXME***)
+
+The use of the various libraries in ev3dev for development requires installing the relevant header (include) files for the Cross-compilation platform on the Host. This is documented in the  [Clone the Language-specific Repository](https://github.com/tcwan/ev3dev/wiki/Getting-Started-Developing-on-ev3dev/_edit#clone-the-language-specific-repository) section.
+
+>Take a look at [Organization of ev3dev Repositories](ev3dev-Repositories) for more information regarding the packages maintained by the ev3dev project, including available Language Bindings and support libraries.
 
 # Building the Libraries
 
