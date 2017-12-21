@@ -60,9 +60,27 @@ You can use the following Toolchain Selection Guide for your chosen programming 
 
 ## Software Packages for Host and Target Platforms
 
-It is important to keep in mind that you're dealing with two separate Operating Systems environments when developing software for the EV3, the **Host** environment and the **Target** (EV3) environment. The **Host** environment typically would be based on Windows, macOS, or Linux Operating Systems, while the **Target** will be based on the Debian Linux-derived ev3dev Distribution. Nonetheless, the following discussion assumes the use of a [POSIX compliant](https://en.wikipedia.org/wiki/POSIX) environment for the **Host**. 
+It is important to keep in mind that you're dealing with two separate Operating Systems environments when developing software for the EV3, the **Host** (PC) environment and the **Target** (EV3) environment. The **Host** environment typically would be based on Windows, macOS, or Linux Operating Systems, while the **Target** will be based on the Debian Linux-derived ev3dev Distribution. Nonetheless, the following discussion assumes the use of a [POSIX compliant](https://en.wikipedia.org/wiki/POSIX) environment for the **Host**. 
 
 ![Software Packages](https://github.com/tcwan/ev3dev/blob/ev3dev-wiki-1/images/ev3dev-software-packages.dot.svg?sanitize=true)
+
+### Host Packages
+
+The essential components for developing on the Host are:
+* [Integrated Development Environment](https://en.wikipedia.org/wiki/Integrated_development_environment) (IDE) or Editor
+* Cross-compiler Toolchain
+>ev3dev has packaged the relevant GCC Cross-compiler Toolchain in [Docker](https://www.docker.com/what-docker) containers to simplify the installation of a POSIX-compliant development environment for the Host.
+* Project Build Tools (we assume the use of [Makefiles](https://en.wikipedia.org/wiki/Makefile) for managing compilation)
+* Remote Access program (we assume use of [OpenSSH client](https://en.wikipedia.org/wiki/OpenSSH) to login to the EV3 Platform remotely)
+* Executable Program Downloader from PC to Target (e.g., OpenSSH provides `scp` (Secure Copy) for transferring files)
+* Cross-Debugger (usually comes with the Cross-compiler Toolchain, but can also be provided as part of the IDE)
+
+In addition, several build tools may be provided to build ev3dev Distribution Boot images or GCC Cross-compiler toolchains for Docker. 
+>These build tools are not needed unless you plan to create custom toolchains or custom ev3dev Distribution images.
+
+### Target Packages
+* Platform specific Kernel
+* 
 
 >Take a look at [Organization of ev3dev Repositories](ev3dev-Repositories) for more information regarding the packages maintained by the ev3dev project.
 
