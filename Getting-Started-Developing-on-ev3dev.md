@@ -2,13 +2,13 @@
 
 ## Introduction
 
-The LEGO Mindstorms EV3 Controller (better known as the EV3 Brick) is a Linux-based computing platform for interfacing with the various motors and sensors for the Mindstorms environment.
+The standard LEGO Mindstorms EV3 Controller (better known as the EV3 Brick) is a Linux-based computing platform for interfacing with the various motors and sensors for the Mindstorms environment.
 
-LEGO provides the EV3 Programmer software which uses graphical programming to develop programs to run on the EV3 Brick. However, these executables stored in `*.rxe` files are actually virtual machine bytecode files (conceptually similar to Java Bytecodes) that run on top of the LMS Virtual Machine.
+LEGO provides the EV3 Programmer software which uses a graphical programming paradigm, originating from National Instruments' LabView platform, to develop programs to run on the EV3 Brick. However, these executables stored in `*.rxe` files are actually virtual machine bytecode files (conceptually similar to Java Bytecodes) that run on top of the LMS Virtual Machine.
 
-Alternatively, others are interested in writing programs that execute directly on the EV3 Brick, bypassing the LMS Virtual Machine. Commercial solutions include [`RobotC`](http://www.robotc.net/) which supports C programming for the EV3 Brick.
+Alternatively, others are interested in writing programs that execute directly on the EV3 Brick, bypassing the LMS Virtual Machine. Commercial solutions include [`RobotC`](http://www.robotc.net/) which supports C programming for the EV3 Brick (Q: Does the Robot-C custom firmware support `*.rxe` execution?).
 
-Nonetheless, since the EV3 Brick Operating System is based on Linux, we have various alternatives to commercially available tools. ev3dev provides a Debian-based Linux distribution to support people interested in writing code directly for the Linux environment using open source tools. This also opens up the possibility of using other Controllers such as the Raspberry Pi, Beaglebone boards, and others which have higher processing capabilities compared to the EV3 Brick Controller to run the software written for the ev3dev distribution.
+Nonetheless, since the EV3 Brick Operating System is based on Linux, we have various alternatives to commercially available tools. ev3dev provides a Debian-based Linux distribution to support people interested in writing code directly for the Linux environment using open source tools. This also opens up the possibility of using other EV3 Controllers such as the Raspberry Pi, Beaglebone boards (with appropriate motor and sensor expansion capes)`, and others which have higher processing capabilities compared to the EV3 Brick to run software written for the ev3dev distribution.
 
 The basic process to start developing on ev3dev is as follows:
 1. [Choose a Language](@choosing-a-language)
@@ -39,11 +39,15 @@ Bytecode based languages such as the LEGO Programmer and Java will have Compiler
 
 Consequently, when compiling C and C++ programs on the PC to run on the EV3 Controller, we need to perform [Cross Compilation](https://en.wikipedia.org/wiki/Cross_compiler). The C and C++ cross compilers used by ev3dev are based on the GNU Compiler Collection ([`GCC`](https://gcc.gnu.org/)).
 
-> It is important to select the correct Target environment for the cross compiler; otherwise the generated programs will not be able to run on the targeted EV3 controller platform. Generally we use a generic Cross-Compiler which can generate executables for multiple target architectures. However, if you're building on the Target platform, or else intend to run the cross-compiler for a specific architecture since certain custom libraries are only available for the given target architecture, the appropriate GCC Cross-Toolchain *MUST* be used to generate the binary executables to avoid unexpected problems. There are two [Target Architectures](https://www.debian.org/ports/arm/) for ARM-based Debian distributions used by ev3dev depending on the Controller board:
+> It is important to select the correct Target environment for the cross compiler; otherwise the generated programs will not be able to run on the targeted EV3 controller platform. Generally we should use a generic Cross-Compiler which can generate executables for multiple target architectures. 
+>
+>However, if you're building on the Target platform natively, or else intend to run the architecture specific cross-compiler under emulation on the Host to build with custom libraries which are only available for the given target architecture, GCC provides architecture specific compiler and cross-compiler toolchains that takes less disk space compared with the multi-target cross-compilers.
+
+When cross-compiling using a GCC Cross-Toolchain, the selected target architecture *MUST* be compliant with the chosen EV3 Controller platform distribution (EV3 Brick, RPi, etc.), otherwise unexpected problems may occur. There are two [Target Architectures](https://www.debian.org/ports/arm/) for ARM-based Debian distributions used by ev3dev depending on the Controller hardware platform:
 > * armel (for XXX)
 > * armhf (for YYY)
 
-You can use the following selection process for your chosen programming languages as a guide:
+You can use the following Toolchain Selection Guide for your chosen programming languages as a reference:
 * [Python](http://www.ev3dev.org/docs/tutorials/setting-up-python-pycharm/)
 * C/C++
 ![C-CPP-Workflow](https://github.com/tcwan/ev3dev/blob/tcwan-wiki-swarch-1/images/workflow-c-cpp.flowchart.svg)
