@@ -1,10 +1,11 @@
 # Organization of ev3dev Repositories
 
 The ev3dev Repositories in GitHub consists of the following major components:
-* Components related to Linux-based Programming
-* Components related to EV3 Programmer (LMS Bytecode)
+* Components related to EV3 Programmer /LMS Bytecode Support (EV3 Programmer Software Compatible)
 > EV3 Programmer support cannot be used concurrently with the rest of the ev3dev development environment
-* Linux Kernel Sourcecode Repositories
+* Components related to Linux-based Programming Support (ev3dev Distribution)
+* Linux Kernel Sourcecode Repositories (Platform Specific Linux Kernel)
+> The relevant kernel repository depends on the EV3 Controller Hardware Platform (choose *ONE* appropriate kernel)
 
 ![Image](https://github.com/tcwan/ev3dev/blob/ev3dev-wiki-1/images/ev3dev-related-repositories.dot.svg?sanitize=true)
 
