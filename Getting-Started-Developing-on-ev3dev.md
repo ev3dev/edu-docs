@@ -62,6 +62,8 @@ You can use the following Toolchain Selection Guide for your chosen programming 
 
 ![Software Packages](https://github.com/tcwan/ev3dev/blob/ev3dev-wiki-1/images/ev3dev-software-packages.dot.svg?sanitize=true)
 
+>Take a look at [Organization of ev3dev Repositories](ev3dev-Repositories) for more information regarding the packages maintained by the ev3dev project.
+
 # Building the Libraries
 
 ## Clone the Language-specific Repository
