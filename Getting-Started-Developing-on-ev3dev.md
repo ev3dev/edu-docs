@@ -101,9 +101,12 @@ The description of the packages starts from the bottom layer, since the lower la
 >
 > Others (***FIXME***)
 
+### Header Files
+
 The use of the various libraries in ev3dev for development requires installing the relevant header (include) files for the Cross-compilation platform on the Host. This is documented in the  [Clone the Language-specific Repository](https://github.com/tcwan/ev3dev/wiki/Getting-Started-Developing-on-ev3dev/_edit#clone-the-language-specific-repository) section.
 
 >Take a look at [Organization of ev3dev Repositories](ev3dev-Repositories) for more information regarding the packages maintained by the ev3dev project, including available Language Bindings and support libraries.
+
 
 # Building the Libraries
 
