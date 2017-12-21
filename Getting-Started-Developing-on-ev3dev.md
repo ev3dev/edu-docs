@@ -23,9 +23,11 @@ While it is a bit daunting to start by choosing a [Programming Language](http://
 
 # Choosing a Workflow and Toolchain
 
+## Workflow Introduction
+
 >This mostly applies to more advanced language options. 
 
-For Python and Javascript, almost everything is built-in to the ev3dev distribution already, and all you need is an Editor or Integrated Development Environment (IDE) to write your programs in, and then execute it on the EV3 Controller (after downloading if necessary).
+For Python and Javascript, almost everything is already built-in to the ev3dev distribution; all you need is an Editor or Integrated Development Environment (IDE) to write your programs in, and then execute it on the EV3 Controller (after downloading if necessary).
 
 > The pre-built ev3dev image has everything you need, unless you're interested in installing non-standard library packages into the ev3dev image (this is an advanced topic which is not covered in this guide). 
 
@@ -33,7 +35,7 @@ For the other languages, there is a need to compile the source files into execut
 
 Typically we would want to use our Host PC to write, compile and debug the program, since it is much more powerful than the EV3 Controller platform. However, the EV3 Controller uses a different CPU or Instruction Set compared with the ones typically used on your PC. 
 
->More specifically, the EV3 Controller are (almost) all based on the ARM CPU Architecture, while the PC are (almost) all based on the x86 or x64 (Intel-compatible) CPU Architecture.
+>More specifically, the available EV3 Controllers are ~~almost~~ all based on the ARM CPU Architecture, while the PC are (almost) all based on the x86 or x64 (Intel-Architecture compatible) CPU Architecture.
 
 Bytecode based languages such as the LEGO Programmer and Java will have Compilers that compile the source programs into Virtual Machine bytecodes, which is able to run on any platform having the appropriate Virtual Machine software. However, the default C and C++ compilers for the PC platform targets the x86 or x64 CPU Architecture, and cannot be run on the EV3 Controller. 
 
@@ -47,6 +49,8 @@ When cross-compiling using a GCC Cross-Toolchain, the selected target architectu
 > * armel (for XXX)
 > * armhf (for YYY)
 
+## Toolchain Selection
+
 You can use the following Toolchain Selection Guide for your chosen programming languages as a reference:
 * [Python](http://www.ev3dev.org/docs/tutorials/setting-up-python-pycharm/)
 * C/C++
@@ -54,15 +58,16 @@ You can use the following Toolchain Selection Guide for your chosen programming 
 * ???
 * TBD
 
+## Software Pacakges for Host and Target Platforms
+
+![Software Packages](https://github.com/tcwan/ev3dev/blob/ev3dev-wiki-1/images/ev3dev-software-packages.dot.svg?sanitize=true)
+
 # Building the Libraries
 
 ## Clone the Language-specific Repository
 
 Based on the chosen [Programming Language](http://www.ev3dev.org/docs/programming-languages) and toolchain, the specific repository should be cloned to your Host (PC) platform
 
-## Software Pacakges for Host and Target Platforms
-
-![Software Packages](https://github.com/tcwan/ev3dev/blob/ev3dev-wiki-1/images/ev3dev-software-packages.dot.svg?sanitize=true)
 
 # Writing Your Programs
 
