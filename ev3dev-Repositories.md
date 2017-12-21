@@ -21,9 +21,9 @@ The `lego-linux-drivers` repository hosts the Linux SysFS-based I/O routines for
 
 ### Language-specific Components
 
-The important repositories listed here are the Language Bindings which provide the Application Programming Interface (API) to `lego-linux-drivers`. The ev3dev project maintains several standard Language bindings based on the GObject/GLib library, which can be automatically updated for all supported languages easily when new APIs are developed.
+The important repositories listed here are the Language Bindings which provide the Application Programming Interface (API) to `lego-linux-drivers`. The ev3dev project maintains several standard Language bindings for the GObject/GLib-based `ev3devKit` library, which can be automatically updated for all supported languages easily when new APIs are developed.
 
-Alternatively, third party Language Bindings and support libraries are available for several languages. These  do not use the ev3dev GObject/GLib libraries but provide their own API and libraries for writing programs. Nonetheless, all of them depend on `lego-linux-drivers` to actually interface with the sensors and motors.
+Alternatively, third party Language Bindings and support libraries are available for several languages. These  do not use the `ev3devKit` libraries but provide their own API and libraries for writing programs. Nonetheless, all of them depend on `lego-linux-drivers` to actually interface with the sensors and motors.
 
 ### Higher level Components
 
