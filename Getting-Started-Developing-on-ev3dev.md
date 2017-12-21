@@ -66,6 +66,8 @@ It is important to keep in mind that you're dealing with two separate Operating 
 
 ### Host Packages
 
+Packages maintained by ev3dev are highlighted in turquiose to indicate that they are used for building applications for the e3vdev platform. In addition, some examples of vendor-supplied Cross compilers are listed for reference. Standard packages (default packages provided by third parties for the Host OS) are highlighted in plum.
+
 The essential components for developing on the Host are:
 * [Integrated Development Environment](https://en.wikipedia.org/wiki/Integrated_development_environment) (IDE) or Editor
 * Cross-compiler Toolchain
@@ -94,8 +96,9 @@ The description of the packages starts from the bottom layer, since the lower la
 >The other ev3dev specific libraries listed here are for reference only. They are not included in the Boot Image but but will be statically linked in with the program where necessary (***FIXME: Is this correct???***)
 * Target Applications
 
-> Native Compiler Tools are not included in the ev3dev Boot Image, since users are expected to perform cross-compilation
+> Native Compiler Tools are not included in the ev3dev Boot Image, since users are expected to perform cross-compilation.
 > Brickman is the GUI interface for ev3dev (included as part of the ev3dev Boot Image)
+>
 > Others (***FIXME***)
 
 The use of the various libraries in ev3dev for development requires installing the relevant header (include) files for the Cross-compilation platform on the Host. This is documented in the  [Clone the Language-specific Repository](https://github.com/tcwan/ev3dev/wiki/Getting-Started-Developing-on-ev3dev/_edit#clone-the-language-specific-repository) section.
