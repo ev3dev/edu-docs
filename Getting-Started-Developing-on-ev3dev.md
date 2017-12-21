@@ -58,7 +58,9 @@ You can use the following Toolchain Selection Guide for your chosen programming 
 * ???
 * TBD
 
-## Software Pacakges for Host and Target Platforms
+## Software Packages for Host and Target Platforms
+
+It is important to keep in mind that you're dealing with two separate Operating Systems environments when developing software for the EV3, the **Host** environment and the **Target** (EV3) environment. The **Host** environment typically would be based on Windows, macOS, or Linux Operating Systems, while the **Target** will be based on the Debian Linux-derived ev3dev Distribution. Nonetheless, the following discussion assumes the use of a [POSIX compliant](https://en.wikipedia.org/wiki/POSIX) environment for the **Host**. 
 
 ![Software Packages](https://github.com/tcwan/ev3dev/blob/ev3dev-wiki-1/images/ev3dev-software-packages.dot.svg?sanitize=true)
 
