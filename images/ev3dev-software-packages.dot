@@ -85,7 +85,7 @@ graph G {
 				style=filled;
 				fillcolor=plum;
 				node [shape=rect,style="filled,rounded",color=navajowhite,width=2,height=0.7];
-				"GNU Compilers";
+				"build-essential";
 			};
 			
 			subgraph cluster_12 {

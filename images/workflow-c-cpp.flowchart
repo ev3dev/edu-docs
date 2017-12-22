@@ -14,18 +14,21 @@ multiarch(no)->ontarget
 multiarch(yes,bottom)->customlib
 usetarget=>subroutine: Target Based 
 Compilation
-(ev3dev-tools):>https://github.com/ev3dev/ev3dev-tools
+(ev3dev-tools)
+[See ev3dev-tools repository]
 usehostemu=>subroutine: Host-based Emulated
 Cross-compilation
-(debian-<dist>-<arch>-cross):>https://github.com/ev3dev/docker-cross
+(debian-<dist>-<arch>-cross)
+[See docker-cross repository]
 usedocker=>subroutine: Host-based Native 
 Cross-compilation
-(debian-<dist>-cross):>http://www.ev3dev.org/docs/tutorials/using-docker-to-cross-compile/
+(debian-<dist>-cross)
+[See using-docker-to-cross-compile Tutorial on ev3dev.org]
 useprebuilt=>subroutine: Vendor-supplied
 Host-based Toolchain
 (NB: latest releases
 may not support
-EV3 HW Platform):>https://github.com/ddemidov/ev3dev-lang-cpp
+EV3 HW Platform)
 ontarget(yes,right)->usetarget->e
 ontarget(no)->usehostemu->e
 customlib(yes)->usedocker->e
