@@ -244,11 +244,11 @@
 <path fill="#ffdead" stroke="#ffdead" d="M164,-950.6C164,-950.6 44,-950.6 44,-950.6 38,-950.6 32,-944.6 32,-938.6 32,-938.6 32,-912.6 32,-912.6 32,-906.6 38,-900.6 44,-900.6 44,-900.6 164,-900.6 164,-900.6 170,-900.6 176,-906.6 176,-912.6 176,-912.6 176,-938.6 176,-938.6 176,-944.6 170,-950.6 164,-950.6"/>
 <text text-anchor="middle" x="104" y="-921.4" font-family="Times,serif" font-size="14.00" fill="#000000">OpenSSH</text>
 </g>
-<!-- GNU Compilers -->
+<!-- build&#45;essential -->
 <g id="node11" class="node">
-<title>GNU Compilers</title>
+<title>build&#45;essential</title>
 <path fill="#ffdead" stroke="#ffdead" d="M1471,-950.6C1471,-950.6 1351,-950.6 1351,-950.6 1345,-950.6 1339,-944.6 1339,-938.6 1339,-938.6 1339,-912.6 1339,-912.6 1339,-906.6 1345,-900.6 1351,-900.6 1351,-900.6 1471,-900.6 1471,-900.6 1477,-900.6 1483,-906.6 1483,-912.6 1483,-912.6 1483,-938.6 1483,-938.6 1483,-944.6 1477,-950.6 1471,-950.6"/>
-<text text-anchor="middle" x="1411" y="-921.4" font-family="Times,serif" font-size="14.00" fill="#000000">GNU Compilers</text>
+<text text-anchor="middle" x="1411" y="-921.4" font-family="Times,serif" font-size="14.00" fill="#000000">build&#45;essential</text>
 </g>
 <!-- ev3dev&#45;config\n(ev3dev&#45;tools) -->
 <g id="node12" class="node">
