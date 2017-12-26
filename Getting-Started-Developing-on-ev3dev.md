@@ -32,7 +32,7 @@ For Python and Javascript, almost everything is already built-in to the ev3dev d
 
 > The pre-built ev3dev image has everything you need, unless you're interested in installing non-standard library packages into the ev3dev image (this is an advanced topic which is not covered in this guide). 
 
-For the other languages, there is a need to compile the source files into executable files that will be run on the EV3 Controller. Technically, it is possible to write and compile programs on the EV3 Controller platform (this is also known as Native Compilation), but that would be an exercise in frustration except for compiling trivial programs such as `Hello World!`. 
+For the other languages, there is a need to compile the source files into executable files that will be run on the EV3 Controller. Technically, it is possible to write and compile programs on the EV3 Controller platform (this is also known as Target (Native) Compilation), but that would be an exercise in frustration except for compiling trivial programs such as `Hello World!`. 
 
 Typically we would want to use our Host PC to write, compile and debug the program, since it is much more powerful than the EV3 Controller platform. However, the EV3 Controller uses a different CPU or Instruction Set compared with the ones typically used on your PC. 
 
@@ -56,6 +56,13 @@ You can use the following Toolchain Selection Guide for your chosen programming 
 * [Python](http://www.ev3dev.org/docs/tutorials/setting-up-python-pycharm/)
 * C/C++
 ![C-CPP-Workflow](https://github.com/tcwan/ev3dev/blob/tcwan-wiki-swarch-1/images/workflow-c-cpp.flowchart.svg)
+
+Four options are available for C/C++:
+1. Target-based (Native) Compilation (compiler running on EV3 Controller): This is not a recommended configuration
+2. Host-based Emulated Cross-Compilation: If custom libraries are only available for the Target platform
+3. Host-based Native Cross-Compilation: If multi-architecture custom libraries are available on the Host (PC) platform, this is the most efficient configuration
+4. Host-based Vendor supplied Cross-Compilation Toolchain: The latest versions of the toolchains may not support the EV3 Controller platform
+
 * ???
 * TBD
 
@@ -106,7 +113,7 @@ The description of the packages starts from the bottom layer, since the lower la
 
 ### Header Files
 
-The use of the various libraries in ev3dev for development requires installing the relevant header (include) files for the Cross-compilation platform on the Host. This is documented in the  [Clone the Language-specific Repository](https://github.com/tcwan/ev3dev/wiki/Getting-Started-Developing-on-ev3dev/_edit#clone-the-language-specific-repository) section.
+The use of the various libraries in ev3dev for development requires installing the relevant header (include) files for the Cross-compilation platform on the Host. This is documented in the  [Building the Libraries](#building-the-libraries) section.
 
 >Take a look at [Organization of ev3dev Repositories](ev3dev-Repositories) for more information regarding the packages maintained by the ev3dev project, including available Language Bindings and support libraries.
 
@@ -120,13 +127,15 @@ Based on the chosen [Programming Language](http://www.ev3dev.org/docs/programmin
 
 ## Install the Library Headers and Archives
 
-Typically cross-platform development uses statically linked libraries to create the final program. While dynamically loaded libraries may save some space on the boot image, the compilation and linking step is more complicated, and it is up to the developer to make sure that the version of the libraries on the boot image is the correct version for the given application.
+Typically cross-platform development uses statically linked libraries to create the final program. 
+
+>While dynamically loaded libraries may save some space on the boot image, the compilation and linking step is more complicated, and it is up to the developer to make sure that the version of the libraries on the boot image is the correct version for the given application.
 
 In this step, you need to take note of the directory locations for both the Library archive files (`*.a`), as well as the include header files. They would typically be different from the paths to the Host (PC) compiler libraries and include files.
 
 >On Linux, the standard library path is in `/usr/lib`, while the standard include path is in `/usr/include`, they are used to keep all system-wide library archives and include files. 
 >
->Cross-compilation is also considered an example of using custom libraries. The standard libraries for the cross-compiler would also usually be stored in a well known location such as `/usr/local/` or `/opt/local`, depending on the vendor or packager of the cross-compilation toolchain. Normally, you won't need to specify the path to the standard libraries and header files for the cross-compiler 
+>Cross-compilation is considered an example of using custom libraries. The standard libraries for the cross-compiler would also usually be stored in a well known location such as `/usr/local/` or `/opt/local`, depending on the vendor or packager of the cross-compilation toolchain. Normally, you won't need to specify the path to the standard libraries and header files for the cross-compiler 
 >
 >On top of that, the libraries for supporting EV3 cross-compilation is another set of custom libraries that we need to access from our programs. There may not be a standard location for accessing those files, except for the location where the libraries were cloned to, though well designed custom libraries usually allow us to install it to the same directories as the cross-compiler libraries and headers for easier access. 
 
