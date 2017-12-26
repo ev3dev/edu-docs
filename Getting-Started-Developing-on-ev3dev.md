@@ -58,10 +58,10 @@ You can use the following Toolchain Selection Guide for your chosen programming 
 ![C-CPP-Workflow](https://github.com/tcwan/ev3dev/blob/tcwan-wiki-swarch-1/images/workflow-c-cpp.flowchart.svg)
 
 Four options are available for C/C++:
-1. Target-based (Native) Compilation (compiler running on EV3 Controller): This is not a recommended configuration
-2. Host-based Emulated Cross-Compilation: If custom libraries are only available for the Target platform
-3. Host-based Native Cross-Compilation: If multi-architecture custom libraries are available on the Host (PC) platform, this is the most efficient configuration
-4. Host-based Vendor supplied Cross-Compilation Toolchain: The latest versions of the toolchains may not support the EV3 Controller platform
+1. Target-based (Native) Compilation (compiler running on EV3 Controller): This is not a recommended configuration due to the limited storage, processing power and RAM on the EV3 Controller.
+2. Host-based Emulated Cross-Compilation: If custom libraries were only available for the Target platform; the cross-compilers are actually Target-based compilers running in an emulator on the Host (PC)
+3. Host-based Native Cross-Compilation: If multi-architecture custom libraries were available on the Host (PC) platform; this is the most efficient configuration
+4. Vendor supplied Host-based Cross-Compilation Toolchain: The latest versions of the vendor toolchains may not support the EV3 Controller platform
 
 * ???
 * TBD
