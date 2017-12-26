@@ -71,6 +71,8 @@ Packages maintained by ev3dev are highlighted in turquiose to indicate that they
 
 The essential components for developing on the Host are:
 * [Integrated Development Environment](https://en.wikipedia.org/wiki/Integrated_development_environment) (IDE) or Editor
+>While it is not the intention of this guide to recommend any particular IDE, since it is highly subjective regarding which is the *best* (and this is often a contentious debate); you may want to take a look at [Eclipse](http://www.eclipse.org/), which provides an open source, cross-platform everything-including-the-kitchen-sink IDE that is highly extensible and has support for various plugins relevant for cross-platform development.
+
 * Cross-compiler Toolchain
 >ev3dev has packaged the relevant GCC Cross-compiler Toolchain in [Docker](https://www.docker.com/what-docker) containers to simplify the installation of a POSIX-compliant development environment for the Host.
 * Project Build Tools (we assume the use of [Makefiles](https://en.wikipedia.org/wiki/Makefile) for managing compilation)
@@ -113,8 +115,22 @@ The use of the various libraries in ev3dev for development requires installing t
 
 ## Clone the Language-specific Repository
 
-Based on the chosen [Programming Language](http://www.ev3dev.org/docs/programming-languages) and toolchain, the specific repository should be cloned to your Host (PC) platform
+Based on the chosen [Programming Language](http://www.ev3dev.org/docs/programming-languages) and toolchain, the specific repository should be cloned to your Host (PC) platform. 
+> The *Getting Started* guide for a programming language may suggest doing it on the EV3 Controller, but this is not recommended due to the large storage requirements for compilation, as well as the issue of it being much slower due to the limited processing capabilities and RAM on the Controller. 
 
+## Install the Library Headers and Archives
+
+Typically cross-platform development uses statically linked libraries to create the final program. While dynamically loaded libraries may save some space on the boot image, the compilation and linking step is more complicated, and it is up to the developer to make sure that the version of the libraries on the boot image is the correct version for the given application.
+
+In this step, you need to take note of the directory locations for both the Library archive files (`*.a`), as well as the include header files. They would typically be different from the paths to the Host (PC) compiler libraries and include files.
+
+>On Linux, the standard library path is in `/usr/lib`, while the standard include path is in `/usr/include`, they are used to keep all system-wide library archives and include files. 
+>
+>Cross-compilation is also considered an example of using custom libraries. The standard libraries for the cross-compiler would also usually be stored in a well known location such as `/usr/local/` or `/opt/local`, depending on the vendor or packager of the cross-compilation toolchain. Normally, you won't need to specify the path to the standard libraries and header files for the cross-compiler 
+>
+>On top of that, the libraries for supporting EV3 cross-compilation is another set of custom libraries that we need to access from our programs. There may not be a standard location for accessing those files, except for the location where the libraries were cloned to, though well designed custom libraries usually allow us to install it to the same directories as the cross-compiler libraries and headers for easier access. 
+
+Therefore, it is important when compiling with custom libraries to specify the correct path to the header directory and the library archive correctly to the compiler and linker, so that it will know how to access the needed files unless they could be installed to the standard locations.
 
 # Writing Your Programs
 
