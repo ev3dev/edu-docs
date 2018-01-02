@@ -143,7 +143,66 @@ Therefore, it is important when compiling with custom libraries to specify the c
 
 # Writing Your Programs
 
-TBD
+It is not the intention of this guide to go into detailed description of every step, but the things to be aware of are:
+
+* Program Lifecycle
+* Creating project Makefiles to build the program automatically
+* Setting up correct paths to custom or ev3dev specific libraries and include files
+* Use of the Editor or IDE features for syntax checking and API completion
+* Adoption of common style-guidelines for consistency with existing projects/code
+* Using source revision management software to track changes made to the program
+
+## Program Lifecycle
+
+Every program follows the basic life cycle for applications:
+* Genesis of an idea (spark)
+* Breaking down the idea into manageable components
+* Sketch out essential logic of specific components
+* Test out the basic functionality of a component (prototyping, also include running and debugging the program)
+* Refine the functionality based on prototype
+* Iterate until you're happy with the outcome
+* Archive/freeze program development and/or share with others
+
+There are many ways (formally termed development paradigms) to carry out these steps, some may not even consciously adopt a given paradigm but it came out naturally as part of the exploration. Nonetheless, having some semblance of a structured sequence would help reduce the frustrations and confusions involved with program development as the project scales up in complexity.
+
+## Creating project Makefiles
+
+The default building process adopted by ev3dev and many other projects uses [`make`](https://www.gnu.org/software/make/) to manage the compilation of files after they have been edited or modified. There are many other build management tools available, each with different strengths and weaknesses. Nonetheless, the default starting point is to use your IDE to create the necessary project build files, and modify it if necessary for advanced build features. For example, Eclipse CDT with the [GNU MCU Eclipse plugin](https://gnu-mcu-eclipse.github.io/) would create standard project folders with the necessary Makefiles for you automatically when creating a New Project.
+
+*FIXME: Need some additional HOWTOs for Make*
+
+## Setting up Library and Include Paths
+
+This involves specifying the paths passed to the cross-compiler and linker. 
+For GCC, the compiler command line switches are:
+* `-L <path-to-library>`
+* `-I <path-to-include-directory>`
+
+In addition, for the generation of the complete program, all custom libraries used by the program would need to be linked with the object files for the program using:
+* `-l <library-archive>`
+
+> This assumes static linking of libraries used by the program
+
+## Syntax highlighting and API completion
+
+One of the major advantages of using an IDE as opposed to a normal text editor is the capability to highlight the programming language syntax to ease comprehension and bug tracking. While purists may insist on using no-frills text editor for speed in entering the program code, a large portion of the programmer's time is actually spent understanding the program logic and how to convert it into the appropriate syntax used by the chosen programming language. Hence, IDEs with good syntax highlighting is a great help in reducing logical errors introduced during the course of programming.
+
+If the IDE was configured well, it is even possible for it to provide prompts for function parameters and reference to the appropriate header files when looking up the definition of a particular function call.
+This is another useful feature especially when dealing with custom libraries and APIs (not the standard language supplied library APIs)
+
+## Adoption of Common Style Guidelines
+
+Very often we start from example projects or code taken from other open source projects. This is the basis for ev3dev after all. While it is tempting to just add new code to the project willy-nilly, it is better to try and be consistent with the existing project style guidelines, to ensure readability as well as future sharing of the code with others. 
+
+> Large projects frequently have strict style guidelines and will not accept code contribution from others which do not meet those guidelines.
+
+## Using Source Revision Management Software
+
+Source code control, revision management, or code control, refer to the task of managing changes to the program code over time. The ability to roll back a change which introduced an unexpected bug, or to test out new features while the already working code is being used actively, is a powerful feature of Source Revision Management Software. Beyond these typical features that benefit an individual programmer tremendously, almost all source revision management software also allows collaboration with other programmers to improve the code and work on larger projects in a team.
+
+Since this is a huge topic in itself, this guide will not get into further details, except to note that knowledge of commonly-used source revision management software is a useful skill for any programmer to know, and is well worth the time investment involved. If you're new to this whole concept of source code control, [Git](https://git-scm.com/) is the go-to software for source revision management today.
+
+>For reference, all ev3dev projects are using Git for source code control; Git is the basis for all projects hosted on GitHub as well.
 
 # Downloading Programs to Target
 
