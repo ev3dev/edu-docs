@@ -46,9 +46,10 @@ Consequently, when compiling C and C++ programs on the PC to run on the EV3 Cont
 >
 >However, if you're building on the Target platform natively, or else intend to run the architecture specific cross-compiler under emulation on the Host to build with custom libraries which are only available for the given target architecture, GCC provides architecture specific compiler and cross-compiler toolchains that takes less disk space compared with the multi-target cross-compilers.
 
-When cross-compiling using a GCC Cross-Toolchain, the selected target architecture *MUST* be compliant with the chosen EV3 Controller platform distribution (EV3 Brick, RPi, etc.), otherwise unexpected problems may occur. There are two [Target Architectures](https://www.debian.org/ports/arm/) for ARM-based Debian distributions used by ev3dev depending on the Controller hardware platform:
-> * armel (for XXX)
-> * armhf (for YYY)
+When cross-compiling using a GCC Cross-Toolchain, the selected target architecture *MUST* be compliant with the chosen EV3 Controller platform distribution (EV3 Brick, RPi, etc.), otherwise unexpected problems may occur. There are three [Target Architectures](https://www.debian.org/ports/arm/) for ARM-based Debian distributions used by ev3dev depending on the Controller hardware platform:
+> * armel (for EV3 Controller)
+> * armhf for ARMv6 (for the original Raspberry Pi and Pi Zero, **Docker Cross-compiler Image not provided**)
+> * armhf for ARMv7 (for Raspberry Pi 2, 3, and Beaglebone)
 
 ## Toolchain Selection
 
