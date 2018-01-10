@@ -59,7 +59,7 @@ You can use the following Toolchain Selection Guide for your chosen programming 
 ![C-CPP-Workflow](https://github.com/tcwan/ev3dev/blob/tcwan-wiki-swarch-1/images/workflow-c-cpp.flowchart.svg)
 
 Four options are available for C/C++:
-1. Target-based (Native) Compilation (compiler running on EV3 Controller): This is not a recommended configuration due to the limited storage, processing power and RAM on the EV3 Controller. You'll need the [build-essential](https://packages.debian.org/stretch/build-essential) apt package, as well as [ev3dev-tools](https://github.com/ev3dev/ev3dev-tools)
+1. Target-based (Native) Compilation (compiler running on EV3 Controller): This is not a recommended configuration due to the limited storage, processing power and RAM on the EV3 Controller. You'll need the [build-essential](https://packages.debian.org/stretch/build-essential) apt package.
 2. Host-based Emulated Cross-Compilation: If custom libraries were only available for the Target platform; the cross-compilers are actually Target-based compilers running in an emulator on the Host (PC). Look for [`debian-<dist>-<arch>-cross`](https://github.com/ev3dev/docker-cross) docker iamges.
 3. Host-based Native Cross-Compilation: If multi-architecture custom libraries were available on the Host (PC) platform; this is the most efficient configuration. Look for [`debian-<dist>-cross`](https://github.com/ev3dev/docker-cross) docker images.
 4. Vendor supplied Host-based Cross-Compilation Toolchain: The latest versions of the vendor toolchains may not support the EV3 Controller platform. See [C++ Language Bindings Project](https://github.com/ddemidov/ev3dev-lang-cpp) for a link to vendor supplied packages.
@@ -104,13 +104,15 @@ The description of the packages starts from the bottom layer, since the lower la
 
 > Micropython is included as part of the ev3dev Boot Image. 
 >
->The other ev3dev specific libraries listed here are for reference only. They are not included in the Boot Image but but will be statically linked in with the program where necessary (***FIXME: Is this correct???***)
+>The other ev3dev specific libraries listed here are for reference only. They are not included in the Boot Image but but will be statically linked in with the program where necessary
 * Target Applications
 
 > Native Compiler Tools are not included in the ev3dev Boot Image, since users are expected to perform cross-compilation.
-> Brickman is the GUI interface for ev3dev (included as part of the ev3dev Boot Image)
 >
-> Others (***FIXME***)
+>* Brickman is the GUI interface for ev3dev (included as part of the ev3dev Boot Image)
+>* brickrun is the command line program launcher for ev3dev (also called by Brickman internally) 
+>* System Information and Configuration scripts: ev3dev-sysinfo and ev3dev-config from the [ev3dev-tools](https://github.com/ev3dev/ev3dev-tools) repository
+>* Others (***FIXME***)
 
 ### Header Files
 
