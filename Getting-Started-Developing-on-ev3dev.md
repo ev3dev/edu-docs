@@ -2,11 +2,11 @@
 
 ## Introduction
 
-The standard LEGO Mindstorms EV3 Controller (better known as the EV3 Brick) is a Linux-based computing platform for interfacing with the various motors and sensors for the Mindstorms environment.
+The standard LEGO Mindstorms EV3 Controller (better known as the LEGO Mindstorms EV3 Programmable Brick) is a Linux-based computing platform for interfacing with the various motors and sensors for the Mindstorms environment.
 
-LEGO provides the EV3 Programmer software which uses a graphical programming paradigm, originating from National Instruments' LabView platform, to develop programs to run on the EV3 Brick. However, these executables stored in `*.rxe` files are actually virtual machine bytecode files (conceptually similar to Java Bytecodes) that run on top of the LMS Virtual Machine.
+LEGO provides the EV3 Programmer software which uses a graphical programming paradigm, originating from National Instruments' LabView platform, to develop programs to run on the EV3 Brick. However, these executables stored in `*.rbf` files are actually virtual machine bytecode files (conceptually similar to Java Bytecodes) that run on top of the LMS Virtual Machine.
 
-Alternatively, others are interested in writing programs that execute directly on the EV3 Brick, bypassing the LMS Virtual Machine. Commercial solutions include [`RobotC`](http://www.robotc.net/) which supports C programming for the EV3 Brick (Q: Does the Robot-C custom firmware support `*.rxe` execution?).
+Alternatively, others are interested in writing programs that execute directly on the EV3 Brick, bypassing the LMS Virtual Machine. Commercial solutions include [`RobotC`](http://www.robotc.net/) which supports C-like programming for the EV3 Brick to create the `*.rbf` virtual machine bytecode files for their custom firmware.
 
 Nonetheless, since the EV3 Brick Operating System is based on Linux, we have various alternatives to commercially available tools. ev3dev provides a Debian-based Linux distribution to support people interested in writing code directly for the Linux environment using open source tools. This also opens up the possibility of using other EV3 Controllers such as the Raspberry Pi, Beaglebone boards (with appropriate motor and sensor expansion capes)`, and others which have higher processing capabilities compared to the EV3 Brick to run software written for the ev3dev distribution.
 
@@ -20,7 +20,7 @@ The basic process to start developing on ev3dev is as follows:
 
 # Choosing a Language
 
-While it is a bit daunting to start by choosing a [Programming Language](http://www.ev3dev.org/docs/programming-languages) if you're new to programming, the list of languages are more or less sorted from easiest for beginners such as Python and Javascript, to more advanced options such as C++ and C.
+While it is a bit daunting to start by choosing a [Programming Language](http://www.ev3dev.org/docs/programming-languages) if you're new to programming, the list of languages are more or less sorted from easiest for beginners such as Python, to more advanced options such as C++ and C.
 
 # Choosing a Workflow and Toolchain
 
@@ -96,7 +96,7 @@ In addition, several build tools are provided for building ev3dev Distribution B
 
 The description of the packages starts from the bottom layer, since the lower layers of the OS are common to the upper layers. The ev3dev specific packages are highlighted in turquiose to indicate that they are specifically developed for the e3vdev platform. Debian-derived packages (default packages provided by the Debian Linux Distribution) are highlighted in plum. Additionally, packages highlighted in dark gray indicate third-party packages ported for use with the e3vdev distribution.
 
-* Platform specific Kernel (part of ev3dev Boot Image (only ev3-kernel based kernel provided currently)
+* Platform specific Kernel (part of ev3dev Boot Image (only ev3dev-kernel based kernel provided currently)
 * Linux Daemons (part of ev3dev Boot Image)
 * Low-level Library Packages (part of ev3dev Boot Image)
 * Mid-level Library Packages
