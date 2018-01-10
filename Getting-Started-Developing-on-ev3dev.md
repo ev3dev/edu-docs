@@ -2,13 +2,13 @@
 
 ## Introduction
 
-The standard LEGO Mindstorms EV3 Controller (better known as the LEGO Mindstorms EV3 Programmable Brick) is a Linux-based computing platform for interfacing with the various motors and sensors for the Mindstorms environment.
+The standard LEGO Mindstorms EV3 Controller (better known as the LEGO Mindstorms EV3 Programmable Brick) is a Linux-based computing platform (referred to in the rest of this page as a Robot Controller) for interfacing with the various motors and sensors for the Mindstorms environment.
 
 LEGO provides the EV3 Programmer software which uses a graphical programming paradigm, originating from National Instruments' LabView platform, to develop programs to run on the EV3 Brick. However, these executables stored in `*.rbf` files are actually virtual machine bytecode files (conceptually similar to Java Bytecodes) that run on top of the LMS Virtual Machine.
 
 Alternatively, others are interested in writing programs that execute directly on the EV3 Brick, bypassing the LMS Virtual Machine. Commercial solutions include [`RobotC`](http://www.robotc.net/) which supports C-like programming for the EV3 Brick to create the `*.rbf` virtual machine bytecode files for their custom firmware.
 
-Nonetheless, since the EV3 Brick Operating System is based on Linux, we have various alternatives to commercially available tools. ev3dev provides a Debian-based Linux distribution to support people interested in writing code directly for the Linux environment using open source tools. This also opens up the possibility of using other EV3 Controllers such as the Raspberry Pi, Beaglebone boards (with appropriate motor and sensor expansion capes)`, and others which have higher processing capabilities compared to the EV3 Brick to run software written for the ev3dev distribution.
+Nonetheless, since the EV3 Brick Operating System is based on Linux, we have various alternatives to commercially available tools. ev3dev provides a Debian-based Linux distribution to support people interested in writing code directly for the Linux environment using open source tools. This also opens up the possibility of using other Robot Controllers such as the Raspberry Pi, Beaglebone boards (with appropriate motor and sensor expansion capes)`, and others which have higher processing capabilities compared to the EV3 Brick to run software written for the ev3dev distribution.
 
 The basic process to start developing on ev3dev is as follows:
 1. [Choose a Language](@choosing-a-language)
@@ -28,26 +28,26 @@ While it is a bit daunting to start by choosing a [Programming Language](http://
 
 >This mostly applies to more advanced language options. 
 
-For Python and Javascript, almost everything is already built-in to the ev3dev distribution; all you need is an Editor or Integrated Development Environment (IDE) to write your programs in, and then execute it on the EV3 Controller (after downloading if necessary).
+For Python-based development, almost everything is already built-in to the ev3dev distribution; all you need is an Editor or Integrated Development Environment (IDE) to write your programs in, and then execute it on the Robot Controller (after downloading if necessary).
 
 > The pre-built ev3dev image has everything you need, unless you're interested in installing non-standard library packages into the ev3dev image (this is an advanced topic which is not covered in this guide). 
 
-For the other languages, there is a need to compile the source files into executable files that will be run on the EV3 Controller. Technically, it is possible to write and compile programs on the EV3 Controller platform (this is also known as Target (Native) Compilation), but that would be an exercise in frustration except for compiling trivial programs such as `Hello World!`. 
+For the other languages, there is a need to compile the source files into executable files that will be run on the Robot Controller. Technically, it is possible to write and compile programs on the Robot Controller platform (this is also known as Target (Native) Compilation), but that would be an exercise in frustration except for compiling trivial programs such as `Hello World!`. 
 
-Typically we would want to use our Host PC to write, compile and debug the program, since it is much more powerful than the EV3 Controller platform. However, the EV3 Controller uses a different CPU or Instruction Set compared with the ones typically used on your PC. 
+Typically we would want to use our Host PC to write, compile and debug the program, since it is much more powerful than the Robot Controller platform. However, the Robot Controller uses a different CPU or Instruction Set compared with the ones typically used on your PC. 
 
->More specifically, the available EV3 Controllers are ~~almost~~ all based on the ARM CPU Architecture, while the PC are (almost) all based on the x86 or x64 (Intel-Architecture compatible) CPU Architecture.
+>More specifically, the available Robot Controllers are ~~almost~~ all based on the ARM CPU Architecture, while the PC are (almost) all based on the x86 or x64 (Intel-Architecture compatible) CPU Architecture.
 
-Bytecode based languages such as the LEGO Programmer and Java will have Compilers that compile the source programs into Virtual Machine bytecodes, which is able to run on any platform having the appropriate Virtual Machine software. However, the default C and C++ compilers for the PC platform targets the x86 or x64 CPU Architecture, and cannot be run on the EV3 Controller. 
+Bytecode based languages such as the LEGO Programmer and Java will have Compilers that compile the source programs into Virtual Machine bytecodes, which is able to run on any platform having the appropriate Virtual Machine software. However, the default C and C++ compilers for the PC platform targets the x86 or x64 CPU Architecture, and cannot be run on the Robot Controller. 
 
-Consequently, when compiling C and C++ programs on the PC to run on the EV3 Controller, we need to perform [Cross Compilation](https://en.wikipedia.org/wiki/Cross_compiler). The C and C++ cross compilers used by ev3dev are based on the GNU Compiler Collection ([`GCC`](https://gcc.gnu.org/)).
+Consequently, when compiling C and C++ programs on the PC to run on the Robot Controller, we need to perform [Cross Compilation](https://en.wikipedia.org/wiki/Cross_compiler). The C and C++ cross compilers used by ev3dev are based on the GNU Compiler Collection ([`GCC`](https://gcc.gnu.org/)).
 
-> It is important to select the correct Target environment for the cross compiler; otherwise the generated programs will not be able to run on the targeted EV3 controller platform. Generally we should use a generic Cross-Compiler which can generate executables for multiple target architectures. 
+> It is important to select the correct Target environment for the cross compiler; otherwise the generated programs will not be able to run on the targeted Robot controller platform. Generally we should use a generic Cross-Compiler which can generate executables for multiple target architectures. 
 >
 >However, if you're building on the Target platform natively, or else intend to run the architecture specific cross-compiler under emulation on the Host to build with custom libraries which are only available for the given target architecture, GCC provides architecture specific compiler and cross-compiler toolchains that takes less disk space compared with the multi-target cross-compilers.
 
-When cross-compiling using a GCC Cross-Toolchain, the selected target architecture *MUST* be compliant with the chosen EV3 Controller platform distribution (EV3 Brick, RPi, etc.), otherwise unexpected problems may occur. There are three [Target Architectures](https://www.debian.org/ports/arm/) for ARM-based Debian distributions used by ev3dev depending on the Controller hardware platform:
-> * armel (for EV3 Controller)
+When cross-compiling using a GCC Cross-Toolchain, the selected target architecture *MUST* be compliant with the chosen Robot Controller platform distribution (EV3 Brick, RPi, etc.), otherwise unexpected problems may occur. There are three [Target Architectures](https://www.debian.org/ports/arm/) for ARM-based Debian distributions used by ev3dev depending on the Controller hardware platform:
+> * armel (for EV3 Programmable Brick)
 > * armhf for ARMv6 (for the original Raspberry Pi and Pi Zero, **Docker Cross-compiler Image not provided**)
 > * armhf for ARMv7 (for Raspberry Pi 2, 3, and Beaglebone)
 
@@ -59,10 +59,10 @@ You can use the following Toolchain Selection Guide for your chosen programming 
 ![C-CPP-Workflow](https://github.com/tcwan/ev3dev/blob/tcwan-wiki-swarch-1/images/workflow-c-cpp.flowchart.svg)
 
 Four options are available for C/C++:
-1. Target-based (Native) Compilation (compiler running on EV3 Controller): This is not a recommended configuration due to the limited storage, processing power and RAM on the EV3 Controller. You'll need the [build-essential](https://packages.debian.org/stretch/build-essential) apt package.
+1. Target-based (Native) Compilation (compiler running on Robot Controller): This is not a recommended configuration for large projects due to the limited storage, processing power and RAM on the Robot Controller. You'll need the [build-essential](https://packages.debian.org/stretch/build-essential) apt package.
 2. Host-based Emulated Cross-Compilation: If custom libraries were only available for the Target platform; the cross-compilers are actually Target-based compilers running in an emulator on the Host (PC). Look for [`debian-<dist>-<arch>-cross`](https://github.com/ev3dev/docker-cross) docker iamges.
 3. Host-based Native Cross-Compilation: If multi-architecture custom libraries were available on the Host (PC) platform; this is the most efficient configuration. Look for [`debian-<dist>-cross`](https://github.com/ev3dev/docker-cross) docker images.
-4. Vendor supplied Host-based Cross-Compilation Toolchain: The latest versions of the vendor toolchains may not support the EV3 Controller platform. See [C++ Language Bindings Project](https://github.com/ddemidov/ev3dev-lang-cpp) for a link to vendor supplied packages.
+4. Vendor supplied Host-based Cross-Compilation Toolchain: The latest versions of the vendor toolchains may not support the Robot Controller platform. See [C++ Language Bindings Project](https://github.com/ddemidov/ev3dev-lang-cpp) for a link to vendor supplied packages.
 
 * ???
 * TBD
@@ -126,7 +126,7 @@ The use of the various libraries in ev3dev for development requires installing t
 ## Clone the Language-specific Repository
 
 Based on the chosen [Programming Language](http://www.ev3dev.org/docs/programming-languages) and toolchain, the specific repository should be cloned to your Host (PC) platform. 
-> The *Getting Started* guide for a programming language may suggest doing it on the EV3 Controller, but this is not recommended due to the large storage requirements for compilation, as well as the issue of it being much slower due to the limited processing capabilities and RAM on the Controller. 
+> The *Getting Started* guide for a programming language may suggest doing it on the Robot Controller, but if you plan on working with a large project with multiple (> 10) source files, it is advisable to choose a proper cross-compilation workflow due to the large storage requirements for compilation, as well as the issue of it being much slower due to the limited processing capabilities and RAM on the Robot Controller. 
 
 ## Install the Library Headers and Archives
 
