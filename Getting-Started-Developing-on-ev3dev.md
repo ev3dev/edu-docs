@@ -8,7 +8,7 @@ LEGO provides the EV3 Programmer software which uses a graphical programming par
 
 Alternatively, others are interested in writing programs that execute directly on the EV3 Brick, bypassing the LMS Virtual Machine. Commercial solutions include [`RobotC`](http://www.robotc.net/) which supports C-like programming for the EV3 Brick to create the `*.rbf` virtual machine bytecode files for their custom firmware.
 
-Nonetheless, since the EV3 Brick Operating System is based on Linux, we have various alternatives to commercially available tools. ev3dev provides a Debian-based Linux distribution to support people interested in writing code directly for the Linux environment using open source tools. This also opens up the possibility of using other Robot Controllers such as the Raspberry Pi, Beaglebone boards (with appropriate motor and sensor expansion capes)`, and others which have higher processing capabilities compared to the EV3 Brick to run software written for the ev3dev distribution.
+Nonetheless, since the EV3 Brick Operating System is based on Linux, we have various alternatives to commercially available tools. ev3dev provides a Debian-based Linux distribution to support people interested in writing code directly for the Linux environment using open source tools. This also opens up the possibility of using other Robot Controllers such as the Raspberry Pi, Beaglebone boards (with appropriate motor and sensor expansion capes), and others which have higher processing capabilities compared to the EV3 Brick to run software written for the ev3dev distribution.
 
 The basic process to start developing on ev3dev is as follows:
 1. [Choose a Language](@choosing-a-language)
