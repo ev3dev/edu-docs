@@ -1,4 +1,4 @@
-# Getting Started Developing on ev3dev
+# Development Workflow
 
 ## Introduction
 
@@ -12,7 +12,7 @@ Nonetheless, since the EV3 Brick Operating System is based on Linux, we have var
 
 The basic process to start developing on ev3dev is as follows:
 1. [Choose a Language](@choosing-a-language)
-2. [Choose a Workflow and Toolchain](#choosing-a-workflow-and-toolchain)
+2. [Choose a Toolchain](#choosing-a-toolchain)
 3. [Build the Libraries](#building-the-libraries)
 4. [Write your Programs](#writing-your-programs)
 5. [Download Program to Target](#downloading-programs-to-target)
@@ -22,9 +22,9 @@ The basic process to start developing on ev3dev is as follows:
 
 While it is a bit daunting to start by choosing a [Programming Language](http://www.ev3dev.org/docs/programming-languages) if you're new to programming, the list of languages are more or less sorted from easiest for beginners such as Python, to more advanced options such as C++ and C.
 
-# Choosing a Workflow and Toolchain
+# Choosing a Toolchain
 
-## Workflow Introduction
+## Workflow is dependant on the programming language
 
 >This mostly applies to more advanced language options. 
 
@@ -55,15 +55,7 @@ When cross-compiling using a GCC Cross-Toolchain, the selected target architectu
 
 You can use the following Toolchain Selection Guide for your chosen programming languages as a reference:
 * [Python](http://www.ev3dev.org/docs/tutorials/setting-up-python-pycharm/)
-* C/C++
-![C-CPP-Workflow](images/workflow-c-cpp.flowchart.svg)
-
-Four options are available for C/C++:
-1. Target-based (Native) Compilation (compiler running on Robot Controller): This is not a recommended configuration for large projects due to the limited storage, processing power and RAM on the Robot Controller. You'll need the [build-essential](https://packages.debian.org/stretch/build-essential) apt package.
-2. Host-based Emulated Cross-Compilation: If custom libraries were only available for the Target platform; the cross-compilers are actually Target-based compilers running in an emulator on the Host (PC). Look for [`debian-<dist>-<arch>-cross`](https://github.com/ev3dev/docker-cross) docker iamges.
-3. Host-based Native Cross-Compilation: If multi-architecture custom libraries were available on the Host (PC) platform; this is the most efficient configuration. Look for [`debian-<dist>-cross`](https://github.com/ev3dev/docker-cross) docker images.
-4. Vendor supplied Host-based Cross-Compilation Toolchain: The latest versions of the vendor toolchains may not support the Robot Controller platform. See [C++ Language Bindings Project](https://github.com/ddemidov/ev3dev-lang-cpp) for a link to vendor supplied packages.
-
+* [C/C++](../toolchains/c-cpp-toolchains.md)
 * ???
 * TBD
 
@@ -79,11 +71,9 @@ Packages maintained by ev3dev are highlighted in turquiose to indicate that they
 
 The essential components for developing on the Host are:
 * [Integrated Development Environment](https://en.wikipedia.org/wiki/Integrated_development_environment) (IDE) or Editor
->While it is not the intention of this guide to recommend any particular IDE, since it is highly subjective regarding which is the *best* (and this is often a contentious debate); you may want to take a look at [Eclipse](http://www.eclipse.org/), which provides an open source, cross-platform everything-including-the-kitchen-sink IDE that is highly extensible and has support for various plugins relevant for cross-platform development.
-
-* Cross-compiler Toolchain
->ev3dev has packaged the relevant GCC Cross-compiler Toolchain in [Docker](https://www.docker.com/what-docker) containers to simplify the installation of a POSIX-compliant development environment for the Host.
-* Project Build Tools (we assume the use of [Makefiles](https://en.wikipedia.org/wiki/Makefile) for managing compilation)
+>While it is not the intention of this guide to recommend any particular IDE, since it is highly subjective regarding which is the *best* (and this is often a contentious debate); take a look at [List of IDEs](https://github.com/ev3dev/ev3dev/blob/ev3dev-stretch/docs/programming/ides.rst) to find an IDE which is suited to your programming language, OS and development style.
+* Development Toolchain
+> See [Toolchain Selection](#toolchain-selection) for information relevant to your chosen programming language
 * Remote Access program (we assume use of [OpenSSH client](https://en.wikipedia.org/wiki/OpenSSH) to login to the EV3 Platform remotely)
 * Executable Program Downloader from PC to Target (e.g., OpenSSH provides `scp` (Secure Copy) for transferring files)
 * Cross-Debugger (usually comes with the Cross-compiler Toolchain, but can also be provided as part of the IDE)
@@ -168,23 +158,6 @@ Every program follows the basic life cycle for applications:
 
 There are many ways (formally termed development paradigms) to carry out these steps, some may not even consciously adopt a given paradigm but it came out naturally as part of the exploration. Nonetheless, having some semblance of a structured sequence would help reduce the frustrations and confusions involved with program development as the project scales up in complexity.
 
-## Creating project Makefiles
-
-The default building process adopted by ev3dev and many other projects uses [`make`](https://www.gnu.org/software/make/) to manage the compilation of files after they have been edited or modified. There are many other build management tools available, each with different strengths and weaknesses. Nonetheless, the default starting point is to use your IDE to create the necessary project build files, and modify it if necessary for advanced build features. For example, Eclipse CDT with the [GNU MCU Eclipse plugin](https://gnu-mcu-eclipse.github.io/) would create standard project folders with the necessary Makefiles for you automatically when creating a New Project.
-
-*FIXME: Need some additional HOWTOs for Make*
-
-## Setting up Library and Include Paths
-
-This involves specifying the paths passed to the cross-compiler and linker. 
-For GCC, the compiler command line switches are:
-* `-L <path-to-library>`
-* `-I <path-to-include-directory>`
-
-In addition, for the generation of the complete program, all custom libraries used by the program would need to be linked with the object files for the program using:
-* `-l <library-archive>`
-
-> This assumes static linking of libraries used by the program
 
 ## Syntax highlighting and API completion
 
