@@ -181,10 +181,14 @@ Since this is a huge topic in itself, this guide will not get into further detai
 
 # Downloading Programs to Target
 
+* Enabling Networking on the Target
 * Setting Up SSH Access
 * Using Public Key Authentication
 * Downloading/copying Programs to the Robot Controller
-*
+
+## Enabling Networking on the Target
+
+See the topic on [Networking](http://www.ev3dev.org/docs/networking/) for more information on how to enable network access on the Robot Controller.
 
 ## Setting up SSH Access
 
@@ -200,7 +204,7 @@ $ ssh robot@<robotcontroller> [where <robotcontroller> can either be a hostname 
 e.g., 
 
 ```
-$ssh robot@192.168.1.100
+$ssh robot@192.168.2.2
 ```
 
 The first time you connect to the Robot Controller, it might complain that it is an unknown host, or else the cached Robot Controller credentials does not match.
@@ -232,7 +236,7 @@ Once you've mastered logging in using SSH, and is frustrated with the constant n
 >
 > The advantage of using Public Key Authentication is that you don't need to transmit your password over the network link (even if it is encrypted) when logging in. In addition, the security of using Public Key Authentication is much better since the credentials are much longer than the typical user password.
 
-You should protect the SSH Login Key with a passphrase (specified during the Login Key generation step). Most SSH client software can automatically unlock the SSH Login Key automatically from your Host OS environment (via `ssh-agent`) , so that you don't even have to manually unlock the SSH Login Key, making logging in to the Robot Controller a single step process.
+You should protect the SSH Login Key with a passphrase (specified during the Login Key generation step). Most SSH client software can automatically unlock the SSH Login Key from your Host OS environment using `ssh-agent` , so that you don't even have to manually type in your passphrase to unlock the SSH Login Key each time, making logging in to the Robot Controller a single step by just issuing the ssh command with the appropriate username and hostname/ip address.
 
 ## Downloading Programs to the Robot Controller
 
@@ -241,7 +245,7 @@ Executable applications need to be accessed by the ev3dev OS on the Robot Contro
 e.g.,
 ```
 [On Host]
-$ scp <application_file> robot@192.168.1.100
+$ scp <application_file> robot@192.168.2.2
 ```
 
 Once the application has been copied over to the Target, you should check that the application can be executed. This is done by displaying the file permissions.
