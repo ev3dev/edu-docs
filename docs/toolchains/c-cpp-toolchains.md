@@ -1,6 +1,6 @@
 # Selecting a C/C++ Toolchain for ev3dev
 
-![C-CPP-Workflow](../images/workflow-c-cpp.flowchart.svg)
+![C-CPP-Workflow](../../images/workflow-c-cpp.flowchart.svg)
 
 Four options are available for C/C++:
 1. Target-based (Native) Compilation (compiler running on Robot Controller): This is not a recommended configuration for large projects due to the limited storage, processing power and RAM on the Robot Controller. You'll need the [build-essential](https://packages.debian.org/stretch/build-essential) apt package.
