@@ -13,7 +13,7 @@ Nonetheless, since the EV3 Brick Operating System is based on Linux, we have var
 The basic process to start developing on ev3dev is as follows:
 1. [Choose a Language](@choosing-a-language)
 2. [Choose a Toolchain](#choosing-a-toolchain)
-3. [Build the Libraries](#building-the-libraries)
+3. [Build and Install the Libraries](#building-and-installing-the-libraries)
 4. [Write your Programs](#writing-your-programs)
 5. [Download Program to Target](#downloading-programs-to-target)
 6. [Run/Debug the Program](#running-and-debugging-programs)
@@ -64,9 +64,12 @@ The essential components for developing on the Host are:
 >While it is not the intention of this guide to recommend any particular IDE, since it is highly subjective regarding which is the *best* (and this is often a contentious debate); take a look at [List of IDEs](https://github.com/ev3dev/ev3dev/blob/ev3dev-stretch/docs/programming/ides.rst) to find an IDE which is suited to your programming language, OS and development style.
 * Development Toolchain
 > See [Toolchain Selection](#toolchain-selection) for information relevant to your chosen programming language
-* Remote Access program (we assume use of [OpenSSH client](https://en.wikipedia.org/wiki/OpenSSH) to login to the EV3 Platform remotely)
-* Executable Program Downloader from PC to Target (e.g., OpenSSH provides `scp` (Secure Copy) for transferring files)
-* Cross-Debugger (usually comes with the Cross-compiler Toolchain, but can also be provided as part of the IDE)
+* Remote Access / Terminal program 
+> We assume use of [OpenSSH client](https://en.wikipedia.org/wiki/OpenSSH) to login to the EV3 Platform remotely
+* Executable Program Downloader from PC to Target 
+> e.g., OpenSSH provides `scp` (Secure Copy) for transferring files
+* Cross-Debugger 
+> This usually comes with the Cross-compiler Toolchain, but can also be provided as part of the IDE
 
 In addition, several build tools are provided for building ev3dev Distribution Boot images or GCC Cross-compiler toolchains for Docker. 
 >These build tools are not needed unless you plan to create custom toolchains or custom ev3dev Distribution images.
@@ -101,7 +104,7 @@ The use of the various libraries in ev3dev for development requires installing t
 >Take a look at [Organization of ev3dev Repositories](ev3dev-Repositories) for more information regarding the packages maintained by the ev3dev project, including available Language Bindings and support libraries.
 
 
-# Building the Libraries
+# Building and Installing the Libraries
 
 ## Clone the Language-specific Repository
 
@@ -129,8 +132,7 @@ Therefore, it is important when compiling with custom libraries to specify the c
 It is not the intention of this guide to go into detailed description of every step, but the things to be aware of are:
 
 * Program Lifecycle
-* Creating project Makefiles to build the program automatically
-* Setting up correct paths to custom or ev3dev specific libraries and include files
+* Building the program incrementally
 * Use of the Editor or IDE features for syntax checking and API completion
 * Adoption of common style-guidelines for consistency with existing projects/code
 * Using source revision management software to track changes made to the program
@@ -148,6 +150,13 @@ Every program follows the basic life cycle for applications:
 
 There are many ways (formally termed development paradigms) to carry out these steps, some may not even consciously adopt a given paradigm but it came out naturally as part of the exploration. Nonetheless, having some semblance of a structured sequence would help reduce the frustrations and confusions involved with program development as the project scales up in complexity.
 
+## Building the Program Incrementally
+
+`Rome was not built in a day`, as the saying goes, and it is not likely that your program will be done in a single programming session unless it is meant to test a simple scenario. 
+
+Often executable applications consist of multiple modules and source files, which may be updated at different times during the development process. Only source files that were changed need to be recompiled. The naive approach is to just compile every source file regardless if they were updated or not. This may work well for small projects, but as the size of the project grows, significant amount of time might be spent waiting for the compilation to complete. 
+
+Instead of compiling each and every source files over and over again, developers rely on various Project Build tools to manage the updating of the executable application based on changes made to specific source files. A common build tool is [`make`](https://www.gnu.org/software/make/) used by many development projects.
 
 ## Syntax highlighting and API completion
 
@@ -173,8 +182,8 @@ Since this is a huge topic in itself, this guide will not get into further detai
 # Downloading Programs to Target
 
 * Setting Up SSH Access
-* 
-*
+* Using Public Key Authentication
+* Downloading/copying Programs to the Robot Controller
 *
 
 ## Setting up SSH Access
@@ -225,8 +234,25 @@ Once you've mastered logging in using SSH, and is frustrated with the constant n
 
 You should protect the SSH Login Key with a passphrase (specified during the Login Key generation step). Most SSH client software can automatically unlock the SSH Login Key automatically from your Host OS environment (via `ssh-agent`) , so that you don't even have to manually unlock the SSH Login Key, making logging in to the Robot Controller a single step process.
 
+## Downloading Programs to the Robot Controller
 
-TBD
+Executable applications need to be accessed by the ev3dev OS on the Robot Controller in order to run the program that you've created. The easiest way to do this is to transfer the application from the Host to the Target using `scp` from a Host console. 
+
+e.g.,
+```
+[On Host]
+$ scp <application_file> robot@192.168.1.100
+```
+
+Once the application has been copied over to the Target, you should check that the application can be executed. This is done by displaying the file permissions.
+
+```
+[On Target]
+$ ls -al <applicaiton_file>
+
+-rwxr-xr-x  1 robot robot [FILESIZE] [DATE] <application_file>
+```
+The file permissions should include `x` (executable flag). See [Unix Fundamentals](https://github.com/ev3dev/ev3dev/blob/ev3dev-stretch/docs/programming/fundamentals.rst) for information on how to change file permissions.
 
 # Running and Debugging Programs
 
