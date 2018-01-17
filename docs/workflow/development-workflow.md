@@ -252,7 +252,7 @@ e.g.,
 [On Host]
 $ scp <application_file> robot@192.168.2.2:
 ```
-> Note that there is a colon `:` after the Ip address. It is important to include the colon, otherwise `scp` will  just create copy it to a local file with the name `robot@192.168.2.2`!
+> Note that there is a colon `:` after the Ip address. It is important to include the colon, otherwise `scp` will  just copy it to a local file with the name `robot@192.168.2.2`!
 
 Once the application has been copied over to the Target, you should check that the application can be executed. This is done by displaying the file permissions.
 
