@@ -1,6 +1,6 @@
 # Selecting a C/C++ Toolchain for ev3dev
 
-![C-CPP-Workflow](images/workflow-c-cpp.flowchart.svg)
+![C-CPP-Workflow](../images/workflow-c-cpp.flowchart.svg)
 
 Four options are available for C/C++:
 1. Target-based (Native) Compilation (compiler running on Robot Controller): This is not a recommended configuration for large projects due to the limited storage, processing power and RAM on the Robot Controller. You'll need the [build-essential](https://packages.debian.org/stretch/build-essential) apt package.
@@ -13,18 +13,17 @@ Four options are available for C/C++:
 >However, if you're building on the Target platform natively, or else intend to run the architecture specific cross-compiler under emulation on the Host to build with custom libraries which are only available for the given target architecture, GCC provides architecture specific compiler and cross-compiler toolchains that takes less disk space compared with the multi-target cross-compilers.
 
 When cross-compiling using a GCC Cross-Toolchain, the selected target architecture *MUST* be compliant with the chosen Robot Controller platform distribution (EV3 Brick, RPi, etc.), otherwise unexpected problems may occur. There are three [Target Architectures](https://www.debian.org/ports/arm/) for ARM-based Debian distributions used by ev3dev depending on the Controller hardware platform:
-> * armel (for EV3 Programmable Brick)
-> * armhf for ARMv6 (for the original Raspberry Pi and Pi Zero, **Docker Cross-compiler Image not provided**)
-> * armhf for ARMv7 (for Raspberry Pi 2, 3, and Beaglebone)
+ * armel (for EV3 Programmable Brick)
+ * armhf for ARMv6 (for the original Raspberry Pi and Pi Zero, **Docker Cross-compiler Image not provided**)
+ * armhf for ARMv7 (for Raspberry Pi 2, 3, and Beaglebone)
 
-
-# Host Packages for C/C++ Cross Compilation
-
-* Cross-compiler Toolchain
 >ev3dev has packaged the relevant GCC Cross-compiler Toolchain in [Docker](https://www.docker.com/what-docker) containers to simplify the installation of a POSIX-compliant development environment for the Host.
-* Project Build Tools (we assume the use of [Makefiles](https://en.wikipedia.org/wiki/Makefile) for managing compilation)
 
-# Creating project Makefiles
+# Project Build Tools 
+
+We assume the use of [Makefiles](https://en.wikipedia.org/wiki/Makefile) for managing compilation of projects containing multiple source files and/or libraries
+
+## Creating project Makefiles
 
 The default building process adopted by ev3dev and many other projects uses [`make`](https://www.gnu.org/software/make/) to manage the compilation of files after they have been edited or modified. There are many other build management tools available, each with different strengths and weaknesses. Nonetheless, the default starting point is to use your IDE to create the necessary project build files, and modify it if necessary for advanced build features. For example, Eclipse CDT with the [GNU MCU Eclipse plugin](https://gnu-mcu-eclipse.github.io/) would create standard project folders with the necessary Makefiles for you automatically when creating a New Project.
 
