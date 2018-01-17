@@ -99,7 +99,7 @@ The description of the packages starts from the bottom layer, since the lower la
 
 ### Header Files
 
-The use of the various libraries in ev3dev for development requires installing the relevant header (include) files for the Cross-compilation platform on the Host. This is documented in the  [Building the Libraries](#building-the-libraries) section.
+The use of the various libraries in ev3dev for development requires installing the relevant header (include) files for the Cross-compilation platform on the Host. This is documented in the  [Building and Installing the Libraries](#building-and-installing-the-libraries) section.
 
 >Take a look at [Organization of ev3dev Repositories](ev3dev-Repositories) for more information regarding the packages maintained by the ev3dev project, including available Language Bindings and support libraries.
 
@@ -152,11 +152,15 @@ There are many ways (formally termed development paradigms) to carry out these s
 
 ## Building the Program Incrementally
 
-`Rome was not built in a day`, as the saying goes, and it is not likely that your program will be done in a single programming session unless it is meant to test a simple scenario. 
+*Rome was not built in a day*, and it is not likely that your program will be completed in a single programming session unless it is meant to test a simple scenario. 
 
-Often executable applications consist of multiple modules and source files, which may be updated at different times during the development process. Only source files that were changed need to be recompiled. The naive approach is to just compile every source file regardless if they were updated or not. This may work well for small projects, but as the size of the project grows, significant amount of time might be spent waiting for the compilation to complete. 
+Executable applications often consist of multiple modules and source files, which may be updated at different times during the development process. Only source files that were changed need to be recompiled. The naive approach is to just compile every source file regardless of whether they were modified or not. This may work well for small projects, but as the size of the project grows, significant amount of time might be spent waiting for the compilation to complete. 
 
-Instead of compiling each and every source files over and over again, developers rely on various Project Build tools to manage the updating of the executable application based on changes made to specific source files. A common build tool is [`make`](https://www.gnu.org/software/make/) used by many development projects.
+Instead of compiling each and every source files over and over again, developers rely on various Project Build tools to manage the updating of the executable application based on changes made to specific source files. A common build tool for POSIX environments is [`make`](https://www.gnu.org/software/make/), used by many development projects to manage and automate the build process.
+
+> Make works by comparing the timestamps on the headers files and source files with the timestamps on the object code and executable files. It is important to keep the Real-Time Clock (RTC) running consistently (i.e., timestamps do not jump backwards) on the development machine in order not to confuse Make.
+>
+> When in doubt, `make clean` should delete all the generated object and executable files and give you a clean slate to recompile everything.
 
 ## Syntax highlighting and API completion
 
@@ -198,7 +202,8 @@ Secure Shell (SSH) is the recommended way to connect to the Robot Controller fro
 
 The basic way of connecting to the Robot Controller is to specify the username and host information to the SSH client:
 ```
-$ ssh robot@<robotcontroller> [where <robotcontroller> can either be a hostname or the IP address of the Robot Controller]
+$ ssh robot@<robotcontroller> 
+[where <robotcontroller> is either the hostname or IP address of the Robot Controller]
 ```
 
 e.g., 
