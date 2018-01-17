@@ -42,28 +42,18 @@ Bytecode based languages such as the LEGO Programmer and Java will have Compiler
 
 Consequently, when compiling C and C++ programs on the PC to run on the Robot Controller, we need to perform [Cross Compilation](https://en.wikipedia.org/wiki/Cross_compiler). The C and C++ cross compilers used by ev3dev are based on the GNU Compiler Collection ([`GCC`](https://gcc.gnu.org/)).
 
-> It is important to select the correct Target environment for the cross compiler; otherwise the generated programs will not be able to run on the targeted Robot controller platform. Generally we should use a generic Cross-Compiler which can generate executables for multiple target architectures. 
->
->However, if you're building on the Target platform natively, or else intend to run the architecture specific cross-compiler under emulation on the Host to build with custom libraries which are only available for the given target architecture, GCC provides architecture specific compiler and cross-compiler toolchains that takes less disk space compared with the multi-target cross-compilers.
-
-When cross-compiling using a GCC Cross-Toolchain, the selected target architecture *MUST* be compliant with the chosen Robot Controller platform distribution (EV3 Brick, RPi, etc.), otherwise unexpected problems may occur. There are three [Target Architectures](https://www.debian.org/ports/arm/) for ARM-based Debian distributions used by ev3dev depending on the Controller hardware platform:
-> * armel (for EV3 Programmable Brick)
-> * armhf for ARMv6 (for the original Raspberry Pi and Pi Zero, **Docker Cross-compiler Image not provided**)
-> * armhf for ARMv7 (for Raspberry Pi 2, 3, and Beaglebone)
-
 ## Toolchain Selection
 
 You can use the following Toolchain Selection Guide for your chosen programming languages as a reference:
 * [Python](http://www.ev3dev.org/docs/tutorials/setting-up-python-pycharm/)
 * [C/C++](../toolchains/c-cpp-toolchains.md)
-* ???
 * TBD
 
 ## Software Packages for Host and Target Platforms
 
 It is important to keep in mind that you're dealing with two separate Operating Systems environments when developing software for the EV3, the **Host** (PC) environment and the **Target** (EV3) environment. The **Host** environment typically would be based on Windows, macOS, or Linux Operating Systems, while the **Target** will be based on the Debian Linux-derived ev3dev Distribution. Nonetheless, the following discussion assumes the use of a [POSIX compliant](https://en.wikipedia.org/wiki/POSIX) environment for the **Host**. 
 
-![Software Packages](images/ev3dev-software-packages.dot.svg)
+![Software Packages](../../images/ev3dev-software-packages.dot.svg)
 
 ### Host Packages
 
