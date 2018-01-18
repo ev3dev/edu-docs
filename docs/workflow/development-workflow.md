@@ -28,7 +28,7 @@ While it is a bit daunting to start by choosing a [Programming Language](http://
 
 >This mostly applies to more advanced language options. 
 
-For Python-based development, almost everything is already built-in to the ev3dev distribution; all you need is an Editor or Integrated Development Environment (IDE) to write your programs in, and then execute it on the Robot Controller (after downloading if necessary).
+For Python-based development, almost everything is already built-in to the ev3dev distribution; all you need is a Text Editor or [Integrated Development Environment](https://en.wikipedia.org/wiki/Integrated_development_environment) (IDE) to write your programs in, and then execute it on the Robot Controller (after downloading if necessary).
 
 > The pre-built ev3dev image has everything you need, unless you're interested in installing non-standard library packages into the ev3dev image (this is an advanced topic which is not covered in this guide). 
 
@@ -60,7 +60,7 @@ It is important to keep in mind that you're dealing with two separate Operating 
 Packages maintained by ev3dev are highlighted in turquiose to indicate that they are used for building applications for the e3vdev platform. In addition, some examples of vendor-supplied Cross compilers are listed for reference. Standard packages (default packages provided by third parties for the Host OS) are highlighted in plum.
 
 The essential components for developing on the Host are:
-* [Integrated Development Environment](https://en.wikipedia.org/wiki/Integrated_development_environment) (IDE) or Editor
+* Integrated Development Environment (IDE) or Text Editor
 >While it is not the intention of this guide to recommend any particular IDE, since it is highly subjective regarding which is the *best* (and this is often a contentious debate); take a look at [List of IDEs](https://github.com/ev3dev/ev3dev/blob/ev3dev-stretch/docs/programming/ides.rst) to find an IDE which is suited to your programming language, OS and development style.
 * Development Toolchain
 > See [Toolchain Selection](#toolchain-selection) for information relevant to your chosen programming language
