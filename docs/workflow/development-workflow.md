@@ -51,25 +51,31 @@ You can use the following Toolchain Selection Guide for your chosen programming 
 
 ## Software Packages for Host and Target Platforms
 
-It is important to keep in mind that you're dealing with two separate Operating Systems environments when developing software for the EV3, the **Host** (PC) environment and the **Target** (EV3) environment. The **Host** environment typically would be based on Windows, macOS, or Linux Operating Systems, while the **Target** will be based on the Debian Linux-derived ev3dev Distribution. Nonetheless, the following discussion assumes the use of a [POSIX compliant](https://en.wikipedia.org/wiki/POSIX) environment for the **Host**. 
+It is important to keep in mind that you're dealing with two separate Operating Systems environments when developing software for ev3dev, the **Host** (PC) environment and the **Target** (Robot Controller) environment. The **Host** environment typically would be based on Windows, macOS, or Linux Operating Systems, while the **Target** will be based on the Debian Linux-derived ev3dev Distribution. Nonetheless, the following discussion assumes the use of a [POSIX compliant](https://en.wikipedia.org/wiki/POSIX) environment for the **Host**. 
 
 ![Software Packages](../../images/ev3dev-software-packages.dot.svg)
 
 ### Host Packages
 
-Packages maintained by ev3dev are highlighted in turquiose to indicate that they are used for building applications for the e3vdev platform. In addition, some examples of vendor-supplied Cross compilers are listed for reference. Standard packages (default packages provided by third parties for the Host OS) are highlighted in plum.
+Packages maintained by ev3dev are highlighted in turquiose to indicate that they are used for building applications for the e3vdev platform. In addition, some examples of vendor-supplied C/C++ Cross compilers are listed for reference. Standard packages (default packages provided by third parties for the Host OS) are highlighted in plum.
 
 The essential components for developing on the Host are:
 * Integrated Development Environment (IDE) or Text Editor
 >While it is not the intention of this guide to recommend any particular IDE, since it is highly subjective regarding which is the *best* (and this is often a contentious debate); take a look at [List of IDEs](https://github.com/ev3dev/ev3dev/blob/ev3dev-stretch/docs/programming/ides.rst) to find an IDE which is suited to your programming language, OS and development style.
 * Development Toolchain
-> See [Toolchain Selection](#toolchain-selection) for information relevant to your chosen programming language
+> See [Toolchain Selection](#toolchain-selection) for information relevant to your chosen programming language.
 * Remote Access / Terminal program 
-> We assume use of [OpenSSH client](https://en.wikipedia.org/wiki/OpenSSH) to login to the EV3 Platform remotely
-* Executable Program Downloader from PC to Target 
-> e.g., OpenSSH provides `scp` (Secure Copy) for transferring files
+> While it is possible to connect a Serial cable to the EV3 and use a Terminal program to interact with the system, it requires a custom [cable](http://botbench.com/blog/2013/08/15/ev3-creating-console-cable/) or [adapter](http://www.mindsensors.com/ev3-and-nxt/40-console-adapter-for-ev3) and is only able to provide basic Input/Output capabilities. Network-based remote access is much more flexible since it supports file transfers and device-to-device communications, and is the recommended way to connect to the system.
+>
+> Of course, a serial console is necessary if you're doing low level (e.g. kernel) development and/or the networking configuration is toast, but then you'd probably know what you're doing and won't need to refer to this guide in the first place.
+>
+> We assume use of [OpenSSH client](https://en.wikipedia.org/wiki/OpenSSH) to access and login to the ev3dev Robot Controller remotely
+* Executable Program Downloader from Host (PC) to Target 
+> Since the executable program was compiled on the Host, we need to transfer it to the Target in order to execute it. The easiest way to do so is to use a network connection, since it does not involve removing and inserting SD cards or USB Flash drives repeatedly.
+>
+> e.g., OpenSSH provides `scp` (Secure Copy) for transferring files.
 * Cross-Debugger 
-> This usually comes with the Cross-compiler Toolchain, but can also be provided as part of the IDE
+> This usually comes with the Cross-compiler Toolchain, but can also be provided as part of the IDE.
 
 In addition, several build tools are provided for building ev3dev Distribution Boot images or GCC Cross-compiler toolchains for Docker. 
 >These build tools are not needed unless you plan to create custom toolchains or custom ev3dev Distribution images.
@@ -121,7 +127,7 @@ In this step, you need to take note of the directory locations for both the Libr
 
 >On Linux, the standard library path is in `/usr/lib`, while the standard include path is in `/usr/include`, they are used to keep all system-wide library archives and include files. 
 >
->Cross-compilation is considered an example of using custom libraries. The standard libraries for the cross-compiler would also usually be stored in a well known location such as `/usr/local/` or `/opt/local`, depending on the vendor or packager of the cross-compilation toolchain. Normally, you won't need to specify the path to the standard libraries and header files for the cross-compiler 
+>Cross-compilation is considered an example of using custom libraries. The standard libraries for the cross-compiler would also usually be stored in a well known location such as `/usr/local/` or `/opt/local`, depending on the vendor or packager of the cross-compilation toolchain. Normally, you won't need to specify the path to the standard libraries and header files for the cross-compiler .
 >
 >On top of that, the libraries for supporting EV3 cross-compilation is another set of custom libraries that we need to access from our programs. There may not be a standard location for accessing those files, except for the location where the libraries were cloned to, though well designed custom libraries usually allow us to install it to the same directories as the cross-compiler libraries and headers for easier access. 
 
@@ -258,7 +264,7 @@ Once the application has been copied over to the Target, you should check that t
 
 ```
 [On Target]
-$ ls -al <applicaiton_file>
+$ ls -al <application_file>
 
 -rwxr-xr-x  1 robot robot [FILESIZE] [DATE] <application_file>
 ```
@@ -266,4 +272,4 @@ The file permissions should include `x` (executable flag). See [Unix Fundamental
 
 # Running and Debugging Programs
 
-TBD
+To test the application, we would normally build the software with debugging symbols. This extra information is usually removed when building for the release (non-debugging) version as it makes the filesize much smaller.

@@ -21,13 +21,16 @@ When cross-compiling using a GCC Cross-Toolchain, the selected target architectu
 
 # Project Build Tools 
 
-We assume the use of [Makefiles](https://en.wikipedia.org/wiki/Makefile) for managing compilation of projects containing multiple source files and/or libraries
+We assume the use of [Makefiles](https://en.wikipedia.org/wiki/Makefile) for managing compilation of projects containing multiple source files and/or libraries.
 
 ## Creating project Makefiles
 
 The default building process adopted by ev3dev and many other projects uses [`make`](https://www.gnu.org/software/make/) to manage the compilation of files after they have been edited or modified. There are many other build management tools available, each with different strengths and weaknesses. Nonetheless, the default starting point is to use your IDE to create the necessary project build files, and modify it if necessary for advanced build features. For example, Eclipse CDT with the [GNU MCU Eclipse plugin](https://gnu-mcu-eclipse.github.io/) would create standard project folders with the necessary Makefiles for you automatically when creating a New Project.
 
-*FIXME: Need some additional HOWTOs for Make*
+Some references on how to create/customize Makefiles:
+* [Wikibooks Make Tutorial](https://en.wikibooks.org/wiki/Make)
+* [Using GCC and Make](https://www3.ntu.edu.sg/home/ehchua/programming/cpp/gcc_make.html)
+* [GNU Make Reference](https://www.gnu.org/software/make/manual/make.html)
 
 # Setting up Library and Include Paths for Custom Libraries
 
