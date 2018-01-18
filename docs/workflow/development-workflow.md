@@ -198,7 +198,7 @@ See the topic on [Networking](http://www.ev3dev.org/docs/networking/) for more i
 
 Secure Shell (SSH) is the recommended way to connect to the Robot Controller from the Host. The most commonly used SSH package is OpenSSH, which is supported by all the major OSes. Alternatively, Putty is available on Windows as a SSH client.
 
-> The default Developer's Firmware from LEGO suggests using `telnet` for access to the EV3 Robot Controller. Resist all temptations to use `telnet`, as it is an obsolete remote access client which transmits *EVERYTHING* you type in cleartext over the network link. You should excise any usage of `telnet` from your repertoire of command line tools as it is the road to grief and security compromises.
+> The default Developer's Firmware from LEGO uses `telnet` for access to the EV3 running `D` version firmware. Resist all temptations to install or use `telnet` and `telnetd` on ev3dev, as it is an obsolete remote access protocol which transmits *EVERYTHING* you type in cleartext over the network link. You should excise any usage of `telnet` from your repertoire of command line tools as it is the road to grief and [security compromises](https://translate.google.com/translate?sl=auto&tl=en&js=y&prev=_t&hl=en&ie=UTF-8&u=http%3A%2F%2Fwww.heise.de%2Fsecurity%2Fartikel%2FAnalysiert-Lego-Mindstorms-fuer-Cyber-Angriffe-missbraucht-3055305.html&edit-text=&act=url).
 
 The basic way of connecting to the Robot Controller is to specify the username and host information to the SSH client:
 ```
@@ -252,7 +252,7 @@ e.g.,
 [On Host]
 $ scp <application_file> robot@192.168.2.2:
 ```
-> Note that there is a colon `:` after the Ip address. It is important to include the colon, otherwise `scp` will  just copy it to a local file with the name `robot@192.168.2.2`!
+> Note that there is a colon `:` after the IP address. It is important to include the colon, otherwise `scp` will  just copy it to a local file with the name `robot@192.168.2.2`!
 
 Once the application has been copied over to the Target, you should check that the application can be executed. This is done by displaying the file permissions.
 
