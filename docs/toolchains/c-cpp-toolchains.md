@@ -1,4 +1,6 @@
-# Selecting a C/C++ Toolchain for ev3dev
+# C/C++ Toolchain Notes
+
+## Selecting a C/C++ Toolchain for ev3dev
 
 ![C-CPP-Workflow](../../images/workflow-c-cpp.flowchart.svg)
 
@@ -19,11 +21,15 @@ When cross-compiling using a GCC Cross-Toolchain, the selected target architectu
 
 >ev3dev has packaged the relevant GCC Cross-compiler Toolchain in [Docker](https://www.docker.com/what-docker) containers to simplify the installation of a POSIX-compliant development environment for the Host.
 
-# Project Build Tools 
+## Project Build Tools 
+
+The typical development workflow involves iteration through various Coding-Compiling-Debugging cycles.
+
+While Integrated Development Environments (IDEs) have reduced the complexity of performing each of those steps in the development workflow, as well as automate many of the steps involved, it is important to note that each of the required step can always be invoked from the Shell. It is therefore useful to know some of the command line parameters used by the respective tools; and it is still necessary to configure the IDE correctly so that it will perform the necessary steps for building the project.
 
 We assume the use of [Makefiles](https://en.wikipedia.org/wiki/Makefile) for managing compilation of projects containing multiple source files and/or libraries.
 
-## Creating project Makefiles
+### Creating project Makefiles
 
 The default building process adopted by ev3dev and many other projects uses [`make`](https://www.gnu.org/software/make/) to manage the compilation of files after they have been edited or modified. There are many other build management tools available, each with different strengths and weaknesses. Nonetheless, the default starting point is to use your IDE to create the necessary project build files, and modify it if necessary for advanced build features. For example, Eclipse CDT with the [GNU MCU Eclipse plugin](https://gnu-mcu-eclipse.github.io/) would create standard project folders with the necessary Makefiles for you automatically when creating a New Project.
 
@@ -32,7 +38,7 @@ Some references on how to create/customize Makefiles:
 * [Using GCC and Make](https://www3.ntu.edu.sg/home/ehchua/programming/cpp/gcc_make.html)
 * [GNU Make Reference](https://www.gnu.org/software/make/manual/make.html)
 
-# Setting up Library and Include Paths for Custom Libraries
+## Setting up Library and Include Paths for Custom Libraries
 
 This involves specifying the custom library paths passed to the cross-compiler and linker. 
 For GCC, the compiler command line switches are:
@@ -43,3 +49,40 @@ In addition, for the generation of the complete program, all custom libraries us
 * `-l <library-archive>`
 
 > This assumes static linking of libraries used by the program
+
+## Compiling Projects Using Docker
+
+Docker images encapsulates all the required cross-compilation tools into a container which is setup specifically for cross-compiling programs for the target platform. The advantage of using Docker is that the configuration of the toolchain is done once and can be replicated precisely on different Hosts. 
+
+The project directory is maintained and its contents edited on the Host OS environment.
+This will provide the best interactive performance since the editor or IDE is running natively.
+ 
+In order to use the cross-compiler toolchain images for ev3dev development, you will need to mount the project directory into the docker image as a `volume`. This allows the docker image to read the project files, as well as write the generated object and application files to the Host project directory. 
+
+> The docker image acts like a remote computer for the purpose of performing the compilation. Virtual Machine images can be used to accomplish this purpose as well but the overheads incurred by running a VM image is much greater compared with the overheads for running a docker image.
+>
+> It is important to note that the mounted project directory works like a shared network drive to allow the Host to exchange information with the Docker image. Anything else that is needed by the cross-compiler toolchain inside the docker image must have been installed beforehand, otherwise it is not accessible from with the docker image.
+>
+> This is especially true for any custom headers and libraries used by the project. If the custom headers and libraries were not pre-installed in the docker image, then it must be available via some mounted volume, or else included as a subproject within the project directory.
+
+See [Using Docker to Cross-Compiler](http://www.ev3dev.org/docs/tutorials/using-docker-to-cross-compile/) for information on how to build software using the docker environment.
+
+## Compiling with Debugging Information
+
+GCC uses `-g` to enable debugging symbols generation for the object file. 
+It is important to specify `-g` when compiling, otherwise the debugger would not be able to access the symbols to display the program context when setting breakpoints and stepping through the code.
+
+We would also need to build any custom libraries with `-g` as well if we plan to step through the library functions. If we link the custom libraries statically, those debug symbols will also be included in the executable file. Otherwise, the debug symbols for shared libraries need to be made available on the Target platform and made accessible to the debugger.
+
+> For the ev3dev distribution, `libc6-dbg` contains the C-library debug symbols.
+> `sudo apt install libc6-dbg` can be used to install the debugger symbols in the target platform.
+
+## Remote Debugging
+
+The Debugger for GCC is GNU Debugger ([GDB](https://www.gnu.org/software/gdb/documentation/)). It is a text-based debugger which can be run from the terminal.
+
+For cross-debugging, we need to use a GDB compiled for multiarch support. This allows us to run GDB on the Host and interact with the remote Target which uses the ARM architecture. In order for the multiarch GDB to understand which specific target type to use, we need to issue the following configuration command:
+
+> `set gnutarget elf32-littlearm`
+
+TBD

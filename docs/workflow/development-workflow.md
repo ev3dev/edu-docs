@@ -69,7 +69,7 @@ The essential components for developing on the Host are:
 >
 > Of course, a serial console is necessary if you're doing low level (e.g. kernel) development and/or the networking configuration is toast, but then you'd probably know what you're doing and won't need to refer to this guide in the first place.
 >
-> We assume use of [OpenSSH client](https://en.wikipedia.org/wiki/OpenSSH) to access and login to the ev3dev Robot Controller remotely
+> We assume use of [OpenSSH client](https://en.wikipedia.org/wiki/OpenSSH) to access and login to the ev3dev Robot Controller remotely.
 * Executable Program Downloader from Host (PC) to Target 
 > Since the executable program was compiled on the Host, we need to transfer it to the Target in order to execute it. The easiest way to do so is to use a network connection, since it does not involve removing and inserting SD cards or USB Flash drives repeatedly.
 >
@@ -273,3 +273,4 @@ The file permissions should include `x` (executable flag). See [Unix Fundamental
 # Running and Debugging Programs
 
 To test the application, we would normally build the software with debugging symbols. This extra information is usually removed when building for the release (non-debugging) version as it makes the filesize much smaller.
+
