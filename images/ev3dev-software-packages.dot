@@ -8,18 +8,18 @@ graph G {
 	
 		label = "Host Platform (PC)"
 
-		subgraph cluster_108 {
+		subgraph cluster_109 {
 			label = "Cross Compilation Toolchains";
 
-			subgraph cluster_107 {
-				label="Vendor\nSupplied";
+			subgraph cluster_108 {
+				label="Vendor Supplied\nToolchains";
 				style=filled;
 				fillcolor=white;
 				node [shape=rect,style="filled,rounded",color=cornsilk3,width=2,height=0.7];
 				"Mentor Graphics"--"Linaro"; 
 			};
 
-			subgraph cluster_106 {
+			subgraph cluster_107 {
 				label="Docker Images\nARM-only Arch";
 				style=filled;
 				fillcolor=paleturquoise;
@@ -27,7 +27,7 @@ graph G {
 				"ev3dev/\ndebian-jessie-\n<arch>-cross"--"ev3dev/\ndebian-stretch-\n<arch>-cross"; 
 			};
 
-			subgraph cluster_105 {
+			subgraph cluster_106 {
 				label="Docker Images\nMulti-Arch";
 				style=filled;
 				fillcolor=paleturquoise;
@@ -37,10 +37,10 @@ graph G {
 
 		};
 
-		subgraph cluster_104 {
+		subgraph cluster_105 {
 			label="ev3dev Build Tools";
 			
-			subgraph cluster_103 {
+			subgraph cluster_104 {
 				label="EV3 BootImage\nBuild Tool";
 				style=filled;
 				fillcolor=paleturquoise;
@@ -48,27 +48,36 @@ graph G {
 				"brickstrap"; 
 			};
 
-			subgraph cluster_102 {
+			subgraph cluster_103 {
 				label="Docker Image\nGenerator Scripts";
 				style=filled;
 				fillcolor=paleturquoise;
 				node [shape=rect,style="filled,rounded",color=goldenrod1,width=2,height=0.7];
-				"Cross-compiler\nev3dev/\ndocker-library"--"QEMU Base Image\nev3dev/\ndocker-base"; 
+				"Cross-compiler\nev3dev/\ndocker-cross"--"ev3dev OS Image\nev3dev/\ndocker-library"--"QEMU Base Image\nev3dev/\ndocker-base"; 
 			};
 	
 		};
 		"ev3dev/\ndebian-stretch-\n<arch>-cross"--"brickstrap";		// Dummy link for stacking
-		"ev3dev/\ndebian-stretch-cross"--"Cross-compiler\nev3dev/\ndocker-library"		// Dummy link for stacking
+		"ev3dev/\ndebian-stretch-cross"--"Cross-compiler\nev3dev/\ndocker-cross"		// Dummy link for stacking
 
-		subgraph cluster_101 {
+		subgraph cluster_102 {
 			label = "Host Applications";
-			subgraph cluster_100 {
+			subgraph cluster_101 {
 				label="Remote Access";
 				style=filled;
 				fillcolor=plum;
 				node [shape=rect,style="filled,rounded",color=navajowhite,width=2,height=0.7];
 				"OpenSSH"; 
 			};
+
+			subgraph cluster_100 {
+				label="Remote Debugging";
+				style=filled;
+				fillcolor=plum;
+				node [shape=rect,style="filled,rounded",color=navajowhite,width=2,height=0.7];
+				"GDB-multiarch"; 
+			};
+		"OpenSSH"--"GDB-multiarch";								// Dummy link for stacking
 		};
 	
 	};
