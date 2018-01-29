@@ -74,11 +74,19 @@ The essential components for developing on the Host are:
 > Since the executable program was compiled on the Host, we need to transfer it to the Target in order to execute it. The easiest way to do so is to use a network connection, since it does not involve removing and inserting SD cards or USB Flash drives repeatedly.
 >
 > e.g., OpenSSH provides `scp` (Secure Copy) for transferring files.
+
 * Cross-Debugger 
 > This usually comes with the Cross-compiler Toolchain, but can also be provided as part of the IDE.
+>
+> In order to debug the applications running on the Robot Controller, we must control the instruction execution on the Robot Controller using a Debugger. A Cross-Debugger runs on the Host, sending commands via the network link to the Target which runs a small debugger stub to control the application directly.
+>
+> In ev3dev, GDB and GDB Server are the Host Cross-Debugger and Target debgger stub respectively.
 
-In addition, several build tools are provided for building ev3dev Distribution Boot images or GCC Cross-compiler toolchains for Docker. 
->These build tools are not needed unless you plan to create custom toolchains or custom ev3dev Distribution images.
+* Other Packages
+
+> Several build tools are provided for building ev3dev Distribution Boot images or GCC Cross-compiler toolchains for Docker. 
+>
+> These build tools are not needed unless you plan to create custom toolchains or custom ev3dev Distribution images.
 
 ### Target Packages
 
