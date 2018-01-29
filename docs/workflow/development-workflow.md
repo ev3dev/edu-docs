@@ -75,12 +75,12 @@ The essential components for developing on the Host are:
 >
 > e.g., OpenSSH provides `scp` (Secure Copy) for transferring files.
 
-* Cross-Debugger 
+* Remote-Debugger 
 > This usually comes with the Cross-compiler Toolchain, but can also be provided as part of the IDE.
 >
-> In order to debug the applications running on the Robot Controller, we must control the instruction execution on the Robot Controller using a Debugger. A Cross-Debugger runs on the Host, sending commands via the network link to the Target which runs a small debugger stub to control the application directly.
+> In order to debug the applications running on the Robot Controller, we must control the instruction execution on the Robot Controller using a Debugger. A Remote-Debugger runs on the Host, sending commands via the network link to the Target which runs a small debugger stub to control the application directly.
 >
-> In ev3dev, GDB and GDB Server are the Host Cross-Debugger and Target debgger stub respectively.
+> In ev3dev, GDB and GDB Server are the Host Remote-Debugger and Target debugger stub respectively. GDB-multiarch is the Cross-Debugging enabled version of GDB to allow the GDB software running on the Host PC to recognize the instructions and registers of the Target platform.
 
 * Other Packages
 
