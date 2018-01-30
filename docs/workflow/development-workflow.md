@@ -241,4 +241,13 @@ $ ./<application_file>
 
 > The path given here includes the current working directory `.` to ensure that the Shell will execute the application we just downloaded. This is important for user created applications, since the Shell will search the default `$PATH` for the name of the executable first if the current working directory `.` is not specified. If there is an existing application with the same name as the newly downloaded version, it will execute the previously installed version in place of the new version if it was found in one of the directories listed in `$PATH`.
 
-* [C/C++](toolchains/c-cpp-toolchains.md#remote-debugging)
+In order to support debugging, ev3dev uses `gdbserver` to control the execution of the application via a debugger running on the Host platform. You can manually invoke gdbserver as follows:
+```
+$ gdbserver <host>:<port_no> ./<application_file>
+```
+
+> The `host` portion of the argument is optional. You can use either the IP address, or the hostname if it is automatically resolvable. If omitted, just specify `:<port_no>` to allow any Host to connect.
+
+Refer to the Language-specific guides for further details on how to use `gdb and `gdbserver` to debug the application remotely.
+
+* [C/C++](../toolchains/c-cpp-toolchains.md#remote-debugging)
