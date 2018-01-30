@@ -16,7 +16,7 @@ The basic process to start developing on ev3dev is as follows:
 3. [Build and Install the Libraries](#building-and-installing-the-libraries)
 4. [Write your Programs](#writing-your-programs)
 5. [Build your Application](#building-your-application)
-6. [Download Program to Target](#downloading-programs-to-robot-controller)
+6. [Download Program to Target](#downloading-programs-to-the-robot-controller)
 7. [Run/Debug the Program](#running-and-debugging-programs)
 
 # Choosing a Language
