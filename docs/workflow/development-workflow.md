@@ -11,12 +11,12 @@ Alternatively, others are interested in writing programs that execute directly o
 Nonetheless, since the EV3 Brick Operating System is based on Linux, we have various alternatives to commercially available tools. ev3dev provides a Debian-based Linux distribution to support people interested in writing code directly for the Linux environment using open source tools. This also opens up the possibility of using other Robot Controllers such as the Raspberry Pi, Beaglebone boards (with appropriate motor and sensor expansion capes), and others which have higher processing capabilities compared to the EV3 Brick to run software written for the ev3dev distribution.
 
 The basic process to start developing on ev3dev is as follows:
-1. [Choose a Language](@choosing-a-language)
+1. [Choose a Language](#choosing-a-language)
 2. [Choose a Toolchain](#choosing-a-toolchain)
 3. [Build and Install the Libraries](#building-and-installing-the-libraries)
 4. [Write your Programs](#writing-your-programs)
 5. [Build your Application](#building-your-application)
-6. [Download Program to Target](#downloading-programs-to-target)
+6. [Download Program to Target](#downloading-programs-to-robot-controller)
 7. [Run/Debug the Program](#running-and-debugging-programs)
 
 # Choosing a Language
