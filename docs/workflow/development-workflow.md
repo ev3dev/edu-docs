@@ -211,6 +211,7 @@ Refer to the Language-specific Toolchain Guide on how to perform these steps:
 # Downloading Programs to the Robot Controller
 
 > The workflow assumes the use of OpenSSH (SSH) related tools. You can find out how to configure SSH access on the Host and Target [here](../getting-started/remote-access-using-ssh.md).
+
 Executable applications need to be accessed by the ev3dev OS on the Robot Controller in order to run the program that you've created. The easiest way to do this is to transfer the application from the Host to the Target using `scp` from a Host console. 
 
 e.g.,
@@ -238,6 +239,6 @@ Running the program on the target is done by specifying the path to the executab
 $ ./<application_file>
 ```
 
-> The path given here includes the current working directory `.` to ensure that the Shell will execute the application we just downloaded. This is important for user created applications, since the Shell will search the default `$PATH` for the name of the executable first if the current working directory `.` is not specified. If there is another application with the same name as the newly downloaded version, it will execute the previously installed version in place of the new version.
+> The path given here includes the current working directory `.` to ensure that the Shell will execute the application we just downloaded. This is important for user created applications, since the Shell will search the default `$PATH` for the name of the executable first if the current working directory `.` is not specified. If there is an existing application with the same name as the newly downloaded version, it will execute the previously installed version in place of the new version if it was found in one of the directories listed in `$PATH`.
 
 * [C/C++](toolchains/c-cpp-toolchains.md#remote-debugging)
