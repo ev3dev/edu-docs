@@ -160,7 +160,7 @@ graph G {
 				style=filled;
 				fillcolor=plum;
 				node [shape=rect,style="filled,rounded",color=navajowhite,width=3,height=0.7];
-				"???"
+				"gdbserver"
 			};
 
 		subgraph cluster_4 {
@@ -212,7 +212,7 @@ graph G {
 
 		"Modular Micro-\nPython Library\n(micropython-lib)"--"avahi"
 		"GLib/\nGObject Library\n(ev3devKit)"--"SysFS Driver Library\n(lego-linux-drivers)"
-		"???"--"avahi"
+		"gdbserver"--"avahi"
 		"SysFS Driver Library\n(lego-linux-drivers)"--"brickd" [ltail=cluster_4, lhead=cluster_3];
 		"avahi"--"..." [ltail=cluster_1,lhead=cluster_0];
 		"brickd"--"..." [ltail=cluster_2,lhead=cluster_0];

@@ -282,3 +282,5 @@ The file permissions should include `x` (executable flag). See [Unix Fundamental
 
 To test the application, we would normally build the software with debugging symbols. This extra information is usually removed when building for the release (non-debugging) version as it makes the filesize much smaller.
 
+Refer to the Language-specific Toolchain Guide on how to perform these steps:
+* [C/C++](../toolchains/c-cpp-toolchains.md#compiling-with-debugging-information)
