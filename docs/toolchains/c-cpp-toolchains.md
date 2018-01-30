@@ -79,11 +79,13 @@ We would also need to build any custom libraries with `-g` as well if we plan to
 
 ## Remote Debugging
 
+Remote debugging requires that a Debugging Stub runs on the Target, which communicates with the Debugger Client (front end) running on the Host for issuing debugging commands and examining register and variable values.
 The Debugger for GCC is GNU Debugger ([GDB](https://www.gnu.org/software/gdb/documentation/)). It is a text-based debugger which can be run from the terminal.
+For cross-debugging, we need to use a GDB compiled for multiarch support. This allows us to run the Debugger Client (`gdb`) on the Host and interact with the remote Debugger Stub (`gdbserver`) which understands the ARM architecture registers. 
 
-> See [Using GDB](http://www.ev3dev.org/docs/tutorials/using-docker-to-cross-compile/#using-gdb) for an example of how to use breakpoints to control execution of the application
+> See [Using GDB](http://www.ev3dev.org/docs/tutorials/using-docker-to-cross-compile/#using-gdb) for an example of how to use breakpoints to control execution of the application.
 
-For cross-debugging, we need to use a GDB compiled for multiarch support. This allows us to run GDB on the Host and interact with the remote Target which uses the ARM architecture. In order for the multiarch GDB to understand which specific target type to use, we need to issue the following configuration command:
+In order for the multiarch GDB to understand which specific target type to use, we need to issue the following configuration command:
 
 > `set gnutarget elf32-littlearm`
 
