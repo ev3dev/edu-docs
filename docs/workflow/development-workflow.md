@@ -248,6 +248,6 @@ $ gdbserver <host>:<port_no> ./<application_file>
 
 > The `host` portion of the argument is optional. You can use either the IP address, or the hostname if it is automatically resolvable. If omitted, just specify `:<port_no>` to allow any Host to connect.
 
-Refer to the Language-specific guides for further details on how to use `gdb and `gdbserver` to debug the application remotely.
+Refer to the Language-specific guides for further details on how to use `gdb` and `gdbserver` to debug the application remotely.
 
 * [C/C++](../toolchains/c-cpp-toolchains.md#remote-debugging)
