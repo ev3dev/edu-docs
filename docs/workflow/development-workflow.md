@@ -15,8 +15,9 @@ The basic process to start developing on ev3dev is as follows:
 2. [Choose a Toolchain](#choosing-a-toolchain)
 3. [Build and Install the Libraries](#building-and-installing-the-libraries)
 4. [Write your Programs](#writing-your-programs)
-5. [Download Program to Target](#downloading-programs-to-target)
-6. [Run/Debug the Program](#running-and-debugging-programs)
+5. [Build your Application](#building-your-application)
+6. [Download Program to Target](#downloading-programs-to-target)
+7. [Run/Debug the Program](#running-and-debugging-programs)
 
 # Choosing a Language
 
@@ -197,67 +198,17 @@ Since this is a huge topic in itself, this guide will not get into further detai
 
 >For reference, all ev3dev projects are using Git for source code control; Git is the basis for all projects hosted on GitHub as well.
 
-# Downloading Programs to Target
 
-* Enabling Networking on the Target
-* Setting Up SSH Access
-* Using Public Key Authentication
-* Downloading/copying Programs to the Robot Controller
+# Building your Application
 
-## Enabling Networking on the Target
+During the development process, we need to test the application to check for correct logic and operation.
+To do so, we need to build the software with debugging symbols, and use a Debugger to control the execution of the program.
+This extra debugging information is usually removed when building for the release (non-debugging) version as it makes the filesize much smaller.
 
-See the topic on [Networking](http://www.ev3dev.org/docs/networking/) for more information on how to enable network access on the Robot Controller.
+Refer to the Language-specific Toolchain Guide on how to perform these steps:
+* [C/C++](../toolchains/c-cpp-toolchains.md#compiling-with-debugging-information)
 
-## Setting up SSH Access
-
-Secure Shell (SSH) is the recommended way to connect to the Robot Controller from the Host. The most commonly used SSH package is OpenSSH, which is supported by all the major OSes. Alternatively, Putty is available on Windows as a SSH client.
-
-> The default Developer's Firmware from LEGO uses `telnet` for access to the EV3 running `D` version firmware. Resist all temptations to install or use `telnet` and `telnetd` on ev3dev, as it is an obsolete remote access protocol which transmits *EVERYTHING* you type in cleartext over the network link. You should excise any usage of `telnet` from your repertoire of command line tools as it is the road to grief and [security compromises](https://translate.google.com/translate?sl=auto&tl=en&js=y&prev=_t&hl=en&ie=UTF-8&u=http%3A%2F%2Fwww.heise.de%2Fsecurity%2Fartikel%2FAnalysiert-Lego-Mindstorms-fuer-Cyber-Angriffe-missbraucht-3055305.html&edit-text=&act=url).
-
-The basic way of connecting to the Robot Controller is to specify the username and host information to the SSH client:
-```
-$ ssh robot@<robotcontroller> 
-[where <robotcontroller> is either the hostname or IP address of the Robot Controller]
-```
-
-e.g., 
-
-```
-$ssh robot@192.168.2.2
-```
-
-The first time you connect to the Robot Controller, it might complain that it is an unknown host, or else the cached Robot Controller credentials does not match.
-If it is indeed the first time you're connecting to the particular controller, you can accept the prompt. If it complains about non-matching credentials, you may need to remove the old cached entry manually.
-
-After the connection is established, SSH will present the login prompt for the password.
-You can then login to the ev3dev environment using the appropriate password. (the default password is `maker`).
-
-> See [Connecting to Ev3dev Using SSH](http://www.ev3dev.org/docs/tutorials/connecting-to-ev3dev-with-ssh/) for more information.
->
-
-If this is your personal EV3, it is of course prudent to change the password to something other than the default. 
-
->In a Lab environment, your instructor may advise you to use the default password to avoid unnecessary problems logging into the Robot Controller.
-
-Changing passwords on ev3dev is the same as on any Linux distribution:
-
-```
-$ passwd
-```
-
-## Using Public Key Authentication
-
-Once you've mastered logging in using SSH, and is frustrated with the constant need to type in your password at the login prompt, you can explore the use of Public Key Authentication for SSH login.
-
-[Creating SSH Login Keys](https://www.ssh.com/ssh/keygen/)
-
-> Remember to copy the SSH Login Public Key to the server. `ssh-copy-id` is one way of doing so.
->
-> The advantage of using Public Key Authentication is that you don't need to transmit your password over the network link (even if it is encrypted) when logging in. In addition, the security of using Public Key Authentication is much better since the credentials are much longer than the typical user password.
-
-You should protect the SSH Login Key with a passphrase (specified during the Login Key generation step). Most SSH client software can automatically unlock the SSH Login Key from your Host OS environment using `ssh-agent` , so that you don't even have to manually type in your passphrase to unlock the SSH Login Key each time. This make logging in to the Robot Controller a single step by just issuing the ssh command with the appropriate username and hostname/ip address.
-
-## Downloading Programs to the Robot Controller
+# Downloading Programs to the Robot Controller
 
 Executable applications need to be accessed by the ev3dev OS on the Robot Controller in order to run the program that you've created. The easiest way to do this is to transfer the application from the Host to the Target using `scp` from a Host console. 
 
@@ -276,11 +227,16 @@ $ ls -al <application_file>
 
 -rwxr-xr-x  1 robot robot [FILESIZE] [DATE] <application_file>
 ```
+
 The file permissions should include `x` (executable flag). See [Unix Fundamentals](https://github.com/ev3dev/ev3dev/blob/ev3dev-stretch/docs/programming/fundamentals.rst) for information on how to change file permissions.
 
 # Running and Debugging Programs
 
-To test the application, we would normally build the software with debugging symbols. This extra information is usually removed when building for the release (non-debugging) version as it makes the filesize much smaller.
+Running the program on the target is done by specifying the path to the executable.
+```
+$ ./<application_file>
+```
 
-Refer to the Language-specific Toolchain Guide on how to perform these steps:
-* [C/C++](../toolchains/c-cpp-toolchains.md#compiling-with-debugging-information)
+> The path given here includes the current working directory `.` to ensure that the Shell will execute the application we just downloaded. This is important for user created applications, since the Shell will search the default `$PATH` for the name of the executable first if the current working directory `.` is not specified. If there is another application with the same name as the newly downloaded version, it will execute the previously installed version in place of the new version.
+
+* [C/C++](toolchains/c-cpp-toolchains.md#remote-debugging)
