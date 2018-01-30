@@ -1,4 +1,4 @@
-# C/C++ Toolchain Notes
+# C/C++ Toolchain Guide
 
 ## Selecting a C/C++ Toolchain for ev3dev
 
@@ -83,10 +83,15 @@ Remote debugging requires that a Debugging Stub runs on the Target, which commun
 The Debugger for GCC is GNU Debugger ([GDB](https://www.gnu.org/software/gdb/documentation/)). It is a text-based debugger which can be run from the terminal.
 For cross-debugging, we need to use a GDB compiled for multiarch support. This allows us to run the Debugger Client (`gdb`) on the Host and interact with the remote Debugger Stub (`gdbserver`) which understands the ARM architecture registers. 
 
+### Using GDB from the command line
 > See [Using GDB](http://www.ev3dev.org/docs/tutorials/using-docker-to-cross-compile/#using-gdb) for an example of how to use breakpoints to control execution of the application.
 
-In order for the multiarch GDB to understand which specific target type to use, we need to issue the following configuration command:
+In order for the multiarch GDB client to understand which specific target type to use, we need to issue the following configuration command:
 
 > `set gnutarget elf32-littlearm`
 
-TBD
+### Using GDB from an IDE
+
+IDEs can simplify the remote debugging process, by automatically downloading the compiled application, invoking gdbserver, and presenting a GUI-based interface for the GDB client when invoking the debugging process.
+Since the steps involved in debugging using an IDE is specific to the IDE, you should refer to the relevant guide for further information:
+* [Remote Debugging Using Eclipse](../programming/eclipse-ide.md#remote-debugging-using-eclipse)
