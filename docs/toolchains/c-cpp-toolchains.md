@@ -90,6 +90,10 @@ In order for the multiarch GDB client to understand which specific target type t
 
 > `set gnutarget elf32-littlearm`
 
+The configuration command can be added to `~/.gdbinit` so that it is automatically enabled each time.
+
+> The `~` symbol refers to the user's home directory.
+
 ### Using GDB from an IDE
 
 IDEs can simplify the remote debugging process, by automatically downloading the compiled application, invoking gdbserver, and presenting a GUI-based interface for the GDB client when invoking the debugging process.
