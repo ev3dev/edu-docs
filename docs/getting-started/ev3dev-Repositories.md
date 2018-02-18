@@ -7,7 +7,7 @@ The ev3dev Repositories in GitHub consists of the following major components:
 * Linux Kernel Sourcecode Repositories (Platform Specific Linux Kernel)
 > The relevant kernel repository depends on the EV3 Controller Hardware Platform (choose *ONE* appropriate kernel)
 
-![Image](images/ev3dev-related-repositories.dot.svg)
+![Image](../../images/ev3dev-related-repositories.dot.svg)
 
 ## Linux-based Programming Components
 

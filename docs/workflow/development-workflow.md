@@ -1,4 +1,4 @@
-# Getting Started Developing on ev3dev
+# Development Workflow
 
 ## Introduction
 
@@ -11,24 +11,25 @@ Alternatively, others are interested in writing programs that execute directly o
 Nonetheless, since the EV3 Brick Operating System is based on Linux, we have various alternatives to commercially available tools. ev3dev provides a Debian-based Linux distribution to support people interested in writing code directly for the Linux environment using open source tools. This also opens up the possibility of using other Robot Controllers such as the Raspberry Pi, Beaglebone boards (with appropriate motor and sensor expansion capes), and others which have higher processing capabilities compared to the EV3 Brick to run software written for the ev3dev distribution.
 
 The basic process to start developing on ev3dev is as follows:
-1. [Choose a Language](@choosing-a-language)
-2. [Choose a Workflow and Toolchain](#choosing-a-workflow-and-toolchain)
-3. [Build the Libraries](#building-the-libraries)
+1. [Choose a Language](#choosing-a-language)
+2. [Choose a Toolchain](#choosing-a-toolchain)
+3. [Build and Install the Libraries](#building-and-installing-the-libraries)
 4. [Write your Programs](#writing-your-programs)
-5. [Download Program to Target](#downloading-programs-to-target)
-6. [Run/Debug the Program](#running-and-debugging-programs)
+5. [Build your Application](#building-your-application)
+6. [Download Program to the Robot Controller](#downloading-programs-to-the-robot-controller)
+7. [Run/Debug the Program](#running-and-debugging-programs)
 
 # Choosing a Language
 
 While it is a bit daunting to start by choosing a [Programming Language](http://www.ev3dev.org/docs/programming-languages) if you're new to programming, the list of languages are more or less sorted from easiest for beginners such as Python, to more advanced options such as C++ and C.
 
-# Choosing a Workflow and Toolchain
+# Choosing a Toolchain
 
-## Workflow Introduction
+## Workflow is dependant on the programming language
 
 >This mostly applies to more advanced language options. 
 
-For Python-based development, almost everything is already built-in to the ev3dev distribution; all you need is an Editor or Integrated Development Environment (IDE) to write your programs in, and then execute it on the Robot Controller (after downloading if necessary).
+For Python-based development, almost everything is already built-in to the ev3dev distribution; all you need is a Text Editor or [Integrated Development Environment](https://en.wikipedia.org/wiki/Integrated_development_environment) (IDE) to write your programs in, and then execute it on the Robot Controller (after downloading if necessary).
 
 > The pre-built ev3dev image has everything you need, unless you're interested in installing non-standard library packages into the ev3dev image (this is an advanced topic which is not covered in this guide). 
 
@@ -42,54 +43,51 @@ Bytecode based languages such as the LEGO Programmer and Java will have Compiler
 
 Consequently, when compiling C and C++ programs on the PC to run on the Robot Controller, we need to perform [Cross Compilation](https://en.wikipedia.org/wiki/Cross_compiler). The C and C++ cross compilers used by ev3dev are based on the GNU Compiler Collection ([`GCC`](https://gcc.gnu.org/)).
 
-> It is important to select the correct Target environment for the cross compiler; otherwise the generated programs will not be able to run on the targeted Robot controller platform. Generally we should use a generic Cross-Compiler which can generate executables for multiple target architectures. 
->
->However, if you're building on the Target platform natively, or else intend to run the architecture specific cross-compiler under emulation on the Host to build with custom libraries which are only available for the given target architecture, GCC provides architecture specific compiler and cross-compiler toolchains that takes less disk space compared with the multi-target cross-compilers.
-
-When cross-compiling using a GCC Cross-Toolchain, the selected target architecture *MUST* be compliant with the chosen Robot Controller platform distribution (EV3 Brick, RPi, etc.), otherwise unexpected problems may occur. There are three [Target Architectures](https://www.debian.org/ports/arm/) for ARM-based Debian distributions used by ev3dev depending on the Controller hardware platform:
-> * armel (for EV3 Programmable Brick)
-> * armhf for ARMv6 (for the original Raspberry Pi and Pi Zero, **Docker Cross-compiler Image not provided**)
-> * armhf for ARMv7 (for Raspberry Pi 2, 3, and Beaglebone)
-
 ## Toolchain Selection
 
 You can use the following Toolchain Selection Guide for your chosen programming languages as a reference:
 * [Python](http://www.ev3dev.org/docs/tutorials/setting-up-python-pycharm/)
-* C/C++
-![C-CPP-Workflow](images/workflow-c-cpp.flowchart.svg)
-
-Four options are available for C/C++:
-1. Target-based (Native) Compilation (compiler running on Robot Controller): This is not a recommended configuration for large projects due to the limited storage, processing power and RAM on the Robot Controller. You'll need the [build-essential](https://packages.debian.org/stretch/build-essential) apt package.
-2. Host-based Emulated Cross-Compilation: If custom libraries were only available for the Target platform; the cross-compilers are actually Target-based compilers running in an emulator on the Host (PC). Look for [`debian-<dist>-<arch>-cross`](https://github.com/ev3dev/docker-cross) docker iamges.
-3. Host-based Native Cross-Compilation: If multi-architecture custom libraries were available on the Host (PC) platform; this is the most efficient configuration. Look for [`debian-<dist>-cross`](https://github.com/ev3dev/docker-cross) docker images.
-4. Vendor supplied Host-based Cross-Compilation Toolchain: The latest versions of the vendor toolchains may not support the Robot Controller platform. See [C++ Language Bindings Project](https://github.com/ddemidov/ev3dev-lang-cpp) for a link to vendor supplied packages.
-
-* ???
+* [C/C++](../toolchains/c-cpp-toolchains.md)
 * TBD
 
 ## Software Packages for Host and Target Platforms
 
-It is important to keep in mind that you're dealing with two separate Operating Systems environments when developing software for the EV3, the **Host** (PC) environment and the **Target** (EV3) environment. The **Host** environment typically would be based on Windows, macOS, or Linux Operating Systems, while the **Target** will be based on the Debian Linux-derived ev3dev Distribution. Nonetheless, the following discussion assumes the use of a [POSIX compliant](https://en.wikipedia.org/wiki/POSIX) environment for the **Host**. 
+It is important to keep in mind that you're dealing with two separate Operating Systems environments when developing software for ev3dev, the **Host** (PC) environment and the **Target** (Robot Controller) environment. The **Host** environment typically would be based on Windows, macOS, or Linux Operating Systems, while the **Target** will be based on the Debian Linux-derived ev3dev Distribution. Nonetheless, the following discussion assumes the use of a [POSIX compliant](https://en.wikipedia.org/wiki/POSIX) environment for the **Host**. 
 
-![Software Packages](images/ev3dev-software-packages.dot.svg)
+![Software Packages](../../images/ev3dev-software-packages.dot.svg)
 
 ### Host Packages
 
-Packages maintained by ev3dev are highlighted in turquiose to indicate that they are used for building applications for the e3vdev platform. In addition, some examples of vendor-supplied Cross compilers are listed for reference. Standard packages (default packages provided by third parties for the Host OS) are highlighted in plum.
+Packages maintained by ev3dev are highlighted in turquiose to indicate that they are used for building applications for the e3vdev platform. In addition, some examples of vendor-supplied C/C++ Cross compilers are listed for reference. Standard packages (default packages provided by third parties for the Host OS) are highlighted in plum.
 
 The essential components for developing on the Host are:
-* [Integrated Development Environment](https://en.wikipedia.org/wiki/Integrated_development_environment) (IDE) or Editor
->While it is not the intention of this guide to recommend any particular IDE, since it is highly subjective regarding which is the *best* (and this is often a contentious debate); you may want to take a look at [Eclipse](http://www.eclipse.org/), which provides an open source, cross-platform everything-including-the-kitchen-sink IDE that is highly extensible and has support for various plugins relevant for cross-platform development.
+* Integrated Development Environment (IDE) or Text Editor
+>While it is not the intention of this guide to recommend any particular IDE, since it is highly subjective regarding which is the *best* (and this is often a contentious debate); take a look at [List of IDEs](https://github.com/ev3dev/ev3dev/blob/ev3dev-stretch/docs/programming/ides.rst) to find an IDE which is suited to your programming language, OS and development style.
+* Development Toolchain
+> See [Toolchain Selection](#toolchain-selection) for information relevant to your chosen programming language.
+* Remote Access / Terminal program 
+> While it is possible to connect a Serial cable to the EV3 and use a Terminal program to interact with the system, it requires a custom [cable](http://botbench.com/blog/2013/08/15/ev3-creating-console-cable/) or [adapter](http://www.mindsensors.com/ev3-and-nxt/40-console-adapter-for-ev3) and is only able to provide basic Input/Output capabilities. Network-based remote access is much more flexible since it supports file transfers and device-to-device communications, and is the recommended way to connect to the system.
+>
+> Of course, a serial console is necessary if you're doing low level (e.g. kernel) development and/or the networking configuration is toast, but then you'd probably know what you're doing and won't need to refer to this guide in the first place.
+>
+> We assume use of [OpenSSH client](https://en.wikipedia.org/wiki/OpenSSH) to access and login to the ev3dev Robot Controller remotely.
+* Executable Program Downloader from Host (PC) to Target 
+> Since the executable program was compiled on the Host, we need to transfer it to the Target in order to execute it. The easiest way to do so is to use a network connection, since it does not involve removing and inserting SD cards or USB Flash drives repeatedly.
+>
+> e.g., OpenSSH provides `scp` (Secure Copy) for transferring files.
 
-* Cross-compiler Toolchain
->ev3dev has packaged the relevant GCC Cross-compiler Toolchain in [Docker](https://www.docker.com/what-docker) containers to simplify the installation of a POSIX-compliant development environment for the Host.
-* Project Build Tools (we assume the use of [Makefiles](https://en.wikipedia.org/wiki/Makefile) for managing compilation)
-* Remote Access program (we assume use of [OpenSSH client](https://en.wikipedia.org/wiki/OpenSSH) to login to the EV3 Platform remotely)
-* Executable Program Downloader from PC to Target (e.g., OpenSSH provides `scp` (Secure Copy) for transferring files)
-* Cross-Debugger (usually comes with the Cross-compiler Toolchain, but can also be provided as part of the IDE)
+* Remote-Debugger 
+> This usually comes with the Cross-compiler Toolchain, but can also be provided as part of the IDE.
+>
+> In order to debug the applications running on the Robot Controller, we must control the instruction execution on the Robot Controller using a Debugger. A Remote-Debugger runs on the Host, sending commands via the network link to the Target which runs a small debugger stub to control the application directly.
+>
+> In ev3dev, GDB and GDB Server are the Host Remote-Debugger and Target debugger stub respectively. GDB-multiarch is the Cross-Debugging enabled version of GDB to allow the GDB software running on the Host PC to recognize the instructions and registers of the Target platform.
 
-In addition, several build tools are provided for building ev3dev Distribution Boot images or GCC Cross-compiler toolchains for Docker. 
->These build tools are not needed unless you plan to create custom toolchains or custom ev3dev Distribution images.
+* Other Packages
+
+> Several build tools are provided for building ev3dev Distribution Boot images or GCC Cross-compiler toolchains for Docker. 
+>
+> These build tools are not needed unless you plan to create custom toolchains or custom ev3dev Distribution images.
 
 ### Target Packages
 
@@ -116,12 +114,12 @@ The description of the packages starts from the bottom layer, since the lower la
 
 ### Header Files
 
-The use of the various libraries in ev3dev for development requires installing the relevant header (include) files for the Cross-compilation platform on the Host. This is documented in the  [Building the Libraries](#building-the-libraries) section.
+The use of the various libraries in ev3dev for development requires installing the relevant header (include) files for the Cross-compilation platform on the Host. This is documented in the  [Building and Installing the Libraries](#building-and-installing-the-libraries) section.
 
 >Take a look at [Organization of ev3dev Repositories](ev3dev-Repositories) for more information regarding the packages maintained by the ev3dev project, including available Language Bindings and support libraries.
 
 
-# Building the Libraries
+# Building and Installing the Libraries
 
 ## Clone the Language-specific Repository
 
@@ -138,7 +136,7 @@ In this step, you need to take note of the directory locations for both the Libr
 
 >On Linux, the standard library path is in `/usr/lib`, while the standard include path is in `/usr/include`, they are used to keep all system-wide library archives and include files. 
 >
->Cross-compilation is considered an example of using custom libraries. The standard libraries for the cross-compiler would also usually be stored in a well known location such as `/usr/local/` or `/opt/local`, depending on the vendor or packager of the cross-compilation toolchain. Normally, you won't need to specify the path to the standard libraries and header files for the cross-compiler 
+>Cross-compilation is considered an example of using custom libraries. The standard libraries for the cross-compiler would also usually be stored in a well known location such as `/usr/local/` or `/opt/local`, depending on the vendor or packager of the cross-compilation toolchain. Normally, you won't need to specify the path to the standard libraries and header files for the cross-compiler .
 >
 >On top of that, the libraries for supporting EV3 cross-compilation is another set of custom libraries that we need to access from our programs. There may not be a standard location for accessing those files, except for the location where the libraries were cloned to, though well designed custom libraries usually allow us to install it to the same directories as the cross-compiler libraries and headers for easier access. 
 
@@ -149,8 +147,7 @@ Therefore, it is important when compiling with custom libraries to specify the c
 It is not the intention of this guide to go into detailed description of every step, but the things to be aware of are:
 
 * Program Lifecycle
-* Creating project Makefiles to build the program automatically
-* Setting up correct paths to custom or ev3dev specific libraries and include files
+* Building the program incrementally
 * Use of the Editor or IDE features for syntax checking and API completion
 * Adoption of common style-guidelines for consistency with existing projects/code
 * Using source revision management software to track changes made to the program
@@ -168,23 +165,17 @@ Every program follows the basic life cycle for applications:
 
 There are many ways (formally termed development paradigms) to carry out these steps, some may not even consciously adopt a given paradigm but it came out naturally as part of the exploration. Nonetheless, having some semblance of a structured sequence would help reduce the frustrations and confusions involved with program development as the project scales up in complexity.
 
-## Creating project Makefiles
+## Building the Program Incrementally
 
-The default building process adopted by ev3dev and many other projects uses [`make`](https://www.gnu.org/software/make/) to manage the compilation of files after they have been edited or modified. There are many other build management tools available, each with different strengths and weaknesses. Nonetheless, the default starting point is to use your IDE to create the necessary project build files, and modify it if necessary for advanced build features. For example, Eclipse CDT with the [GNU MCU Eclipse plugin](https://gnu-mcu-eclipse.github.io/) would create standard project folders with the necessary Makefiles for you automatically when creating a New Project.
+*Rome was not built in a day*, and it is not likely that your program will be completed in a single programming session unless it is meant to test a simple scenario. 
 
-*FIXME: Need some additional HOWTOs for Make*
+Executable applications often consist of multiple modules and source files, which may be updated at different times during the development process. Only source files that were changed need to be recompiled. The naive approach is to just compile every source file regardless of whether they were modified or not. This may work well for small projects, but as the size of the project grows, significant amount of time might be spent waiting for the compilation to complete. 
 
-## Setting up Library and Include Paths
+Instead of compiling each and every source files over and over again, developers rely on various Project Build tools to manage the updating of the executable application based on changes made to specific source files. A common build tool for POSIX environments is [`make`](https://www.gnu.org/software/make/), used by many development projects to manage and automate the build process.
 
-This involves specifying the paths passed to the cross-compiler and linker. 
-For GCC, the compiler command line switches are:
-* `-L <path-to-library>`
-* `-I <path-to-include-directory>`
-
-In addition, for the generation of the complete program, all custom libraries used by the program would need to be linked with the object files for the program using:
-* `-l <library-archive>`
-
-> This assumes static linking of libraries used by the program
+> Make works by comparing the timestamps on the headers files and source files with the timestamps on the object code and executable files. It is important to keep the Real-Time Clock (RTC) running consistently (i.e., timestamps do not jump backwards) on the development machine in order not to confuse Make.
+>
+> When in doubt, `make clean` should delete all the generated object and executable files and give you a clean slate to recompile everything.
 
 ## Syntax highlighting and API completion
 
@@ -207,10 +198,56 @@ Since this is a huge topic in itself, this guide will not get into further detai
 
 >For reference, all ev3dev projects are using Git for source code control; Git is the basis for all projects hosted on GitHub as well.
 
-# Downloading Programs to Target
 
-TBD
+# Building your Application
+
+During the development process, we need to test the application to check for correct logic and operation.
+To do so, we need to build the software with debugging symbols, and use a Debugger to control the execution of the program.
+This extra debugging information is usually removed when building for the release (non-debugging) version as it makes the filesize much smaller.
+
+Refer to the Language-specific Toolchain Guide on how to perform these steps:
+* [C/C++](../toolchains/c-cpp-toolchains.md#compiling-with-debugging-information)
+
+# Downloading Programs to the Robot Controller
+
+> The workflow assumes the use of OpenSSH (SSH) related tools. You can find out how to configure SSH access on the Host and Target [here](../getting-started/remote-access-using-ssh.md).
+
+Executable applications need to be accessed by the ev3dev OS on the Robot Controller in order to run the program that you've created. The easiest way to do this is to transfer the application from the Host to the Target using `scp` from a Host console. 
+
+e.g.,
+```
+[On Host]
+$ scp <application_file> robot@192.168.2.2:
+```
+> Note that there is a colon `:` after the IP address. It is important to include the colon, otherwise `scp` will  just copy it to a local file with the name `robot@192.168.2.2`!
+
+Once the application has been copied over to the Target, you should check that the application can be executed. This is done by displaying the file permissions.
+
+```
+[On Target]
+$ ls -al <application_file>
+
+-rwxr-xr-x  1 robot robot [FILESIZE] [DATE] <application_file>
+```
+
+The file permissions should include `x` (executable flag). See [Unix Fundamentals](https://github.com/ev3dev/ev3dev/blob/ev3dev-stretch/docs/programming/fundamentals.rst) for information on how to change file permissions.
 
 # Running and Debugging Programs
 
-TBD
+Running the program on the target is done by specifying the path to the executable.
+```
+$ ./<application_file>
+```
+
+> The path given here includes the current working directory `.` to ensure that the Shell will execute the application we just downloaded. This is important for user created applications, since the Shell will search the default `$PATH` for the name of the executable first if the current working directory `.` is not specified. If there is an existing application with the same name as the newly downloaded version, it will execute the previously installed version in place of the new version if it was found in one of the directories listed in `$PATH`.
+
+In order to support debugging, ev3dev uses `gdbserver` to control the execution of the application via a debugger running on the Host platform. You can manually invoke gdbserver as follows:
+```
+$ gdbserver <host>:<port_no> ./<application_file>
+```
+
+> The `host` portion of the argument is optional. You can use either the IP address, or the hostname if it is automatically resolvable. If omitted, just specify `:<port_no>` to allow any Host to connect.
+
+Refer to the Language-specific guides for further details on how to use `gdb` and `gdbserver` to debug the application remotely.
+
+* [C/C++](../toolchains/c-cpp-toolchains.md#remote-debugging)
