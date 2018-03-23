@@ -8,7 +8,8 @@ The focus of this guide is to configure Eclispe for C cross-development and debu
 
 The cross-compilation process will be performed using [Docker](https://www.docker.com/community-edition), to ensure that the build environment libraries for linking with our programs are consistent with the ev3dev distribution libraries. 
 
-Information about the ev3dev cross-compilation docker images are found [here](../toolchains/c-cpp-toolchains.md).
+Information about the ev3dev cross-compilation docker images are found [here](../toolchains/c-cpp-toolchains.md#compiling-projects-using-docker).
+
 
 Setup the Docker Environment, and install the appropriate ev3dev docker image based on the version of the ev3dev distribution you're targeting.
 
@@ -18,17 +19,19 @@ To refer to the docker image in Eclipse, we'll tag it as `ev3cross`
 $ docker tag <docker_cross_compiler_image> ev3cross
 ```
 
-## Additional Eclipse Plugins
+## Additional Eclipse Plugins Setup
 
 Two additional Eclipse Plugins need to be installed from the Eclipse Marketplace:
-* Eclipse Docker Tooling (works with Eclipse Oxygen release and later)
-* GNU MCU Eclipse
+* Eclipse Docker Tooling: Control and Invoke Docker from within Eclipse (works with Eclipse Neon release and later, tested with Oxygen)
+* GNU MCU Eclipse: Cross-compiler toolchain integration, simplify creation of ARM-based projects in Eclipse
 
 ![Eclipse Plugins](../../images/pics/eclipse-marketplace-installed-tools.png)
 
-## Creating new ev3dev-c project in Eclipse
+From the `Eclipse Marketplace`, search for the two plugins and install them.
 
-To get started, we'll create an ARM "Hello World" project in Eclipse.
+## Creating a new ARM-based project in Eclipse
+
+We'll create an ARM "Hello World" project in Eclipse as an example.
 In Eclipse, select `File->New->C Project`. Choose the `Hello World ARM C Project` from the list.
 
 ![ARM Project](../../images/pics/new-c-project-arm.png)
@@ -74,14 +77,29 @@ Next the build needs to be setup to target the Docker container. Switch to the `
 
 ![Docker Settings](../../images/pics/c-project-build-settings-container-settings.png)
 
+The Docker Plugin automagically mounts the project directories into the Docker image and launches the build process. This makes it more flexible compared to manually invoking the Docker image, which require us to specify the project paths as part of the `docker run` command. 
 
-## Building Cross-Compilation Project Using Docker
+## Building ARM-based Project Using Docker
 
 Once all that is done, the next step is to build the project. 
 With the project folder selected in the Project Explorer View, initiate a `Project->Build Project` action. The Eclipse console should display the progress of the build.
 
 ![Build Status](../../images/pics/c-project-build-console-status.png)
 
-## Remote Debugging Using Eclipse
+If there are build errors, you would need to determine if the problem lies with the toolchain configuration or if it is a project related (programming) error.
+
+## Importing ev3dev-c as an Eclipse ARM-based Project
+
+Since we're interested in C-based programming for ev3dev, we will first import the ev3dev-c project from github.
+
+```
+$ git clone https://github.com/in4lio/ev3dev-c.git
+```
+
+From Eclipse, select `File->Import` and choose `C/C++->Existing Code as Makefile Project`.
+
+TBD
+
+## Remotely Debug ARM-based program Using Eclipse
 
 TBD
