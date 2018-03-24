@@ -67,7 +67,7 @@ After removing references to rdimon, you can verify the updated Linker settings 
 
 ### Configuring Cross Toolchain prefix
 Configuring the Cross Toolchain prefix is the following step.
-As mentioned previously, `arm-none-eabi-` is not the correct cross-compilation toolchain prefix for `ev3dev`. Instead, it should be set to `arm-linux-gnueabi-`. In addition, we should uncheck the `Create Flash Image` option since we're not going to flash it to the robot controller.
+As mentioned previously, `arm-none-eabi-` is not the correct cross-compilation toolchain prefix for `ev3dev` in the Docker cross-compiler image. Instead, it should be set to `arm-linux-gnueabi-`. In addition, we should uncheck the `Create Flash Image` option since we're not going to flash it to the robot controller.
 
 ![Cross Toolchain](../../images/pics/c-project-build-settings-toolchains.png)
 
@@ -144,7 +144,7 @@ In the SSH configuration screen, enter the appropriate information such as IP Ad
 
 ![USB Connection](../../images/pics/c-run-debug-main-connection.png)
 
-To setup the Debugger, click on the `Debugger` tab. The path to the GDB Debugger needs to be specified correctly. On macOS running MacPorts GDB, it should be `/opt/local/bin/ggdb`. The GDB Command file is optional. You might want to include some GDB configuration parameters to be executed on startup.
+To setup the Debugger, click on the `Debugger` tab. The path to the GDB Debugger needs to be specified correctly. On macOS running MacPorts GDB, it should be `/opt/local/bin/ggdb`. The GDB Command file is optional. You might want to include some GDB configuration parameters to be executed on startup. For example, the Multiarch GDB does not seem to know how to parse the application ELF file to determine the target type. This can be fixed using:
 ```
 set gnutarget elf32-littlearm
 ```
