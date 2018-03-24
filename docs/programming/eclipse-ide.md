@@ -100,6 +100,67 @@ From Eclipse, select `File->Import` and choose `C/C++->Existing Code as Makefile
 
 TBD
 
+### Building specific program in ev3dev
+
+> We will use the io example in ev3dev-c as the target program.
+
+You will need to specify the Build Target to be built. `Project->Build Targets->Create...` (TBD)
+![Build Target](../../images/pics/c-project-build-targets.png)
+
+
 ## Remotely Debug ARM-based program Using Eclipse
 
-TBD
+### Setup Multiarch GDB on Host Platform (PC)
+
+Eclipse will use the Host GDB Cross Debugger as the Debugging Client.
+On macOS with MacPorts, you can install GDB with multiarch support as follows:
+```
+$ sudo port install gdb +multiarch
+```
+The executable will be named `ggdb`.
+
+### SSH connection over USB
+
+Remote access to the EV3 can be over WiFi (if a USB WiFi dongle is available), or else over the USB cable. SSH over USB will be more reliable and somewhat faster compared to SSH over WiFi.
+
+To enable SSH over USB, the USB interface must be enabled in ev3dev via Brickman. It will be listed as a Wired Interface. 
+
+(TBD)
+
+### Configuring Debugger parameters in Eclipse for ev3dev-c
+
+> We will use the io example in ev3dev-c as the target program.
+
+To setup Remote Debugging on the Robot Controller, select `Run->Debug Configurations` from the menu. Then select `C/C++ Remote Application` and create a new launch configuration (from the icon bar in the left panel of the dialog). This will display the Launch Configuration setup form.
+
+In the `Main` tab, enter the project name `ev3dev-c` and specify the correct C/C++ application name. the `${project_loc}` variable will allow us to reference the project directory regardless of where it is in the file system.
+
+![Invariant Project Path](../../images/pics/c-run-debug-main-projectpath-invariant.png)
+
+The `Remote Absolute File Path for C/C++ Application` is used by the Debugger to find and launch the application on the Target (Robot Controller). In our case, we will enter the name of the executable without the absolute path, since it will be placed in the home directory of the target username by default.
+
+Next, the Connection to the Robot Controller needs to be configured. Select the `New...` button for the Connection, and select `SSH` as the connection type.
+In the SSH configuration screen, enter the appropriate information such as IP Address of the Robot Controller, Username, and Password or Passphrase for Public Key authentication as appropriate. If you're using Public Key authentication, be sure to configure the path to the public key correctly.
+
+![USB Connection](../../images/pics/c-run-debug-main-connection.png)
+
+To setup the Debugger, click on the `Debugger` tab. The path to the GDB Debugger needs to be specified correctly. On macOS running MacPorts GDB, it should be `/opt/local/bin/ggdb`. The GDB Command file is optional. You might want to include some GDB configuration parameters to be executed on startup.
+```
+set gnutarget elf32-littlearm
+```
+
+![Debugger Configuration](../../images/pics/c-run-debug-debugger.png)
+
+### Debugging Perspective for Eclipse
+
+After the configuration of the Debug Launch Configuration, launch it, and switch over to the Eclipse Debug Perspective. 
+
+Eclipse will copy the built application from the Host (PC) to the Target (Robot Controller) username's home directory via SSH and then launch it using the `Remote Absolute File Path for C/C++ Application`
+
+The Debug Perspective will show the process panel and which routine the program is currently stopped in, the variables and breakpoints inspection panel, a listing of the current line in the source file, and the console information for GDB.
+
+![Debug Perspective](../../images/pics/eclipse-gdb-remote-debug.png)
+
+The contents of variables and CPU registers can be inspected via the top middle panel.
+
+![Step-In Subroutine](../../images/pics/eclipse-gdb-remote-debug-stepin.png)
