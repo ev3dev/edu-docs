@@ -29,7 +29,7 @@ Two additional Eclipse Plugins need to be installed from the Eclipse Marketplace
 
 From the `Eclipse Marketplace`, search for the two plugins and install them.
 
-## Creating a new ARM-based project in Eclipse
+# Creating a new ARM-based project in Eclipse
 
 We'll create an ARM "Hello World" project in Eclipse as an example.
 In Eclipse, select `File->New->C Project`. Choose the `Hello World ARM C Project` from the list.
@@ -79,7 +79,7 @@ Next the build needs to be setup to target the Docker container. Switch to the `
 
 The Docker Plugin automagically mounts the project directories into the Docker image and launches the build process. This makes it more flexible compared to manually invoking the Docker image, which require us to specify the project paths as part of the `docker run` command. 
 
-## Building ARM-based Project Using Docker
+# Building ARM-based Project Using Docker
 
 Once all that is done, the next step is to build the project. 
 With the project folder selected in the Project Explorer View, initiate a `Project->Build Project` action. The Eclipse console should display the progress of the build.
@@ -97,20 +97,35 @@ $ git clone https://github.com/in4lio/ev3dev-c.git
 ```
 
 From Eclipse, select `File->Import` and choose `C/C++->Existing Code as Makefile Project`.
+Enter the project name `ev3dev-c` and setup the `Existing Code Location` path.
+In addition, select `ARM Cross GCC` as the Toolchain.
 
-TBD
+![Import ev3dev-c](../../images/pics/ev3dev-c-import-existing-code.png)
 
-### Building specific program in ev3dev
+## Configuring Project Paths
+
+The configuration of the Project Settings is similar to the steps for [ARM-based Projects](#configuring-project-settings).
+However, Imported C Projects does not have the `Tool Setting` tab because they are unmanaged C projects in Eclipse.
+Consequently generated code would default to the compiler default unless specific compiler flags are defined.
+
+The `Build command` has to be configured explicitly, since the ${cross_make} variable is not defined.
+Make sure that `Generate Makefiles automatically` is turned off, otherwise project builds will most probably not function correctly. In addition, the `Build location` should default to the project directory.
+
+![Import ev3dev-c](../../images/pics/ev3dev-c-project-build-location.png)
+
+
+## Building specific program in ev3dev
 
 > We will use the io example in ev3dev-c as the target program.
 
-You will need to specify the Build Target to be built. `Project->Build Targets->Create...` (TBD)
-![Build Target](../../images/pics/c-project-build-targets.png)
+You will need to specify the Build Target to be built. `Project->Build Targets->Create...`
+![Build Target](../../images/pics/ev3dev-c-create-build-target.png)
 
+After the target has been created, build the specific target by selecting it from the Build Targets list.
 
-## Remotely Debug ARM-based program Using Eclipse
+# Remotely Debug ARM-based program Using Eclipse
 
-### Setup Multiarch GDB on Host Platform (PC)
+## Setup Multiarch GDB on Host Platform (PC)
 
 Eclipse will use the Host GDB Cross Debugger as the Debugging Client.
 On macOS with MacPorts, you can install GDB with multiarch support as follows:
@@ -119,7 +134,7 @@ $ sudo port install gdb +multiarch
 ```
 The executable will be named `ggdb`.
 
-### SSH connection over USB
+## SSH connection over USB
 
 Remote access to the EV3 can be over WiFi (if a USB WiFi dongle is available), or else over the USB cable. SSH over USB will be more reliable and somewhat faster compared to SSH over WiFi.
 
@@ -127,7 +142,7 @@ To enable SSH over USB, the USB interface must be enabled in ev3dev via Brickman
 
 (TBD)
 
-### Configuring Debugger parameters in Eclipse for ev3dev-c
+## Configuring Debugger parameters in Eclipse for ev3dev-c
 
 > We will use the io example in ev3dev-c as the target program.
 
@@ -151,7 +166,7 @@ set gnutarget elf32-littlearm
 
 ![Debugger Configuration](../../images/pics/c-run-debug-debugger.png)
 
-### Debugging Perspective for Eclipse
+## Debugging Perspective for Eclipse
 
 After the configuration of the Debug Launch Configuration, launch it, and switch over to the Eclipse Debug Perspective. 
 
