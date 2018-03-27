@@ -51,6 +51,8 @@ Then, select `Project->Properties` and then expand the parameter list for `C/C++
 
 ### Configuring Target Processor
 
+> Note: This tab is only available for Eclipse Managed projects. This means that the entire project build process will be managed by Eclipse and will not be controlled via manually generated (custom) Makefiles. Eclipse Managed projects must be created via `File->New->C Project`. Imported projects with existing Makefiles would not be able to make use of Target Processor configuration options.
+
 Under `Target processor`, select the appropriate ARM family. For the LEGO Mindstorms EV3, it is `arm926ej-s`. The architecture and instruction set should be set to `Toolchain default`
 
 ![Custom Toolchain](../../images/pics/c-project-build-settings-tool-settings.png)
@@ -88,7 +90,7 @@ With the project folder selected in the Project Explorer View, initiate a `Proje
 
 If there are build errors, you would need to determine if the problem lies with the toolchain configuration or if it is a project related (programming) error.
 
-## Importing ev3dev-c as an Eclipse ARM-based Project
+# Importing Existing Project (ev3dev-c) as an Eclipse ARM-based Project
 
 Since we're interested in C-based programming for ev3dev, we will first import the ev3dev-c project from github.
 
@@ -105,14 +107,15 @@ In addition, select `ARM Cross GCC` as the Toolchain.
 ## Configuring Project Paths
 
 The configuration of the Project Settings is similar to the steps for [ARM-based Projects](#configuring-project-settings).
-However, Imported C Projects does not have the `Tool Setting` tab because they are unmanaged C projects in Eclipse.
-Consequently generated code would default to the compiler default unless specific compiler flags are defined.
+However, Imported C Projects does not have the `Tool Setting` tab because they are unmanaged C projects in Eclipse. Consequently generated code would default to the compiler default unless specific compiler flags are defined.
 
-The `Build command` has to be configured explicitly, since the ${cross_make} variable is not defined.
-Make sure that `Generate Makefiles automatically` is turned off, otherwise project builds will most probably not function correctly. In addition, the `Build location` should default to the project directory.
+The `Build command` has to be configured explicitly, replacing the default value, since the ${cross_make} variable is not defined for unmanaged projects.
+
+> Make sure that `Generate Makefiles automatically` is turned off, otherwise project builds will most probably not function correctly. In addition, the `Build location` should default to the project directory.
 
 ![Import ev3dev-c](../../images/pics/ev3dev-c-project-build-location.png)
 
+> Note: If you enable `Generate Makefiles automatically`, the project will become a Managed Eclipse project, where the build process is controlled by Eclipse and not via custom Makefiles. This will allow you to configure `Tool Setting` for the cross-compilation tools, but will probably cause build issues if the project have custom Makefile rules. YMMV.
 
 ## Building specific program in ev3dev
 
@@ -121,7 +124,7 @@ Make sure that `Generate Makefiles automatically` is turned off, otherwise proje
 You will need to specify the Build Target to be built. `Project->Build Targets->Create...`
 ![Build Target](../../images/pics/ev3dev-c-create-build-target.png)
 
-After the target has been created, build the specific target by selecting it from the Build Targets list.
+After the target has been created, build the specific target by selecting it from the Build Targets list. Eclipse will pass the build target as an argument to `make`.
 
 # Remotely Debug ARM-based program Using Eclipse
 
