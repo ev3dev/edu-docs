@@ -143,7 +143,11 @@ Remote access to the EV3 can be over WiFi (if a USB WiFi dongle is available), o
 
 To enable SSH over USB, the USB interface must be enabled in ev3dev via Brickman. It will be listed as a Wired Interface. 
 
-(TBD)
+From the Brickman menu, select `Wireless and Networks`, then `All Network Connections`. 
+Choose `Wired` and enable the `Connect automatically` checkbox. You can then configure IPv4 and DNS settings as appropriate. This connection will allow you to transfer files between the Host and the Robot Controller for debugging.
+> Normally you would need to set a static IPv4 address and a DNS entry, unless your Host (PC) has a DHCP server enabled; e.g., if you enable `Internet Sharing` on the host, a DHCP server would automatically be enabled.
+> [Internet access](http://www.ev3dev.org/docs/networking/) can then be done via the [USB connection](http://www.ev3dev.org/docs/tutorials/connecting-to-the-internet-via-usb/).
+
 
 ## Configuring Debugger parameters in Eclipse for ev3dev-c
 
