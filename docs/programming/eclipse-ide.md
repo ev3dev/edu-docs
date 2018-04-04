@@ -161,6 +161,8 @@ In the `Main` tab, enter the project name `ev3dev-c` and specify the correct C/C
 
 The `Remote Absolute File Path for C/C++ Application` is used by the Debugger to find and launch the application on the Target (Robot Controller). In our case, we will enter the name of the executable without the absolute path, since it will be placed in the home directory of the target username by default.
 
+> If Eclipse prevents you from executing the Debug Configuration (via the `Debug` button), click on the `Browse...` button and specify the home directory path in the target. 
+
 Next, the Connection to the Robot Controller needs to be configured. Select the `New...` button for the Connection, and select `SSH` as the connection type.
 In the SSH configuration screen, enter the appropriate information such as IP Address of the Robot Controller, Username, and Password or Passphrase for Public Key authentication as appropriate. If you're using Public Key authentication, be sure to configure the path to the public key correctly.
 
