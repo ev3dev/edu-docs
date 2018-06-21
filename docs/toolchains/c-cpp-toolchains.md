@@ -104,4 +104,4 @@ The configuration command can be added to `~/.gdbinit` so that it is automatical
 
 IDEs can simplify the remote debugging process, by automatically downloading the compiled application, invoking gdbserver, and presenting a GUI-based interface for the GDB client when invoking the debugging process.
 Since the steps involved in debugging using an IDE is specific to the IDE, you should refer to the relevant guide for further information:
-* [Remote Debugging Using Eclipse](../programming/eclipse-ide.md#remotely-debug-arm-based-program-using-eclipse)
+* [Remote Debugging Using Eclipse](../programming/eclipse-ide.md#configuring-debugger-parameters-in-eclipse-for-ev3dev-c)
