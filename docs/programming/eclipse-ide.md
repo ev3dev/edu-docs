@@ -139,7 +139,7 @@ The executable will be named `ggdb`.
 
 ## SSH connection over USB
 
-Remote access to the EV3 can be over WiFi (if a USB WiFi dongle is available), or else over the USB cable. SSH over USB will be more reliable and somewhat faster compared to SSH over WiFi.
+Remote access to the Robot controller can be over WiFi (if a USB WiFi dongle is available), or else over the USB cable. SSH over USB will be more reliable and somewhat faster compared to SSH over WiFi.
 
 To enable SSH over USB, the USB interface must be enabled in ev3dev via Brickman. It will be listed as a Wired Interface. 
 
@@ -148,6 +148,14 @@ Choose `Wired` and enable the `Connect automatically` checkbox. You can then con
 > Normally you would need to set a static IPv4 address and a DNS entry, unless your Host (PC) has a DHCP server enabled; e.g., if you enable `Internet Sharing` on the host, a DHCP server would automatically be enabled.
 > [Internet access](http://www.ev3dev.org/docs/networking/) can then be done via the [USB connection](http://www.ev3dev.org/docs/tutorials/connecting-to-the-internet-via-usb/).
 
+## Setup `gdbserver` on Target Platform (Robot)
+
+`gdbserver` is used to control the target program on the robot platform. If it was not installed as part of the ev3dev image, you can add it as follows in a ev3dev terminal:
+
+```
+$ sudo apt-get update
+$ sudo apt-get install gdbserver
+```
 
 ## Configuring Debugger parameters in Eclipse for ev3dev-c
 
@@ -160,6 +168,8 @@ In the `Main` tab, enter the project name `ev3dev-c` and specify the correct C/C
 ![Invariant Project Path](../../images/pics/c-run-debug-main-projectpath-invariant.png)
 
 The `Remote Absolute File Path for C/C++ Application` is used by the Debugger to find and launch the application on the Target (Robot Controller). In our case, we will enter the name of the executable without the absolute path, since it will be placed in the home directory of the target username by default.
+
+> If Eclipse prevents you from executing the Debug Configuration (via the `Debug` button), click on the `Browse...` button and specify the home directory path in the target. 
 
 Next, the Connection to the Robot Controller needs to be configured. Select the `New...` button for the Connection, and select `SSH` as the connection type.
 In the SSH configuration screen, enter the appropriate information such as IP Address of the Robot Controller, Username, and Password or Passphrase for Public Key authentication as appropriate. If you're using Public Key authentication, be sure to configure the path to the public key correctly.
