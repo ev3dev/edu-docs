@@ -5,12 +5,12 @@ graph G {
 	edge [penwidth=0,minlen=1];
 
 
-	subgraph cluster_10 {
+	subgraph cluster_12 {
 		label = "EV3 Programmer Software Compatible\n(Cannot be used conncurrently with ev3dev)"
 		node [shape=tripleoctagon,style="filled",color=cadetblue,width=2.4];
 		"EV3 Bytecode\nAssembler\n(lmsasm)"; "EV3 Bytecode\nDisassembler\n(lms-hacker-tools)";
 
-		subgraph cluster_9 {
+		subgraph cluster_11 {
 			style=filled;
 			fillcolor=ghostwhite;
 			label="LEGO Mindstorms\nEV3 Virtual Machine";
@@ -28,7 +28,7 @@ graph G {
 		"NXTCamView5" "Brickman";
 
 
-		subgraph cluster_8 {
+		subgraph cluster_10 {
 			style=filled;
 			fillcolor=ghostwhite;
 			label="ev3dev-maintained Libraries";
@@ -36,24 +36,26 @@ graph G {
 			subgraph cluster_5 {
 				label="";
 				node [shape=rect,style="filled,rounded",color=navajowhite,width=2];
-				"GRX3 UI\nWidgets\n(grx-widgets)"--"GRX3 UI\nLibrary\n(grx)"
-				--"GLib/\nGObject Library\n(ev3devKit)";
+				"GRX3 UI\nWidgets\n(grx-widgets)"--"GRX3 UI\nLibrary\n(grx)"--
+				"GLib/\nGObject Library\n(ev3devKit)";
+
 				edge [penwidth=1];
 			};
-			subgraph cluster_6 {
+
+			subgraph cluster_7 {
 				label="";
 				node [shape=rect,style="filled,rounded",color=navajowhite,width=2];
 				"CMUCam5 Pixy\nVision Library\n(pixy)";
 				edge [penwidth=1];
 			};
 
-			subgraph cluster_7 {
+			subgraph cluster_8 {
 				label="";
 				node [shape=rect,style="filled,rounded",color=goldenrod1,width=2];
 				"Embedded\nPython\n(micrpython)";
 				edge [penwidth=1];
 			};
-	
+			"CMUCam5 Pixy\nVision Library\n(pixy)"--"Embedded\nPython\n(micrpython)";
 		};
 
 		subgraph cluster_4 {
@@ -84,7 +86,7 @@ graph G {
 			label = "LEGO Mindstorms EV3\nLinux SysFS Drivers";
 			style=filled;
 			fillcolor=paleturquoise;
-			node [shape=rect,style=filled,color=navajowhite,width=14];
+			node [shape=rect,style=filled,color=navajowhite,width=11.5];
 			"lego-linux-drivers"
 
 		};
@@ -107,11 +109,9 @@ graph G {
 	
 	"lego-linux-drivers"--"..." [ltail=cluster_1,lhead=cluster_0];
 
-	"GLib/\nGObject Library\n(ev3devKit)"--"lego-linux-drivers" [ltail=cluster_3,lhead=cluster_1];
 	"Binding Metadata\n(ev3dev-lang)"--"lego-linux-drivers" [ltail=cluster_2,lhead=cluster_1];
 	"GLib/\nGObject Library\n(ev3devKit)"--"lego-linux-drivers" [ltail=cluster_5,lhead=cluster_1];
-	"CMUCam5 Pixy\nVision Library\n(pixy)"--"lego-linux-drivers" [ltail=cluster_6,lhead=cluster_1];
-	"Embedded\nPython\n(micrpython)"--"lego-linux-drivers" [ltail=cluster_7,lhead=cluster_1];
+	"Embedded\nPython\n(micrpython)"--"lego-linux-drivers" [ltail=cluster_8,lhead=cluster_1];
 
 	"lms2012-compat"--"..." [ltail=cluster_10,lhead=cluster_0];
 }
