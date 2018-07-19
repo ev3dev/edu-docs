@@ -7,17 +7,17 @@ graph G {
 
 	subgraph cluster_10 {
 		label = "EV3 Programmer Software Compatible\n(Cannot be used conncurrently with ev3dev)"
-		node [shape=tripleoctagon,style="filled",color=cadetblue,width=2];
-		"EV3\nBytecode\nAsembler\n(lmsasm)"; "EV3 Bytecode\nDisassembler\n(lms-hacker\n-tools)";
+		node [shape=tripleoctagon,style="filled",color=cadetblue,width=2.4];
+		"EV3 Bytecode\nAssembler\n(lmsasm)"; "EV3 Bytecode\nDisassembler\n(lms-hacker-tools)";
 
 		subgraph cluster_9 {
 			style=filled;
 			fillcolor=ghostwhite;
 			label="LEGO Mindstorms\nEV3 Virtual Machine";
-			node [shape=rect,style="filled,rounded",color=cornflowerblue,width=5];
+			node [shape=rect,style="filled,rounded",color=cornflowerblue,width=5.4];
 			"lms2012-compat";
 		};
-		{"EV3\nBytecode\nAsembler\n(lmsasm)" "EV3 Bytecode\nDisassembler\n(lms-hacker\n-tools)"}--"lms2012-compat";
+		{"EV3 Bytecode\nAssembler\n(lmsasm)" "EV3 Bytecode\nDisassembler\n(lms-hacker-tools)"}--"lms2012-compat";
 	};
 	
 	subgraph cluster_100 {
@@ -57,23 +57,24 @@ graph G {
 		};
 
 		subgraph cluster_4 {
-			label="Language Bindings";
+			label="I/O Libraries\nLanguage Bindings";
 
 			subgraph cluster_3 {
-				label="External repos.\n(and alternative libraries)";
+				label="Alternative Libraries\n(and external repos.)";
 				node [shape=house,style=filled,color=darkseagreen1,width=3,height=1.3];
 				"C\n(in4lio/\nev3dev-c)"-- 
 				"Java [LeJos compat.]\n(ev3dev-lang-java/\nev3dev-lang-java)"--
-				"Go\n(ev3go/ev3dev)";
+				"Go\n(ev3go/ev3dev)"--
+				"Python 3\n(ev3dev-lang-python)";
 				node [shape=oval,style=filled,color=darksalmon,width=3,height=1.3];
 				edge [penwidth=1];
 				"Perl, Ruby,\nPython Bindings\n(for ev3dev-c)"--"C\n(in4lio/\nev3dev-c)";
 			}
 			subgraph cluster_2 {
-				label="ev3dev repos.\n(default libraries)";
+				label="ev3dev repos.\n(Vala Unified Bindings)";
 				node [shape=house,style=filled,color=thistle1,width=3,height=1.3];
 				"C++\n(ddemidov/\nev3dev-lang-cpp)"--"Java\n(mob41/\nev3dev-lang-java)"--
-				"Javascript\n(wasabifan/\nev3dev-lang-js)"--"Python 3\n(ev3dev-lang-python)";
+				"Javascript\n(wasabifan/\nev3dev-lang-js)"--"Python\n(ev3devKit)";
 			};
 				node [shape=oval,style=filled,color=darksalmon,width=3,height=1];
 				"Binding Metadata\n(ev3dev-lang)";
@@ -100,7 +101,7 @@ graph G {
 	edge [penwidth=1];
 	"Brickman"--"GRX3 UI\nWidgets\n(grx-widgets)";
 	"NXTCamView5"--"CMUCam5 Pixy\nVision Library\n(pixy)";
-	"Python 3\n(ev3dev-lang-python)"--"Binding Metadata\n(ev3dev-lang)" [ltail=cluster_2];
+	"Python\n(ev3devKit)"--"Binding Metadata\n(ev3dev-lang)" [ltail=cluster_2];
 
 	edge [penwidth=0];
 	

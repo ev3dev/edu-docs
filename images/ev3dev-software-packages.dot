@@ -82,14 +82,14 @@ graph G {
 	
 	};
 
-	subgraph cluster_15 {
+	subgraph cluster_17 {
 
 		label = "Target Platform (Robot Controller)";
 	
-		subgraph cluster_14 {
+		subgraph cluster_16 {
 			label = "Target Applications";
 			
-			subgraph cluster_13 {
+			subgraph cluster_15 {
 				label="Native Compiler Tools";
 				style=filled;
 				fillcolor=plum;
@@ -97,7 +97,7 @@ graph G {
 				"build-essential";
 			};
 			
-			subgraph cluster_12 {
+			subgraph cluster_14 {
 				label="ev3dev specific";
 				style=filled;
 				fillcolor=paleturquoise;
@@ -110,10 +110,10 @@ graph G {
 		
 		};
 		
-		subgraph cluster_11 {
+		subgraph cluster_13 {
 			label = "Mid Level Library Packages";
 
-			subgraph cluster_10 {
+			subgraph cluster_12 {
 				label="ev3dev ported";
 				style=filled;
 				fillcolor=grey;
@@ -121,7 +121,7 @@ graph G {
 				"Embedded\nPython\n(micrpython)";
 			};
 
-			subgraph cluster_9 {
+			subgraph cluster_11 {
 				label="Vision";
 				style=filled;
 				fillcolor=paleturquoise;
@@ -130,14 +130,33 @@ graph G {
 			};
 
 
-			subgraph cluster_8 {
+			subgraph cluster_10 {
 				label = "Graphics";
 				style=filled;
 				fillcolor=paleturquoise;
 				node [shape=rect,style="filled,rounded",color=navajowhite,width=2];
-				"GRX3 UI\nWidgets\n(grx-widgets)"--"GRX3 UI\nLibrary\n(grx)"
-				--"GLib/\nGObject Library\n(ev3devKit)";
+				"GRX3 UI\nWidgets\n(grx-widgets)"--"GRX3 UI\nLibrary\n(grx)";
 			};
+
+			subgraph cluster_9 {
+				label = "Ev3Dev I/O Library";
+				style=filled;
+				fillcolor=paleturquoise;
+				node [shape=rect,style="filled,rounded",color=navajowhite,width=2];
+				"Vala GLib/\nGObject Library\n(ev3devKit)";
+			};
+			subgraph cluster_8 {
+				label = "Alternate I/O Libraries";
+				style=filled;
+				fillcolor=turquoise;
+				node [shape=rect,style="filled,rounded",color=navajowhite,width=2];
+				"C Library\n(in4lio/\nev3dev-c)"; "Java (LeJos) Library\n(ev3dev-lang-java/\nev3dev-lang-java)";
+				"Go Library\n(ev3go/\nev3dev)"; "Python 3 Library\n[Default]\n(ev3dev-lang-python)";
+			};
+			"Go Library\n(ev3go/\nev3dev)"--"Python 3 Library\n[Default]\n(ev3dev-lang-python)";
+			"C Library\n(in4lio/\nev3dev-c)"--"Java (LeJos) Library\n(ev3dev-lang-java/\nev3dev-lang-java)";
+			"GRX3 UI\nLibrary\n(grx)"--"Vala GLib/\nGObject Library\n(ev3devKit)"
+			"CMUCam5 Pixy\nVision Library\n(pixy)"--"C Library\n(in4lio/\nev3dev-c)";
 		};
 	
 		"Brickman"--"GRX3 UI\nWidgets\n(grx-widgets)" [penwidth=1];
@@ -211,7 +230,7 @@ graph G {
 		"Embedded\nPython\n(micrpython)"--"Modular Micro-\nPython Library\n(micropython-lib)";
 
 		"Modular Micro-\nPython Library\n(micropython-lib)"--"avahi"
-		"GLib/\nGObject Library\n(ev3devKit)"--"SysFS Driver Library\n(lego-linux-drivers)"
+		"Vala GLib/\nGObject Library\n(ev3devKit)"--"SysFS Driver Library\n(lego-linux-drivers)"
 		"gdbserver"--"avahi"
 		"SysFS Driver Library\n(lego-linux-drivers)"--"brickd" [ltail=cluster_4, lhead=cluster_3];
 		"avahi"--"..." [ltail=cluster_1,lhead=cluster_0];
