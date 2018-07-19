@@ -279,11 +279,11 @@
 <path fill="#ffdead" stroke="#ffdead" d="M1471,-963C1471,-963 1351,-963 1351,-963 1345,-963 1339,-957 1339,-951 1339,-951 1339,-925 1339,-925 1339,-919 1345,-913 1351,-913 1351,-913 1471,-913 1471,-913 1477,-913 1483,-919 1483,-925 1483,-925 1483,-951 1483,-951 1483,-957 1477,-963 1471,-963"/>
 <text text-anchor="middle" x="1411" y="-933.8" font-family="Times,serif" font-size="14.00" fill="#000000">build&#45;essential</text>
 </g>
-<!-- ev3dev&#45;config\n(ev3dev&#45;tools) -->
+<!-- ev3dev&#45;* Scripts\n(ev3dev&#45;tools) -->
 <g id="node14" class="node">
-<title>ev3dev&#45;config\n(ev3dev&#45;tools)</title>
+<title>ev3dev&#45;* Scripts\n(ev3dev&#45;tools)</title>
 <path fill="#ffdead" stroke="#ffdead" d="M1303,-963C1303,-963 1183,-963 1183,-963 1177,-963 1171,-957 1171,-951 1171,-951 1171,-925 1171,-925 1171,-919 1177,-913 1183,-913 1183,-913 1303,-913 1303,-913 1309,-913 1315,-919 1315,-925 1315,-925 1315,-951 1315,-951 1315,-957 1309,-963 1303,-963"/>
-<text text-anchor="middle" x="1243" y="-942.2" font-family="Times,serif" font-size="14.00" fill="#000000">ev3dev&#45;config</text>
+<text text-anchor="middle" x="1243" y="-942.2" font-family="Times,serif" font-size="14.00" fill="#000000">ev3dev&#45;* Scripts</text>
 <text text-anchor="middle" x="1243" y="-925.4" font-family="Times,serif" font-size="14.00" fill="#000000">(ev3dev&#45;tools)</text>
 </g>
 <!-- NXTCamView5 -->
@@ -292,9 +292,9 @@
 <path fill="#ffdead" stroke="#ffdead" d="M1303,-864.2C1303,-864.2 1183,-864.2 1183,-864.2 1177,-864.2 1171,-858.2 1171,-852.2 1171,-852.2 1171,-826.2 1171,-826.2 1171,-820.2 1177,-814.2 1183,-814.2 1183,-814.2 1303,-814.2 1303,-814.2 1309,-814.2 1315,-820.2 1315,-826.2 1315,-826.2 1315,-852.2 1315,-852.2 1315,-858.2 1309,-864.2 1303,-864.2"/>
 <text text-anchor="middle" x="1243" y="-835" font-family="Times,serif" font-size="14.00" fill="#000000">NXTCamView5</text>
 </g>
-<!-- ev3dev&#45;config\n(ev3dev&#45;tools)&#45;&#45;NXTCamView5 -->
+<!-- ev3dev&#45;* Scripts\n(ev3dev&#45;tools)&#45;&#45;NXTCamView5 -->
 <g id="edge10" class="edge">
-<title>ev3dev&#45;config\n(ev3dev&#45;tools)&#45;&#45;NXTCamView5</title>
+<title>ev3dev&#45;* Scripts\n(ev3dev&#45;tools)&#45;&#45;NXTCamView5</title>
 <path fill="none" stroke="#000000" stroke-width="0" d="M1243,-912.813C1243,-897.9483 1243,-879.1977 1243,-864.3411"/>
 </g>
 <!-- brickrun -->
