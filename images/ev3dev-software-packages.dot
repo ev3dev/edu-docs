@@ -170,7 +170,7 @@ graph G {
 				label="ev3dev ported";
 				style=filled;
 				fillcolor=grey;
-				node [shape=rect,style="filled,rounded",color=goldenrod1,width=2,height=0.7];
+				node [shape=rect,style="filled,rounded",color=goldenrod1,width=2,height=0.8];
 				"Modular Micro-\nPython Library\n(micropython-lib)"; "Micro-Python\nLinux Library\n(micropython-linux)";
 			};
 
@@ -179,7 +179,7 @@ graph G {
 				label = "Debian-derived Libraries";
 				style=filled;
 				fillcolor=plum;
-				node [shape=rect,style="filled,rounded",color=navajowhite,width=3,height=0.7];
+				node [shape=rect,style="filled,rounded",color=navajowhite,width=2.5,height=0.8];
 				"gdbserver"
 			};
 
@@ -187,7 +187,7 @@ graph G {
 			label = "ev3dev specific";
 			style=filled;
 			fillcolor=paleturquoise;
-			node [shape=rect,style="filled,rounded",color=navajowhite,width=3,height=0.7];
+			node [shape=rect,style="filled,rounded",color=navajowhite,width=2.8,height=0.8];
 			"SysFS Driver Library\n(lego-linux-drivers)";
 
 			};
@@ -222,7 +222,7 @@ graph G {
 			style=filled;
 			fillcolor=lightgrey;
 			node [style=filled,color=navajowhite, shape=invhouse,width=2,height=1.3];
-			rank = same; "etc."; "rpi-kernel\n(Raspbian)\n[Raspberrypi.org]"; "..."; 
+			rank = same; "rpi-kernel\n(Raspbian)\n[Raspberrypi.org]"; "..."; 
 			"ev3-kernel\n(Debian mainline)\n[Debian.org]"; "bb-kernel\n(eLinux)\n[Beagleboard.org]"; 
 		};
 
