@@ -102,10 +102,10 @@ graph G {
 				style=filled;
 				fillcolor=paleturquoise;
 				node [shape=rect,style="filled,rounded",color=navajowhite,width=2,height=0.7];
-				"ev3dev-config\n(ev3dev-tools)"; "brickrun"; 
+				"ev3dev-* Scripts\n(ev3dev-tools)"; "brickrun"; 
 				"Brickman"; "NXTCamView5";
 				"brickrun"--"Brickman";	// Dummy link for stacking
-				"ev3dev-config\n(ev3dev-tools)"--"NXTCamView5";	// Dummy link for stacking
+				"ev3dev-* Scripts\n(ev3dev-tools)"--"NXTCamView5";	// Dummy link for stacking
 			};
 		
 		};
