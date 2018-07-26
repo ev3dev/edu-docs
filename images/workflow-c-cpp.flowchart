@@ -15,8 +15,8 @@ multiarch(yes,bottom)->customlib
 usetarget=>subroutine: Target Based 
 Compilation
 (build-essentials)
-[sudo apt-get install build-essential\n
-See Getting Started with C tutorial on ev3dev.org]
+[sudo apt-get install build-essential]
+[See Getting Started with C tutorial on ev3dev.org]
 usehostemu=>subroutine: Host-based Emulated
 Cross-compilation
 (debian-<dist>-<arch>-cross)
