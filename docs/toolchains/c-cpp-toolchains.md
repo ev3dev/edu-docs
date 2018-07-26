@@ -67,6 +67,12 @@ In order to use the cross-compiler toolchain images for ev3dev development, you 
 
 See [Using Docker to Cross-Compiler](http://www.ev3dev.org/docs/tutorials/using-docker-to-cross-compile/) for information on how to build software using the docker environment.
 
+### Using Docker from an IDE
+
+Docker has integration with various IDEs to simplify the build process. The following guides outlines how to build projects using Docker from within an IDE.
+* [Build Using Docker in Eclipse](../programming/eclipse-ide.md#docker-cross-compilation-image-setup)
+* TBD
+
 ## Compiling with Debugging Information
 
 GCC uses `-g` to enable debugging symbols generation for the object file. 
