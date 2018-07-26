@@ -14,8 +14,9 @@ multiarch(no)->ontarget
 multiarch(yes,bottom)->customlib
 usetarget=>subroutine: Target Based 
 Compilation
-(ev3dev-tools)
-[See ev3dev-tools repository]
+(build-essentials)
+[sudo apt-get install build-essential\n
+See Getting Started with C tutorial on ev3dev.org]
 usehostemu=>subroutine: Host-based Emulated
 Cross-compilation
 (debian-<dist>-<arch>-cross)
@@ -23,7 +24,7 @@ Cross-compilation
 usedocker=>subroutine: Host-based Native 
 Cross-compilation
 (debian-<dist>-cross)
-[See using-docker-to-cross-compile Tutorial on ev3dev.org]
+[See Using Docker to Cross-Compile Tutorial on ev3dev.org]
 useprebuilt=>subroutine: Vendor-supplied
 Host-based Toolchain
 (NB: latest releases
